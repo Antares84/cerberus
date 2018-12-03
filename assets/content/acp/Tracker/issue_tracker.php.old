@@ -1,0 +1,94 @@
+<?php
+	if(!($ChkUser->LoggedIn())){header("location: ?pid=Index");exit();}
+
+	# Arrays
+	$errors = array();
+	$postSuccess = false;
+	$deleteSuccess = false;
+
+	# Queries
+	$res1=odbc_exec($cxn1,"SELECT * FROM ".$cfg["Tickets"]."");
+	$res2=odbc_exec($cxn1,"SELECT * FROM ".$cfg["Tickets"]." ORDER BY IssueDate ASC");
+	if(isset($_POST['submit'])){
+		$PosterID=$_SESSION['UserID'];
+		$optionAdd=$_POST['optionAdd'];
+		$titleAdd=escData(htmlentities($_POST['titleAdd']));
+		$detailAdd=escData(htmlentities($_POST['detailAdd']));
+		$errors=array();
+		if(empty($PosterID) || empty($optionAdd)){$errors[]='UserID/Options error.<br />';}
+		if(empty($titleAdd) || empty($detailAdd)){$errors[]='Please fill all fields before submitting your ticket.<br />';}
+		if(empty($errors)){
+			$sql=("INSERT INTO ".$cfg["Tickets"]."(PosterID,Dept,Title,Detail) VALUES(?,?,?,?)");
+			$stmt=odbc_prepare($cxn1,$sql);
+			$args=array($_SESSION['UserID'],$optionAdd,$titleAdd,$detailAdd);
+			$res=odbc_execute($stmt,$args);
+			$postSuccess = '<strong>SUCCESS:</strong> Your ticket has been sent to the appropriate staff for evaluation.';
+		}
+	}
+
+	if(isset($_POST['DelTicket'])){
+		$deletes=$_POST['deleteCheck'];
+		foreach($deletes as $delete){
+			$sql=("DELETE FROM ".Tickets." WHERE RowID=?");
+			$stmt=odbc_prepare($cxn1,$sql);
+			$args=array($delete);
+			odbc_execute($stmt,$args);
+		}
+		$deleteSuccess = '<strong>SUCCESS:</strong> News Has Been Removed!';
+	}
+
+	# Content
+	echo '<div id="wrapper">';
+		echo '<div id="page-wrapper">';
+			echo '<div class="container-fluid">';
+				echo '<div class="row">';
+					echo '<div class="col-lg-12">';
+						echo '<h1 class="page-header">'.$cfg["PageSub"].'<small> - '.$cfg["PageTitle"].'</small></h1>';
+						echo '<div id="title" class="tac">Issue Tracker</div>';
+						echo '<div id="sb_content">';
+							echo '<div id="tabs">';
+								echo '<ul>';
+									echo '<li><a href="#tabs-1">Tickets</a></li>';
+								echo '</ul>';
+								echo '<div id="tabs-1">';
+									if(odbc_num_rows($res1)==0){
+										echo 'No tickets found.';
+									}else{
+										echo '<form action="" class="acp-form" method="POST">';
+											echo '<table class="acp-table">';
+												echo '<tr>';
+													echo '<th width="2%">#</th>';
+													echo '<th width="7%">Ticket ID</th>';
+													echo '<th width="7%">From</th>';
+													echo '<th width="10%">Department</th>';
+													echo '<th width="15%">Title</th>';
+													echo '<th>Detail</th>';
+													echo '<th width="15%">Date</th>';
+												echo '</tr>';
+											while ($row = odbc_fetch_array($res2)) {
+												echo '<tr>';
+													echo '<td class="tac"><input type="checkbox" name="deleteCheck[]" value="'.$row['RowID'].'"/></td>';
+													echo '<td class="tac"><a href="?pid=IssueTrackerReply&TicketID='.$row['TicketID'].'">Reply</a></td>';
+													echo '<td class="tac">'.$row['PosterID'].'</td>';
+													echo '<td class="tac">'.Dept($row['Dept']).'</td>';
+													echo '<td class="tac">'.$row['Title'].'</td>';
+													echo '<td>'.$row['Detail'].'</td>';
+													echo '<td class="tac">'.date("m/d/y H:i A", strtotime($row['IssueDate'])).'</td>';
+												echo '</tr>';
+											}
+											echo '</table>';
+											echo '<br />';
+											echo '<div style="text-align: right;">';
+												echo '<input type="submit" value="Clear Selected Ticket(s)" name="DelTicket" />';
+											echo '</div>';
+										echo '</form>';
+									}
+								echo '</div>';
+							echo '</div>'; # end tabs
+						echo '</div>';
+					echo '</div>';
+				echo '</div>';
+			echo '</div>';
+		echo '</div>';
+	echo '</div>';
+?>

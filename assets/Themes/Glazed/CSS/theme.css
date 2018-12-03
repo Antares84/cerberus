@@ -1,0 +1,74 @@
+/*////////////////////////////////////////////////////////////////////////////////////////////
+	Title: theme.css
+	Author: Bradley Sweeten
+	Rel: Site-wide Custom Stylesheet
+	Date: 09.24.2017
+////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/*////////////////////////////////////////////////////////////////////////////////////////////
+							THEME CSS (ADD YOUR CSS HERE!)
+////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* Card Overall */
+.content_bg{
+	background:rgba(255,255,255,0.25) !important;
+	background-color:rgba(255,255,255,0.25) !important;
+}
+
+/* Card Header */
+.card-header{
+	padding:.5rem !important;
+	border-radius:none !important;
+}
+.card-header.no-radius{
+	border-radius:none !important;
+	border-top-left-radius:none !important;
+	border-top-right-radius:none !important;
+	border-bottom-left-radius:none !important;
+	border-bottom-right-radius:none !important;
+}
+
+/* Card Block */
+.card-block{
+	padding:.5em 1em !important;
+}
+
+/* Card Footer */
+.card-footer{
+	padding:.5em 1em !important;
+/*
+	border-top:1px solid lime !important;
+*/
+}
+/* Card Other */
+.no_border{
+	border:none !important;
+	border-radius:none !important;
+}
+.card_border{
+	border:none;
+}
+.content_bg > .nContent > .news_date {}
+.content_bg > .nContent > .news_poster_id {}
+.title{
+	border-top-left-radius:15px !important;
+	border-top-right-radius:15px !important;
+	padding-bottom:3px;
+	background:url('../images/misc/title_bg.png') repeat-x center;
+	background-size:100% 100%;
+}
+.pTitle{
+	-webkit-transition: all 0.50s ease-in-out;
+	-webkit-transition:all 0.50s ease-in-out;
+	transition: all 0.50s ease-in-out;
+	border-top-left-radius:15px;
+	border-top-right-radius:15px;
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+}
+.pTitle.show{
+	border-top-left-radius:15px;
+	border-top-right-radius:15px;
+	border-bottom-left-radius:0;
+	border-bottom-right-radius:0;
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<database>
+		<db_ip></db_ip>
+		<db_user></db_user>
+		<db_pass></db_pass>
+	</database>
+	<site type="BDSM">
+		<type>BDSM</type>
+		<page_prefix>pageid</page_prefix>
+		<setup>1</setup>
+	</site>
+	<meta>
+		<author>Bradley Sweeten</author>
+		<webmaster>Bradley Sweeten mailto:nexusdevelopment2013@gmail.com</webmaster>
+		<cms_title></cms_title>
+		<acp_title>NDF Admin Panel</acp_title>
+	</meta>
+	<directories>
+		<downloads></downloads>
+		<plugins></plugins>
+		<uploads></uploads>
+	</directories>
+</config>

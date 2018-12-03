@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /ajax/
+Disallow: /assets/
+Disallow: /acp/
+Disallow: /dBase/
+Disallow: /STD/
+Disallow: /BDSM/

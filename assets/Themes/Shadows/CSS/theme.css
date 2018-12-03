@@ -1,0 +1,107 @@
+/*////////////////////////////////////////////////////////////////////////////////////////////
+	Title: theme.css
+	Author: Bradley Sweeten
+	Rel: Windows Surface Theme Stylesheet
+	Date: 09.24.2017
+////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/*////////////////////////////////////////////////////////////////////////////////////////////
+							THEME CSS (ADD YOUR CSS HERE!)
+////////////////////////////////////////////////////////////////////////////////////////////*/
+/*
+header.container{
+	background-color:rgba(0,0,0,1) !important;
+	box-shadow:0px 1px 1px rgba(255,255,255,0.2) inset;
+	-webkit-box-shadow: 0px 1px 1px rgba(255,255,255,0.2) inset;
+}
+*/
+#bread.container{
+	padding:20px 20px 0 20px !important;
+}
+#content.container{
+	padding:20px !important;
+}
+#bread.container,#content.container,#logo.container{
+	border-radius:15px !important;
+}
+.content_bg,.title,.cms_footer{
+	background:#0e0e0e !important;
+	background-color:#0e0e0e !important;
+}
+
+/* Card - Content */
+#content_card.card,#plugin_card.card{
+	margin-bottom:20px !important;
+	box-shadow:7px 7px 5px rgba(0,0,0,1) !important;
+	border:none !important;
+}
+#content_card.card-header,#plugin_card.card-header{
+	border-top-left-radius:15px;
+	border-top-right-radius:15px;
+}
+#content_card.card .card-block .card-text{
+	padding-left:10px !important;
+}
+#no-padding.card-text{
+	padding:0 !important;
+}
+
+.no_border{
+	border:none !important;
+	border-top:none !important;
+	border-right:none !important;
+	border-bottom:none !important;
+	border-left:none !important;
+}
+.content_bg > .nContent > .news_date {}
+.content_bg > .nContent > .news_poster_id {}
+.title{
+	border-bottom:1px solid #fff !important;
+}
+.pTitle{
+	-webkit-transition: all 0.50s ease-in-out;
+	-webkit-transition:all 0.50s ease-in-out;
+	transition: all 0.50 sease-in-out;
+	border-top-left-radius:15px;
+	border-top-right-radius:15px;
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+}
+.pTitle.show{
+	border-top-left-radius:0;
+	border-top-right-radius:0;
+	border-bottom-left-radius:0;
+	border-bottom-right-radius:0;
+}
+/* Card Content */
+.card-block.content{}
+.card-footer.footer{
+	border-top:none !important;
+}
+
+/* Plugin Card */
+div.col-xl-3.col-lg-6 >
+div.card.no_border.no_radius >
+div.card-footer.content_bg.footer{}
+.no_radius{
+	border-radius:0 !important;
+}
+a.nav-link, a.dropdown-item{
+	color:#fff;
+}
+.dropdown-menu{
+	background-color:#0e0e0e;
+}
+nav.navbar{
+	background-color:#0e0e0e;
+}
+a.nav-link:focus,
+a.nav-link:hover,
+a.dropdown-item:focus,
+a.dropdown-item:hover{
+	color:#e62020;
+}
+.cms_footer{}
+.breadcrumb-item{
+	color:#fff !important;
+}
