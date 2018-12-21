@@ -79,7 +79,7 @@
 			}
 			elseif($Zone == "ACP"){
 				echo '<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark nav_top_border">';
-				if($this->User->LoggedIn() && $this->User->isAdmin()){
+				if($this->User->_is_Logged_In() && $this->User->_is_ADM()){
 					echo '<a class="navbar-brand col-sm-3 col-md-2 mr-0 hidden-sm-down" href="?'.$this->Setting->PAGE_PREFIX.'=DASHBOARD">NDF Admin Panel</a>';
 				}
 				else{
@@ -88,7 +88,7 @@
 					echo '<div class="col-md-8"></div>';
 					echo '<div class="col-md-2">';
 						echo '<ul class="navbar-nav justify-content-end">';
-						if($this->User->LoggedIn() && $this->User->isAdmin()){
+						if($this->User->_is_Logged_In() && $this->User->_is_ADM()){
 							echo '<li class="nav-item"><a class="nav-link m_t_5" href="?'.$this->Setting->PAGE_PREFIX.'=STNG_WARNING"><i class="fa fa-cog"></i></a></li>';
 						}
 /*
@@ -106,14 +106,14 @@
 						echo '</li>';
 */
 							echo '<li class="dropdown nav-item">';
-							if($this->User->LoggedIn()){
+							if($this->User->_is_Logged_In()){
 								echo '<a href="javascript:;" class="nav-link dropdown-toggle" id="Options" data-toggle="dropdown"><i class="fa fa-user"></i> '.$this->User->UserID.' <b class="caret"></b></a>';
 							}
 							else{
 								echo '<a href="javascript:;" class="nav-link dropdown-toggle" id="Options" data-toggle="dropdown">Options <b class="caret"></b></a>';
 							}
 								echo '<div class="dropdown-menu" aria-labelledby="Options">';
-								if($this->User->isAdmin()){
+								if($this->User->_is_ADM()){
 									#echo '<li class="dropdown-item"><a href="javascript:;"><i class="fa fa-fw fa-user"></i> Profile</a></li>';
 									#echo '<li class="dropdown-item"><a href="javascript:;"><i class="fa fa-fw fa-envelope"></i> Inbox</a></li>';
 									#echo '<li class="divider"></li>';
@@ -135,12 +135,12 @@
 					echo '<div class="row">';
 						echo '<div class="col-md-2 col-sm-2 ndf_side_nav">';
 							echo '<div class="logo_sidemenu text-center">';
-							if($this->User->get_isLoggedIn()){
+							if($this->User->get_is_is_Logged_In()){
 								echo '<img src="'.$this->Style->get_STYLE_IMAGES_DIR().'NDF%20Logo.ico" style="width:128px;height:128px;" class="img-responsive">';
 								echo '<br>';
 								echo '<h5 class="tac b_i">Hello, '.$_SESSION['UID'].'</h5>';
 								echo '<h6 class="tac"><img src="'.$this->Style->get_STYLE_IMAGES_DIR().'ap_32x32.png" class="img-responsive"> '.$this->User->get_UserInfo("Point").' <span class="b_i"></span></h6>';
-								if($this->User->get_isAdmin()){
+								if($this->User->get__is_ADM()){
 									echo '<h6 class="tac b_i"><a href="acp/" target="_blank">Administration Panel</a></h6>';
 								}
 							}else{
@@ -186,11 +186,11 @@
 				echo '</div>';
 			}
 			elseif($Zone == "ACP"){
-				echo '<nav class="col-md-2 d-none d-md-block sidebar text-white">';
+				echo '<nav class="col-md-2 d-none d-md-block sidebar text-white ndf_side_nav">';
 					echo '<div id="MainMenu">';
 						$this->Tpl->Separator('10');
 						echo '<div class="list-group panel">';
-						if($this->User->LoggedIn()){
+						if($this->User->_is_Logged_In()){
 							# SINGLE LINK
 							$this->Tpl->Separator('10');
 							$this->ds_acp_nav_side_link('Dashboard',1,0,'<i class="fa fa-fw fa-dashboard"></i>');
@@ -201,33 +201,72 @@
 							$this->ds_acp_nav_side_dd('Player',1,0);
 							$this->ds_acp_nav_side_dd('Staff',1,0);
 							$this->ds_acp_nav_side_dd('Developer',1,0);
-/*
-							echo '<a href="#demo3" class="list-group-item list-group-item-dark" data-toggle="collapse" data-parent="#MainMenu">Item 3 <i class="fa fa-caret-down"></i></a>';
-							echo '<div class="collapse" id="demo3">';
-
-								echo '<a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Subitem 1 <i class="fa fa-caret-down"></i></a>';
-								echo '<div class="collapse list-group-submenu" id="SubMenu1">';
-									echo '<a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 1 a</a>';
-									echo '<a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 2 b</a>';
-
-									echo '<a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Subitem 3 c <i class="fa fa-caret-down"></i></a>';
-									echo '<div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">';
-										echo '<a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 1</a>';
-										echo '<a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 2</a>';
-									echo '</div>';
-
-									echo '<a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 4 d</a>';
-								echo '</div>';
-
-								echo '<a href="javascript:;" class="list-group-item">Subitem 2</a>';
-								echo '<a href="javascript:;" class="list-group-item">Subitem 3</a>';
-							echo '</div>';
-*/
 						}
 						echo '</div>';
 					echo '</div>';
 				echo '</nav>';
 			}
+		}
+		function nav_side_2(){
+		#	echo '<nav id="sidebar">';
+/*
+				echo '<div id="MainMenu">';
+					$this->Tpl->Separator('10');
+					echo '<div class="list-group">';
+					if($this->User->_is_Logged_In()){
+						# SINGLE LINK
+						$this->Tpl->Separator('10');
+						$this->ds_acp_nav_side_link('Dashboard',1,0,'<i class="fa fa-fw fa-dashboard"></i>');
+						# DROPDOWN LINK
+						$this->ds_acp_nav_side_dd('Site',1,0);
+						$this->ds_acp_nav_side_dd('Account',1,0);
+						$this->ds_acp_nav_side_dd('Player',1,0);
+						$this->ds_acp_nav_side_dd('Staff',1,0);
+						$this->ds_acp_nav_side_dd('Developer',1,0);
+					}
+					echo '</div>';
+				echo '</div>';
+*/
+			?>	<nav class="d-none d-md-block" id="sidebar">
+					<div class="sidebar-sticky bg-dark">
+						<ul class="nav flex-column">
+							<?php $this->ds_acp_nav_side_link('Dashboard',1,0,'<i class="fa fa-fw fa-dashboard"></i>');?>
+						</ul>
+
+						<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+						<span>Saved reports</span>
+						<a class="d-flex align-items-center text-muted" href="#"></a></h6>
+						<ul class="nav flex-column mb-2">
+							<li class="nav-item"><a class="nav-link" href="#">Current month</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Last quarter</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Social engagement</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Year-end sale</a></li>
+						</ul>
+						<ul class="nav flex-column">
+							<li class="nav-item">
+								<a class="nav-link collapsed" href="#submenu1" data-toggle="collapse" data-target="#submenu1">Reports</a>
+								<div class="collapse" id="submenu1" aria-expanded="false">
+									<ul class="flex-column nav">
+									<li class="nav-item"><a class="nav-link py-0" href="#">Orders</a></li>
+										<li class="nav-item">
+											<a class="nav-link collapsed py-1" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1">Customers</a>
+											<div class="collapse" id="submenu1sub1" aria-expanded="false">
+												<ul class="flex-column nav pl-4">
+													<li class="nav-item"><a class="nav-link p-1" href="#"><i class="fa fa-fw fa-clock-o"></i> Daily</a></li>
+													<li class="nav-item"><a class="nav-link p-1" href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+													<li class="nav-item"><a class="nav-link p-1" href="#"><i class="fa fa-fw fa-bar-chart"></i> Charts</a></li>
+													<li class="nav-item"><a class="nav-link p-1" href="#"><i class="fa fa-fw fa-compass"></i> Areas</a></li>
+												</ul>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
+		<?php
+			#echo '</nav>';
 		}
 		function ds_acp_nav_top_dd($PageCat,$PageShow,$ReqLogin){
 			$sql	=	('
@@ -268,11 +307,12 @@
 
 			if($prep){
 				while($data = odbc_fetch_array($stmt)){
-					echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$data["PAGE_INDEX"].'" class="list-group-item list-group-item-primary b_i f_18 m_t_10 m_b_5" data-parent="#MainMenu">';
-					if($LinkIcon){
-						echo $LinkIcon.' ';
-					}
-					echo $data["PAGE_TITLE"].'</a>';
+					echo '<li class="nav-item">';
+						echo '<a class="nav-link hvr-underline-from-center bg-dark b_i f_18 m_t_10 m_b_5" href="?'.$this->Setting->PAGE_PREFIX.'='.$data["PAGE_INDEX"].'">';
+						if($LinkIcon){echo $LinkIcon.' ';}
+						echo $data["PAGE_TITLE"];
+						echo '</a>';
+					echo '</li>';
 				}
 				odbc_free_result($stmt);
 				odbc_close($this->db->conn);
@@ -292,14 +332,11 @@
 			$prep	=	odbc_execute($stmt,$args);
 			if($prep){
 				if(odbc_num_rows($stmt) > 0){
-				#	echo '<div class="badge badge-primary b_i f_18 m_t_10 m_b_5">'.$PageSub.'</div>';
-					echo '<a href="#'.$PageCat.'" class="list-group-item list-group-item-primary b_i f_18 m_t_10 m_b_5" data-toggle="collapse" data-parent="#MainMenu">'.$PageSub.' <i class="fa fa-caret-down"></i></a>';
+					echo '<a href="#'.$PageCat.'" class="list-group-item bg-dark b_i f_18" data-toggle="collapse" data-parent="#MainMenu">'.$PageSub.' <i class="fa fa-caret-down"></i></a>';
 					echo '<div class="collapse" id="'.$PageCat.'">';
 					while($data = odbc_fetch_array($stmt)){
-						echo '<a class="list-group-item" href="?'.$this->Setting->PAGE_PREFIX.'='.$data["PAGE_INDEX"].'">';
-						if($LinkIcon){
-							echo $LinkIcon;
-						}
+						echo '<a class="list-group-item bg-secondary text-white" href="?'.$this->Setting->PAGE_PREFIX.'='.$data["PAGE_INDEX"].'">';
+						if($LinkIcon){echo $LinkIcon;}
 						echo $data["PAGE_TITLE"].'</a>';
 					}
 					echo '</div>';
@@ -355,6 +392,150 @@
 				odbc_free_result($stmt);
 				odbc_close($this->db->conn);
 			}
+		}
+		function _do_Build_AP_Nav(){
+			echo '<nav id="sidebar" class="d-none d-md-block">';
+				echo '<div class="sidebar-sticky bg-dark">';
+
+					# Single Links
+					if($this->_do_Build_Link("ACP","Single",1,0,1) == true){
+						echo '<ul class="nav flex-column mb-2">';
+							$this->_do_Build_Link("ACP","Single",1,0);
+						echo '</ul>';
+					}
+					
+						echo '<ul class="nav flex-column">';
+							echo '<li class="nav-item">';
+								echo '<a class="nav-link hvr-underline-from-center collapsed" href="#Tools" data-toggle="collapse" data-target="#Tools">Tools</a>';
+								echo '<div class="collapse" id="Tools" aria-expanded="false">';
+									echo '<ul class="flex-column nav">';
+										# Dropdown Sub-menu
+										if($this->_do_Build_Sub_Link("Site",1,1,1)==true){
+											$this->_do_Build_Sub_Link("Site",1,1);
+										}
+										if($this->_do_Build_Sub_Link("Account",1,1,1)==true){
+											$this->_do_Build_Sub_Link("Account",1,1);
+										}
+										if($this->_do_Build_Sub_Link("Player",1,1,1)==true){
+											$this->_do_Build_Sub_Link("Player",1,1);
+										}
+										if($this->_do_Build_Sub_Link("Staff",1,1,1)==true){
+											$this->_do_Build_Sub_Link("Staff",1,1);
+										}
+										if($this->_do_Build_Sub_Link("Developer",1,1,1)==true){
+											$this->_do_Build_Sub_Link("Developer",1,1);
+										}
+									echo '</ul>';
+								echo '</div>';
+							echo '</li>';
+						echo '</ul>';
+
+				echo '</div>';
+			echo '</nav>';
+		}
+		function _do_Build_Link($Zone,$URI_Type,$PageShow,$ReqLogin,$Check=false){
+			$sql	=	('
+							SELECT *
+							FROM '.$this->db->get_TABLE('SETTINGS_PAGES').'
+							WHERE ZONE=? AND URI_TYPE=? AND PAGE_SHOW=? AND REQ_LOGIN=?
+							ORDER BY PAGE_TITLE ASC
+			');
+			$stmt	=	odbc_prepare($this->db->conn,$sql);
+			$args	=	array($Zone,$URI_Type,$PageShow,$ReqLogin);
+			$prep	=	odbc_execute($stmt,$args);
+
+			if($prep){
+				if(odbc_num_rows($stmt)>0){
+					if($Check){
+						return true;
+					}
+					while($data = odbc_fetch_array($stmt)){
+						echo '<li class="nav-item">';
+							echo '<a class="nav-link hvr-underline-from-center bg-dark b_i f_18 m_t_10 m_b_5" href="?'.$this->Setting->PAGE_PREFIX.'='.$data["PAGE_INDEX"].'">';
+							if($data["PAGE_ICON"]){echo $data["PAGE_ICON"].' ';}
+							echo $data["PAGE_TITLE"];
+							echo '</a>';
+						echo '</li>';
+					}
+				}
+				odbc_free_result($stmt);
+				odbc_close($this->db->conn);
+			}
+		}
+		function _do_Build_DropDown_Link($Zone,$URI_Type,$PageShow,$ReqLogin,$Check=false){
+			$sql	=	('
+							SELECT *
+							FROM '.$this->db->get_TABLE('SETTINGS_PAGES').'
+							WHERE PAGE_CAT=? AND PAGE_SHOW=? AND REQ_LOGIN=?
+							ORDER BY PAGE_TITLE ASC
+			');
+			$stmt	=	odbc_prepare($this->db->conn,$sql);
+			$args	=	array($PageCat,$PageShow,$ReqLogin);
+			$prep	=	odbc_execute($stmt,$args);
+
+			if($prep){
+				if(odbc_fetch_array($stmt)>0){
+					if($Check){
+						return true;
+					}
+					while($data = odbc_fetch_array($stmt)){
+						echo '<li class="nav-item">';
+							echo '<a class="nav-link hvr-underline-from-center bg-dark b_i f_18 m_t_10 m_b_5" href="?'.$this->Setting->PAGE_PREFIX.'='.$data["PAGE_INDEX"].'">';
+							if($LinkIcon){echo $LinkIcon.' ';}
+							echo $data["PAGE_TITLE"];
+							echo '</a>';
+						echo '</li>';
+					}
+				}
+				odbc_free_result($stmt);
+				odbc_close($this->db->conn);
+			}
+		}
+		function _do_Build_Sub_Link($PageCat,$PageShow,$ReqLogin,$Check=false){
+			$sql	=	('
+							SELECT *
+							FROM '.$this->db->get_TABLE('SETTINGS_PAGES').'
+							WHERE PAGE_CAT=? AND PAGE_SHOW=? AND REQ_LOGIN=?
+							ORDER BY PAGE_TITLE ASC
+			');
+			$stmt	=	odbc_prepare($this->db->conn,$sql);
+			$args	=	array($PageCat,$PageShow,$ReqLogin);
+			$prep	=	odbc_execute($stmt,$args);
+
+			if($prep){
+				if(odbc_num_rows($stmt)>0){
+					if($Check){
+						return true;
+					}
+					echo '<li class="nav-item">';
+						echo '<a class="nav-link hvr-underline-from-center collapsed py-1" href="#'.$PageCat.'" data-toggle="collapse" data-target="#'.$PageCat.'">'.$PageCat.' Tools</a>';
+						echo '<div class="collapse" id="'.$PageCat.'" aria-expanded="false">';
+							echo '<ul class="flex-column nav">';
+							while($data = odbc_fetch_array($stmt)){
+								echo '<li class="nav-item">';
+									echo '<a class="nav-link hvr-shutter-out-horizontal bg-dark b_i f_18" href="?'.$this->Setting->PAGE_PREFIX.'='.$data["PAGE_INDEX"].'">';
+										if($data["PAGE_ICON"]){echo $data["PAGE_ICON"].' ';}
+										echo $data["PAGE_TITLE"];
+									echo '</a>';
+								echo '</li>';
+							}
+							echo '</ul>';
+						echo '</div>';
+					echo '</li>';
+				}
+				odbc_free_result($stmt);
+				odbc_close($this->db->conn);
+			}
+		}
+		# MISC
+		function Props(){
+			echo '<div class="col-md-12">';
+				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
+				echo '<pre>';
+					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
 		}
 	}
 ?>

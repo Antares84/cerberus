@@ -7,7 +7,7 @@
 			$this->db		=	$db;
 			$this->Setting	=	$Setting;
 		}
-		function LaunchPageLoader(){
+		function _do_LAUNCH_PAGE(){
 			if($_SERVER["REQUEST_URI"] === "/" || $_SERVER["REQUEST_URI"] === ""){
 				$this->PAGE_LINK	=	"HOME";
 			}
@@ -46,5 +46,14 @@
 			else{
 				$this->PAGE				=	$array_pages[$this->PAGE_LINK];
 			}
+		}
+		function Props(){
+			echo '<div class="col-md-12">';
+				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
+				echo '<pre>';
+					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
 		}
 	}

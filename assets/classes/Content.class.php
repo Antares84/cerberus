@@ -3,7 +3,7 @@
 
 		public $PAGE_TITLE;public $PAGE_SUB;public $PAGEURI;public $PAGE_INDEX;public $PAGE;
 
-		public $C_FULL_WIDTH;
+		public $FULL_WIDTH_ARR;
 
 		function __construct($BossRecord,$Browser,$Colors,$Data,$db,$Dirs,$Donate,$LogSys,$MailSys,$Messenger,$Modal,$Nav,$Notices,$Paging,$PayPal,$PHP,$Plugins,$PvP,$Read,$Select,$Session,$Setting,$ShaiyaChar,$ShaiyaUser,$SQL,$Style,$Table,$Template,$Theme,$User,$Version){
 			$this->BossRecord	=	$BossRecord;
@@ -38,13 +38,18 @@
 			$this->User			=	$User;
 			$this->Version		=	$Version;
 
-			$this->C_FULL_WIDTH();
+			$this->_array_builder();
 		}
-		function C_FULL_WIDTH(){
-			$this->C_FULL_WIDTH = array("USER_PROFILE","REGISTER","VALIDATE","ISSUE_TRKR","TOOLS");
+		function _array_builder(){
+			$this->FULL_WIDTH_ARR = array(
+										"USER_PROFILE",
+										"REGISTER",
+										"VALIDATE",
+										"ISSUE_TRKR",
+										"TOOLS"
+			);
 		}
-		function C_MESSENGER(){
-
+		function _get_MESSENGER(){
 			if(!isset($_SESSION["MESSAGES"])){
 				$_SESSION["MESSAGES"] = $this->Messenger->Init();
 			}
@@ -58,25 +63,8 @@
 					echo '</div>';
 				echo '</div>';
 			}
-
-
-			if($this->Messenger->getSystemMessages()){
-				echo '<div class="container no_padding msg_container">';
-					echo '<div class="row msg_data" style="border:1px solid lime;">';
-						echo '<div class="col-md-12">';
-							foreach($this->Messenger->getSystemMessages() as $message){
-								echo '<div class="alert alert-'.$message['type'].'">';
-									echo $message['text'];
-									echo '<a class="close" data-dismiss="alert" href="#">&times;</a>';
-								echo '</div>';
-							}
-						echo '</div>';
-					echo '</div>';
-				echo '</div>';
-				
-			}
 		}
-		function C_HEADER(){
+		function _get_BREADCRUMB(){
 			if($this->Paging->PAGE_ZONE == "CMS"){
 				echo '<div id="bread" class="container" style="background-color:rgba('.$this->Theme->_theme_array[17].','.$this->Theme->_theme_array[18].');">';
 					echo '<div class="row">';
@@ -101,7 +89,7 @@
 				echo '</div>';
 			}
 			elseif($this->Paging->PAGE_ZONE == "ACP"){
-				if($this->User->LoggedIn()){
+				if($this->User->_is_Logged_In()){
 					echo '<div class="row">';
 						echo '<div class="col-lg-12">';
 							
@@ -127,103 +115,111 @@
 				}
 			}
 		}
-		function C_CONTENT($Zone){
+		function _get_CONTENT($Zone){
 			if($Zone == "CMS"){
-				$this->Setting->MAINTENANCE_CHECK();
-
-				echo '<div id="content" class="container" style="background-color:rgba('.$this->Theme->_theme_array[17].','.$this->Theme->_theme_array[18].');">';
-					echo '<div class="row">';
-					if($this->Paging->PAGE_TITLE === "Login"){
-						echo '<div class="col-md-3"></div>';
-						echo '<div class="col-md-6">';
-							require_once($this->Paging->PAGE);
-						echo '</div>';
-					}
-					elseif(in_array($this->Paging->PAGE_INDEX,$this->C_FULL_WIDTH) || $this->Theme->_theme_array[1] === "0"){
-						# No Sidebar
-						echo '<div class="col-md-12">';
-							require_once($this->Paging->PAGE);
-						echo '</div>';
-					}
-					else{
-						# Sidebar Left
-						if($this->Theme->_theme_array[1] === "1"){
-							echo '<div class="col-md-12">';
-								echo '<div class="row">';
-									echo '<div class="col-md-3">';
-										$this->body_sidebar();
-									echo '</div>';
-									echo '<div class="col-md-9">';
-										require_once($this->Paging->PAGE);
-									echo '</div>';
-								echo '</div>';
+				if($this->Setting->MAINTENANCE){
+					require_once($this->Paging->PAGE);
+				}
+				else{
+					echo '<div id="content" class="container" style="background-color:rgba('.$this->Theme->_theme_array[17].','.$this->Theme->_theme_array[18].');">';
+						echo '<div class="row">';
+						if($this->Paging->PAGE_TITLE === "Login"){
+							echo '<div class="col-md-3"></div>';
+							echo '<div class="col-md-6">';
+								require_once($this->Paging->PAGE);
 							echo '</div>';
 						}
-						# Sidebar Right
-						elseif($this->Theme->_theme_array[1] === "2"){
+						elseif(in_array($this->Paging->PAGE_INDEX,$this->FULL_WIDTH_ARR) || $this->Theme->_theme_array[1] === "0"){
+							# No Sidebar
 							echo '<div class="col-md-12">';
-								echo '<div class="row">';
-									echo '<div class="col-md-9">';
-										require_once($this->Paging->PAGE);
-									echo '</div>';
-									echo '<div class="col-md-3">';
-										$this->body_sidebar();
-									echo '</div>';
-								echo '</div>';
+								require_once($this->Paging->PAGE);
 							echo '</div>';
 						}
-					}
+						else{
+							# Sidebar Left
+							if($this->Theme->_theme_array[1] === "1"){
+								echo '<div class="col-md-12">';
+									echo '<div class="row">';
+										echo '<div class="col-md-3">';
+											$this->_get_SIDEBAR();
+										echo '</div>';
+										echo '<div class="col-md-9">';
+											require_once($this->Paging->PAGE);
+										echo '</div>';
+									echo '</div>';
+								echo '</div>';
+							}
+							# Sidebar Right
+							elseif($this->Theme->_theme_array[1] === "2"){
+								echo '<div class="col-md-12">';
+									echo '<div class="row">';
+										echo '<div class="col-md-9">';
+											require_once($this->Paging->PAGE);
+										echo '</div>';
+										echo '<div class="col-md-3">';
+											$this->_get_SIDEBAR();
+										echo '</div>';
+									echo '</div>';
+								echo '</div>';
+							}
+						}
+						echo '</div>';
 					echo '</div>';
-				echo '</div>';
+				}
 			}
 			elseif($Zone == "ACP"){
 				$this->Nav->NAV_TOP($Zone);
-				echo $this->Tpl->Separator('70');
-				echo '<div class="container-fluid">';
-					echo '<div class="row">';
-						$this->Nav->NAV_SIDE($Zone);
-						echo '<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">';
-							echo $this->C_HEADER();
+				echo $this->Tpl->Separator('50');
+				echo '<div class="wrapper">';
+					#	$this->Nav->NAV_SIDE($Zone);
+						$this->Nav->_do_Build_AP_Nav();
+						echo '<div id="content">';
+							echo '<div class="col-md-1">';
+								echo '<button type="button" id="sidebarCollapse" class="badge badge-dark" style="border:transparent;border-radius:20px;">';
+									echo '<span></span>';
+									echo '<span></span>';
+									echo '<span></span>';
+								echo '</button>';
+							echo '</div>';
+							echo $this->Tpl->Separator('20');
+
+							echo $this->_get_BREADCRUMB();
 							require_once($this->Paging->PAGE);
-						echo '</main>';
+
 					echo '</div>';
 				echo '</div>';
 				echo '<div class="separator_50"></div>';
-				$this->body_footer($Zone);
+				$this->_get_FOOTER($Zone);
 			}
 		}
-		function body_sidebar(){
+		function _get_SIDEBAR(){
 			if($this->Theme->_theme_array[0] == '2'){
 				if($this->Theme->_theme_array[15]){
 					$this->Plugins->plugin_search();
 				}
 			}
 		}
-		function PAGE_landing($data){
+		function _get_LANDING($data){
 			include($data);
 		}
-		function body_footer($Zone){
+		function _get_FOOTER($Zone){
 			if($Zone == "CMS"){
 				echo '<div class="cms_footer">';
 					echo '<div class="container">';
 
-						echo '<div class="row">';
-							echo '<div class="col-md-4 col-sm-12 tac"></div>';
-							echo '<div class="col-md-4 col-sm-12 tac"><a href="mailto:'.$this->Setting->EMAIL_SUPPORT.'">Contact Us</a></div>';
-						#	echo '<div class="col-md-4 col-sm-12 tac"><a href="#">Sponsor 3</a></div>';
-						echo '</div>';
-					/*
-						echo '<div class="row">';
-							echo '<div class="col-md-3 col-sm-12 tac"><a href="#">Sponsor 1</a></div>';
-							echo '<div class="col-md-3 col-sm-12 tac"><a href="#">Sponsor 2</a></div>';
-							echo '<div class="col-md-3 col-sm-12 tac"><a href="#">Sponsor 3</a></div>';
-							echo '<div class="col-md-3 col-sm-12 tac"><a href="#">Sponsor 4</a></div>';
-						echo '</div>';
-					*/
+						if($this->Theme->_theme_array[19] == "true"){
+							$this->_do_build_footer_links_1($Zone);
+						}
+						if($this->Theme->_theme_array[20] == "true"){
+							$this->_do_build_footer_links_2($Zone);
+						}
+						if($this->Theme->_theme_array[21] == "true"){
+							$this->_do_build_footer_links_3($Zone);
+						}
 
 						echo '<div class="row">';
 							echo '<div class="col-md-12 col-sm-12 tac">';
-							if($this->User->isAdmin() || $this->User->isGameMaster() && $this->User->get_isLoggedIn()){
+							if($this->User->_is_ADM() || $this->User->_is_GM() && $this->User->is_Logged_In()){
 								echo $this->Tpl->Separator("10");
 								echo '<a href="?'.$this->Setting->PAGE_PREFIX.'=DASHBOARD" target="_blank" class="badge badge-primary b_i f_14">Administration Control Panel</a><br>';
 								echo $this->Tpl->Separator("10");
@@ -245,6 +241,32 @@
 			}
 			echo '</body>';
 			echo '</html>';
+		}
+		function _do_build_footer_links_1($Zone){
+			echo '<div class="row">';
+				echo '<div class="col-md-4 col-sm-12 tac"></div>';
+				echo '<div class="col-md-4 col-sm-12 tac"><a href="mailto:'.$this->Setting->EMAIL_SUPPORT.'">Contact Us</a></div>';
+			echo '</div>';
+		}
+		function _do_build_footer_links_2($Zone){
+			echo '<div class="row">';
+				echo '<div class="col-md-4 col-sm-12 tac"></div>';
+				echo '<div class="col-md-4 col-sm-12 tac"><a href="mailto:'.$this->Setting->EMAIL_SUPPORT.'">Contact Us</a></div>';
+				echo '<div class="col-md-4 col-sm-12 tac"><a href="#">Sponsor 3</a></div>';
+			echo '</div>';
+		}
+		function _do_build_footer_links_3($Zone){}
+		function _do_build_footer_links_4($Zone){}
+		function _do_build_footer_links_5($Zone){}
+		# MISC
+		function Props(){
+			echo '<div class="col-md-12">';
+				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
+				echo '<pre>';
+					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
 		}
 	}
 ?>

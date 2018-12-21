@@ -1,8 +1,15 @@
 <?php
 	require_once('../../Autoloader.php');
 
+	$Browser	=	new Browser();
 	$db			=	new Database();
-	$Setting	=	new Setting($db);
+	$Select		=	new Select();
+	$Data		=	new Data($db);
+	$Theme		=	new Theme($db);
+	$Messenger	=	new Messenger($Browser);
+	$Style		=	new Style($db,$Theme);
+	$Tpl		=	new Template($Data,$Messenger,$Select,$Style,$Theme);
+	$Setting	=	new Setting($Data,$db,$Tpl);
 
 	if($Setting->DEBUG === "1" || $Setting->DEBUG === "2"){
 		echo '<pre>';

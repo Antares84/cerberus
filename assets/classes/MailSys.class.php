@@ -39,7 +39,7 @@
 		# PHPMAILER
 		function PHPMAILER_ACCOUNT_ID(){
 			return $this->db->do_QUERY("VALUE","SETTINGS_MAIN","SETTING","PHPMAILER_ACCOUNT_ID");
-		}	
+		}
 		function PHPMAILER_ACCOUNT_PW(){
 			return $this->db->do_QUERY("VALUE","SETTINGS_MAIN","SETTING","PHPMMAILER_ACCOUNT_PW");
 		}
@@ -76,7 +76,7 @@
 				$this->messages(2,$RegInfo);
 			}
 
-			if($this->PHPMAILER_HOST == "localhost"){
+			if($this->PHPMAILER_HOST === "localhost"){
 				$this->mail_local($mail,$RegInfo);
 			}
 			elseif($this->PHPMAILER_HOST == "Gmail_SSL" || $this->PHPMAILER_HOST == "Gmail_TLS"){
@@ -84,6 +84,11 @@
 			}
 		}
 		function mail_local($mail,$RegInfo){
+#			echo 'Mail Local Dump<br>';
+#			echo '<pre>';
+#				var_dump($RegInfo);
+#			echo '</pre>';
+#			die();
 			$mail->IsSMTP();
 			$mail->Host			=	$this->PHPMAILER_HOST_URI;
 			$mail->Port			=	$this->PHPMAILER_PORT;
@@ -212,10 +217,14 @@
 
 			return $ret;
 		}
+		# MISC
 		function Props(){
-			echo '<b>MailSys Class: Properties:</b>';
-			echo '<pre>';
-				print_r(get_object_vars($this));
-			echo '</pre>';
+			echo '<div class="col-md-12">';
+				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
+				echo '<pre>';
+					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
 		}
 	}

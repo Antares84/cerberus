@@ -3,21 +3,18 @@
 
 	$debug	=	0;
 #	if(isset($_SESSION["Status"]) && $_SESSION["Status"] == 16){
-		$this->Messenger->setSystemMessage(
-			'danger',
-			'some text'
-		);
 		echo '<div style="background-color:#000;">';
-			$this->SQL->_get_paging();
+		#	echo '<font style="'.$this->Colors->_do_ColorBuilder('COLOR','White').'">Normal</font>';
+			$this->SQL->_do_paging();
 		#	$this->Tpl->OUTPUT_TABLE_BODY();
 			$data = $this->SQL->output;
 #			echo $this->Tbl->array_depth($data);
 #			echo $this->Tbl->array_depth($data["head"]);
 #			$this->Tbl->test($data);
-			echo '<div class="col-md-12">';
+#			echo '<div class="col-md-12">';
 #			$this->Tbl->test_v2($data);
 			$this->Tbl->_build($data);
-			echo '</div>';
+#			echo '</div>';
 #			echo $this->Tbl->_ds_level_1($this->Tbl->head,'head');
 #			$this->Tbl->Props();
 #			echo $this->Tbl->test($data["head"]);

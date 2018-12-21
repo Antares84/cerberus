@@ -19,6 +19,6 @@
 	$this->Tpl->TitleBar("Settings");
 	echo $this->Tpl->Separator('10');
 	echo '<div class="row">';
-		$this->SQL->SettingsCards("SETTINGS",0);
+		$this->SQL->_get_SettingsCards("SETTINGS",0);
 	echo '</div>';
 ?>

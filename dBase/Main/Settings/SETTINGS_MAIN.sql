@@ -30,7 +30,7 @@ VALUES (N'ACP',N'CORE',N'Setup Completed?',N'SETUP',N'0',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
 VALUES (N'ACP',N'CORE',N'Site Type',N'SITE_TYPE',N'BDSM',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'CORE',N'Page Prefix',N'PAGE_PREFIX',N'pageid',0,1);
+VALUES (N'ACP',N'CORE',N'Page Prefix',N'PAGE_PREFIX',N'ref',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
 VALUES (N'ACP',N'CORE',N'Site Domain',N'SITE_DOMAIN',N'http://cerberus.ndf-innovations.net',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
@@ -74,29 +74,31 @@ VALUES (N'ACP',N'MAIL',N'Mail Host (local/Gmail)',N'PHPMAILER_HOST',N'localhost'
 
 -- PAYPAL
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - Enable Debugging (Used with IPN System)',N'PAYPAL_DEBUG',N'false',0,1);
+VALUES (N'ACP',N'PAYPAL',N'Donation System',N'PAYPAL_DONATE',N'false',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - Payment Receiver E-mail',N'PAYPAL_RECEIVER',N'mail@mail.com',0,1);
+VALUES (N'ACP',N'PAYPAL',N'Enable Debugging (Used with IPN System)',N'PAYPAL_DEBUG',N'false',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - Sandbox URI (Req for testing IPN System)',N'PAYPAL_SANDBOX_URI',N'https://www.sandbox.paypal.com/cgi-bin/webscr',0,1);
+VALUES (N'ACP',N'PAYPAL',N'Payment Receiver E-mail',N'PAYPAL_RECEIVER',N'mail@mail.com',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - Standard URI',N'PAYPAL_STANDARD_URI',N'https://www.paypal.com/cgi-bin/webscr',0,1);
+VALUES (N'ACP',N'PAYPAL',N'Sandbox URI (Req for testing IPN System)',N'PAYPAL_SANDBOX_URI',N'https://www.sandbox.paypal.com/cgi-bin/webscr',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - Enable Sandbox (Req for testing IPN System',N'PAYPAL_SANDBOX',N'true',0,1);
+VALUES (N'ACP',N'PAYPAL',N'Standard URI',N'PAYPAL_STANDARD_URI',N'https://www.paypal.com/cgi-bin/webscr',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - E-mail A (Req for IPN System)',N'PAYPAL_EMAIL_1',N'seller@paypalsandbox.com',0,1);
+VALUES (N'ACP',N'PAYPAL',N'Enable Sandbox (Req for testing IPN System',N'PAYPAL_SANDBOX',N'true',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - E-mail B (Req for IPN System)',N'PAYPAL_EMAIL_2',N'mail@mail.com',0,1);
+VALUES (N'ACP',N'PAYPAL',N'E-mail A (Req for IPN System)',N'PAYPAL_EMAIL_1',N'seller@paypalsandbox.com',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - E-mail C (Req for IPN System)',N'PAYPAL_EMAIL_3',N'mail@mail.com',0,1);
+VALUES (N'ACP',N'PAYPAL',N'E-mail B (Req for IPN System)',N'PAYPAL_EMAIL_2',N'mail@mail.com',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - Send Confirmation E-mail (Req for IPN System)',N'PAYPAL_CONF_EMAIL',N'true',0,1);
+VALUES (N'ACP',N'PAYPAL',N'E-mail C (Req for IPN System)',N'PAYPAL_EMAIL_3',N'mail@mail.com',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - Log Purchases To File (Req for IPN System)',N'PAYPAL_LOG_TO_FILE',N'true',0,1);
+VALUES (N'ACP',N'PAYPAL',N'Send Confirmation E-mail (Req for IPN System)',N'PAYPAL_CONF_EMAIL',N'true',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - IPN Logs Directory (Req for IPN System)',N'PAYPAL_LOG_DIR',N'logs',0,1);
+VALUES (N'ACP',N'PAYPAL',N'Log Purchases To File (Req for IPN System)',N'PAYPAL_LOG_TO_FILE',N'true',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'PAYPAL',N'PayPal - Log Purchases To Database (Req for IPN System)',N'PAYPAL_LOG_TO_DB',N'true',0,1);
+VALUES (N'ACP',N'PAYPAL',N'IPN Logs Directory (Req for IPN System)',N'PAYPAL_LOG_DIR',N'logs',0,1);
+INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
+VALUES (N'ACP',N'PAYPAL',N'Log Purchases To Database (Req for IPN System)',N'PAYPAL_LOG_TO_DB',N'true',0,1);
 
 -- RECAPTCHA KEYS
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
@@ -106,7 +108,7 @@ VALUES (N'ACP',N'SEC',N'ReCaptcha v2.0 - Secret Key',N'RECAPTCHA_SEC_KEY',N'6LdQ
 
 -- VERSIONING
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
-VALUES (N'ACP',N'VERSIONING',N'CMS Version',N'VERSION',N'3.7.0',0,1);
+VALUES (N'ACP',N'VERSIONING',N'CMS Version',N'VERSION',N'3.6',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]
 VALUES (N'ACP',N'VERSIONING',N'Version Key',N'UPDATER_KEY',N'NHMzbFqcAFaFzSNH9MQO3VqB',0,1);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_MAIN]

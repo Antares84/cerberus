@@ -257,6 +257,8 @@
 			switch($data){
 				case "1"		:	return 'Enabled';	break;
 				case "0"		:	return 'Disabled';	break;
+				case "true"		:	return 'Enabled';	break;
+				case "false"	:	return 'Disabled';	break;
 				default			:	return $data;
 			}
 		}
@@ -317,6 +319,49 @@
 				case 3:		return 'General';		break;
 				case 4:		return 'Suggestions';	break;
 			}
+		}
+		function object2array($object){
+			$return = NULL;
+
+			if(is_array($object)){
+				foreach($object as $key => $value)
+				$return[$key] = $this->object2array($value);
+			}
+			else{
+				$var = get_object_vars($object);
+
+				if($var){
+					foreach($var as $key => $value)
+						$return[$key] = ($key && !$value) ? NULL : $this->object2array($value);
+					}
+					else{
+						return $object;
+					}
+			}
+
+			return $return;
+		} 
+		# MISC
+		function Props(){
+			echo '<div class="col-md-12">';
+				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
+				echo '<pre>';
+					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
+		}
+		function _get_class_methods(){
+			$class_methods	=	get_class_methods($this);
+			echo '<div class="col-md-12">';
+				echo '<b>Class ('.get_class($this).') Methods:</b> <br>';
+				echo '<pre>';
+				foreach($class_methods as $method_name){
+					echo $method_name.'<br>';
+				}
+				echo '</pre>';
+			echo '</div>';
+			exit();
 		}
 	}
 ?>

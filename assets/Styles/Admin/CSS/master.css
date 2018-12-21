@@ -31,16 +31,6 @@
 	}
 }
 */
-#wrapper {
-	padding-left: 0;
-}
-#page-wrapper {
-	width: 100%;
-	padding: 0;
-	background:#000 url('../images/abstract-background-002.jpg') no-repeat center fixed;
-	background-size:100% 100%;
-	margin-bottom: 40px;
-}
 .huge {
 	font-size: 50px;
 	line-height: normal;

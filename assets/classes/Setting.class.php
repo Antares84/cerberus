@@ -14,10 +14,9 @@
 		# SQL
 		private $QUERY;
 
-		function __construct($Data,$db,$Tpl){
+		function __construct($Data,$db){
 			$this->Data	=	$Data;
 			$this->db	=	$db;
-			$this->Tpl	=	$Tpl;
 
 			$this->PAGE_PREFIX();
 			$this->SETUP();

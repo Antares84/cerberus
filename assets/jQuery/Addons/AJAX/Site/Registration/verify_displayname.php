@@ -2,12 +2,19 @@
 	require_once('../../Autoloader.php');
 
 	$db			=	new Database();
+	$Browser	=	new Browser();
 	$Select		=	new Select();
+
 	$Data		=	new Data($db);
 	$Theme		=	new Theme($db);
+
+	$Messenger	=	new Messenger($Browser);
 	$Style		=	new Style($db,$Theme);
-	$Tpl		=	new Template($Data,$Select,$Style,$Theme);
+	$Tpl		=	new Template($Data,$Messenger,$Select,$Style,$Theme);
 	$Setting	=	new Setting($Data,$db,$Tpl);
+	$User		=	new User($Browser,$Data,$db,$Setting);
+	$MailSys	=	new MailSys($db,$Setting,$User);
+	$Session	=	new Session($db,$Browser,$Setting,$User);
 
 	if($Setting->DEBUG === "1" || $Setting->DEBUG === "2"){
 		echo '<pre>';
@@ -19,7 +26,7 @@
 		}
 	}
 
-	if(isset($_POST["DisplayName"])){
+	if(isset($_POST["DisplayName"]) && !empty($_POST["DisplayName"])){
 		$sql	=	('
 						SELECT DisplayName
 						FROM '.$db->get_TABLE("WEB_PRESENCE").'
@@ -39,5 +46,8 @@
 		}else{
 			$Tpl->BADGE_AJAX('badge-danger','<i class="fa fa-info-circle"></i> Unable to check DisplayName. This is a problem...');
 		}
+	}
+	else{
+		$Tpl->_do_alert('3','AJAX-0x01');
 	}
 ?>

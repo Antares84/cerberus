@@ -2,9 +2,7 @@
 	class Database{
 		private $Type	=	"DEV";
 
-		protected $dns;
-		protected $user;
-		protected $pw;
+		protected $dns;protected $user;protected $pw;
 
 		# Public Vars
 		public $conn				=	NULL;
@@ -61,8 +59,8 @@
 				# SHAIYA
 				case "SH_BANNED_PLAYERS"	:	return "[Cerberus].[dbo].[BANNED_PLAYERS]";					break;
 				case "SH_ACTIONLOG"			:	return "[PS_WEB].[PS_GameLog].[dbo].[Actionlog]";			break;
-				case "SH_CHATLOG"			:	return "[PS_WEB].[PS_ChatLog].[dbo].[Chatlog]";				break;
-				case "SH_CHARDATA"			:	return "[PS_WEB].[PS_GameData].[dbo].[Chars]"; 				break;
+				case "SH_CHATLOG"			:	return "[PS_WEB].[SDM_ChatLog].[dbo].[Chatlog]";				break;
+				case "SH_CHARDATA"			:	return "[PS_WEB].[SDM_GameData].[dbo].[Chars]"; 				break;
 				case "SH_CHARSKILLS"		:	return "[PS_WEB].[PS_GameData].[dbo].[CharSkills]"; 		break;
 				case "SH_CHARAPPSKILLS"		:	return "[PS_WEB].[PS_GameData].[dbo].[CharApplySkills]"; 	break;
 				case "SH_CHARITEMS"			:	return "[PS_WEB].[PS_GameData].[dbo].[CharItems]"; 			break;

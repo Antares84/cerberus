@@ -4,7 +4,7 @@
 
 	echo '<div class="row" id="TableLoader">';
 		echo '<div class="col-lg-12" id="TabularData">';
-			$this->SQL->Options('SETTINGS_MAIN','Mail Settings','MAIL',true);
+			$this->SQL->_get_Options('SETTINGS_MAIN','Mail Settings','MAIL',true);
 		echo '</div>';
 	echo '</div>';
 

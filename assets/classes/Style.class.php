@@ -41,38 +41,49 @@
 			# ADDONS - GOOGLE ANALYTICS
 			array_push($this->_style_array,$this->JQUERY_GA_DIR());				#19
 			array_push($this->_style_array,$this->JQUERY_GA_JS());				#20
+			# ADDONS - MDB
+			array_push($this->_style_array,$this->JQUERY_MDB_DIR());			#21
+			array_push($this->_style_array,$this->JQUERY_MDB_VERSION());		#22
+			array_push($this->_style_array,$this->JQUERY_MDB_CSS_DIR());		#23
+			array_push($this->_style_array,$this->JQUERY_MDB_CSS());			#24
+			array_push($this->_style_array,$this->JQUERY_MDB_JS_DIR());			#25
+			array_push($this->_style_array,$this->JQUERY_MDB_JS());				#26
 			# ADDONS - MODERNIZR
-			array_push($this->_style_array,$this->JQUERY_MODERNIZR_DIR());		#21
-			array_push($this->_style_array,$this->JQUERY_MODERNIZR_VERSION());	#22
-			array_push($this->_style_array,$this->JQUERY_MODERNIZR_JS());		#23
+			array_push($this->_style_array,$this->JQUERY_MODERNIZR_DIR());		#27
+			array_push($this->_style_array,$this->JQUERY_MODERNIZR_VERSION());	#28
+			array_push($this->_style_array,$this->JQUERY_MODERNIZR_JS());		#29
+			# ADDONS - POPPERJS
+			array_push($this->_style_array,$this->JQUERY_POPPERJS_DIR());		#30
+			array_push($this->_style_array,$this->JQUERY_POPPERJS_VERSION());	#31
+			array_push($this->_style_array,$this->JQUERY_POPPERJS_JS());		#32
 			# ADDONS - TINYMCE
-			array_push($this->_style_array,$this->JQUERY_TINYMCE_DIR());		#24
-			array_push($this->_style_array,$this->JQUERY_TINYMCE_VERSION());	#25
-			array_push($this->_style_array,$this->JQUERY_TINYMCE_JS());			#26
-			array_push($this->_style_array,$this->JQUERY_TINYMCE_INIT());		#27
+			array_push($this->_style_array,$this->JQUERY_TINYMCE_DIR());		#33
+			array_push($this->_style_array,$this->JQUERY_TINYMCE_VERSION());	#34
+			array_push($this->_style_array,$this->JQUERY_TINYMCE_JS());			#35
+			array_push($this->_style_array,$this->JQUERY_TINYMCE_INIT());		#36
 			# ADDONS - TETHER
-			array_push($this->_style_array,$this->JQUERY_TETHER_DIR());			#28
-			array_push($this->_style_array,$this->JQUERY_TETHER_VERSION());		#29
-			array_push($this->_style_array,$this->JQUERY_TETHER_JS());			#30
+			array_push($this->_style_array,$this->JQUERY_TETHER_DIR());			#37
+			array_push($this->_style_array,$this->JQUERY_TETHER_VERSION());		#38
+			array_push($this->_style_array,$this->JQUERY_TETHER_JS());			#39
 			# ADDONS - WOW
-			array_push($this->_style_array,$this->JQUERY_WOW_DIR());			#31
-			array_push($this->_style_array,$this->JQUERY_WOW_VERSION());		#32
-			array_push($this->_style_array,$this->JQUERY_WOW_JS());				#33
-			array_push($this->_style_array,$this->JQUERY_WOW_CSS());			#34
+			array_push($this->_style_array,$this->JQUERY_WOW_DIR());			#40
+			array_push($this->_style_array,$this->JQUERY_WOW_VERSION());		#41
+			array_push($this->_style_array,$this->JQUERY_WOW_JS());				#42
+			array_push($this->_style_array,$this->JQUERY_WOW_CSS());			#43
 			# STYLES
-			array_push($this->_style_array,$this->STYLES_DIR());				#35
-			array_push($this->_style_array,$this->THEMES_DIR());				#36
-			array_push($this->_style_array,$this->CORE_CSS_DIR());				#37
-			array_push($this->_style_array,$this->UNI_CSS_DIR($ZONE,$TYPE));	#38
-			array_push($this->_style_array,$this->FONTS_DIR());					#39
-			array_push($this->_style_array,$this->FONTAWESOME_DIR());			#40
-			array_push($this->_style_array,$this->FONTAWESOME_CSS());			#41
-			array_push($this->_style_array,$this->FONTICONS_DIR());				#42
-			array_push($this->_style_array,$this->FONTICONS_CSS());				#43
-			array_push($this->_style_array,$this->CUSTOM_DIR());				#44
-			array_push($this->_style_array,$this->ICONS_DIR());					#45
-			array_push($this->_style_array,$this->LOADLAB_DIR());				#46
-			array_push($this->_style_array,$this->LOADER_CSS());				#47
+			array_push($this->_style_array,$this->STYLES_DIR());				#44
+			array_push($this->_style_array,$this->THEMES_DIR());				#45
+			array_push($this->_style_array,$this->CORE_CSS_DIR());				#46
+			array_push($this->_style_array,$this->UNI_CSS_DIR($ZONE,$TYPE));	#47
+			array_push($this->_style_array,$this->FONTS_DIR());					#48
+			array_push($this->_style_array,$this->FONTAWESOME_DIR());			#49
+			array_push($this->_style_array,$this->FONTAWESOME_CSS());			#50
+			array_push($this->_style_array,$this->FONTICONS_DIR());				#51
+			array_push($this->_style_array,$this->FONTICONS_CSS());				#52
+			array_push($this->_style_array,$this->CUSTOM_DIR());				#53
+			array_push($this->_style_array,$this->ICONS_DIR());					#54
+			array_push($this->_style_array,$this->LOADLAB_DIR());				#55
+			array_push($this->_style_array,$this->LOADER_CSS());				#56
 		}
 		function QUERY($DB,$DATA,$ALERT=false){
 			$this->QUERY = $this->db->do_QUERY("VALUE",$DB,"STYLE",$DATA);
@@ -154,11 +165,11 @@
 		}
 		function JQUERY_BS_CSS(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_BS_CSS");
-			return $this->_style_array[11].$this->_style_array[12].'/'.$this->QUERY;
+			return $this->_style_array[11].$this->_style_array[12].'/css/'.$this->QUERY;
 		}
 		function JQUERY_BS_JS(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_BS_JS");
-			return $this->_style_array[11].$this->_style_array[12].'/'.$this->QUERY;
+			return $this->_style_array[11].$this->_style_array[12].'/js/'.$this->QUERY;
 		}
 		# EASING
 		function JQUERY_EASING_DIR(){
@@ -186,6 +197,31 @@
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_GA_JS");
 			return $this->_style_array[19].$this->QUERY;
 		}
+		# MDB
+		function JQUERY_MDB_DIR(){
+			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_MDB_DIR");
+			return $this->_style_array[9].$this->QUERY;
+		}
+		function JQUERY_MDB_VERSION(){
+			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_MDB_VERSION");
+			return $this->_style_array[21].$this->QUERY;
+		}
+		function JQUERY_MDB_CSS_DIR(){
+			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_MDB_CSS_DIR");
+			return $this->_style_array[22].'/'.$this->QUERY;
+		}
+		function JQUERY_MDB_CSS(){
+			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_MDB_CSS");
+			return $this->_style_array[23].$this->QUERY;
+		}
+		function JQUERY_MDB_JS_DIR(){
+			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_MDB_JS_DIR");
+			return $this->_style_array[22].'/'.$this->QUERY;
+		}
+		function JQUERY_MDB_JS(){
+			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_MDB_JS");
+			return $this->_style_array[25].$this->QUERY;
+		}
 		# MODERNIZR
 		function JQUERY_MODERNIZR_DIR(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_MODERNIZR_DIR");
@@ -193,11 +229,24 @@
 		}
 		function JQUERY_MODERNIZR_VERSION(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_MODERNIZR_VERSION");
-			return $this->QUERY;
+			return $this->_style_array[27].$this->QUERY;
 		}
 		function JQUERY_MODERNIZR_JS(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_MODERNIZR_JS");
-			return $this->_style_array[21].$this->_style_array[22].'/'.$this->QUERY;
+			return $this->_style_array[27].$this->QUERY;
+		}
+		# POPPERJS
+		function JQUERY_POPPERJS_DIR(){
+			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_POPPERJS_DIR");
+			return $this->_style_array[9].$this->QUERY;
+		}
+		function JQUERY_POPPERJS_VERSION(){
+			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_POPPERJS_VERSION");
+			return $this->_style_array[30].$this->QUERY;
+		}
+		function JQUERY_POPPERJS_JS(){
+			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_POPPERJS_JS");
+			return $this->_style_array[31].'/'.$this->QUERY;
 		}
 		# TINYMCE
 		function JQUERY_TINYMCE_DIR(){
@@ -206,15 +255,15 @@
 		}
 		function JQUERY_TINYMCE_VERSION(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_TINYMCE_VERSION");
-			return $this->QUERY;
+			return $this->_style_array[33].$this->QUERY;
 		}
 		function JQUERY_TINYMCE_JS(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_TINYMCE_JS");
-			return $this->_style_array[24].$this->_style_array[25].'/js/'.$this->QUERY;
+			return $this->_style_array[34].'/js/'.$this->QUERY;
 		}
 		function JQUERY_TINYMCE_INIT(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_TINYMCE_INIT");
-			return $this->_style_array[24].$this->_style_array[25].'/js/'.$this->QUERY;
+			return $this->_style_array[34].'/js/'.$this->QUERY;
 		}
 		# TETHER
 		function JQUERY_TETHER_DIR(){
@@ -223,11 +272,11 @@
 		}
 		function JQUERY_TETHER_VERSION(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_TETHER_VERSION");
-			return $this->QUERY;
+			return $this->_style_array[37].$this->QUERY;
 		}
 		function JQUERY_TETHER_JS(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_TETHER_JS");
-			return $this->_style_array[28].$this->_style_array[29].'/js/'.$this->QUERY;
+			return $this->_style_array[38].'/js/'.$this->QUERY;
 		}
 		# WOW
 		function JQUERY_WOW_DIR(){
@@ -236,15 +285,15 @@
 		}
 		function JQUERY_WOW_VERSION(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_WOW_VERSION");
-			return $this->QUERY;
+			return $this->_style_array[40].$this->QUERY;
 		}
 		function JQUERY_WOW_JS(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_WOW_JS");
-			return $this->_style_array[31].$this->_style_array[32]."/".$this->QUERY;
+			return $this->_style_array[41]."/".$this->QUERY;
 		}
 		function JQUERY_WOW_CSS(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","JQUERY_WOW_CSS");
-			return $this->_style_array[31].$this->_style_array[32]."/".$this->QUERY;
+			return $this->_style_array[41]."/".$this->QUERY;
 		}
 		# STYLES
 		function STYLES_DIR(){
@@ -257,19 +306,19 @@
 		}
 		function CORE_CSS_DIR(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","CORE_CSS_DIR");
-			return $this->_style_array[35].$this->QUERY;
+			return $this->_style_array[44].$this->QUERY;
 		}
 		function UNI_CSS_DIR($ZONE,$TYPE){
 			if($ZONE == "CMS"){
 				if($TYPE == "STYLE"){
-					return $this->_style_array[35].$this->Theme->_theme_array[3]."css/";
+					return $this->_style_array[44].$this->Theme->_theme_array[3]."css/";
 				}
 				elseif($TYPE == "THEME"){
-					return $this->_style_array[36].$this->Theme->_theme_array[4]."css/";
+					return $this->_style_array[45].$this->Theme->_theme_array[4]."css/";
 				}
 			}
 			elseif($ZONE == "ACP"){
-				return $this->_style_array[35].$this->Theme->_theme_array[5]."css/";
+				return $this->_style_array[44].$this->Theme->_theme_array[5]."css/";
 			}
 		}
 		function UNI_CSS($ZONE,$TYPE,$CSS_NAME){
@@ -278,36 +327,41 @@
 		function UNI_IMAGES($ZONE,$IMG_TYPE=false){
 			if($ZONE == "CMS"){
 				if($IMG_TYPE == "LOGO"){
-					return $this->_style_array[35].$this->Theme->_theme_array[3].'images/logo/';
+					return $this->_style_array[44].$this->Theme->_theme_array[3].'images/logo/';
 				}
 				elseif($IMG_TYPE == "C_LOGO"){
-					return $this->_style_array[36].$this->Theme->_theme_array[4].'images/logo/';
+					return $this->_style_array[45].$this->Theme->_theme_array[4].'images/logo/';
 				}
 				elseif($IMG_TYPE == "WP"){
-					return $this->_style_array[35].$this->Theme->_theme_array[3].'images/wp/';
+					return $this->_style_array[44].$this->Theme->_theme_array[3].'images/wp/';
 				}
 				elseif($IMG_TYPE == "C_WP"){
-					return $this->_style_array[36].$this->Theme->_theme_array[4].'images/wp/';
+					return $this->_style_array[45].$this->Theme->_theme_array[4].'images/wp/';
 				}
 				elseif($IMG_TYPE == "ICON"){
-					return $this->_style_array[35].$this->Theme->_theme_array[3].'images/icon/';
+					return $this->_style_array[44].$this->Theme->_theme_array[3].'images/icon/';
 				}
 				elseif($IMG_TYPE == "C_ICON"){
-					return $this->_style_array[36].$this->Theme->_theme_array[4].'images/icon/';
+					return $this->_style_array[45].$this->Theme->_theme_array[4].'images/icon/';
 				}
 				elseif($IMG_TYPE == "MISC"){
-					return $this->_style_array[35].$this->Theme->_theme_array[3].'images/misc/';
+					return $this->_style_array[44].$this->Theme->_theme_array[3].'images/misc/';
 				}
 				elseif($IMG_TYPE == "C_MISC"){
-					return $this->_style_array[36].$this->Theme->_theme_array[4].'images/misc/';
+					return $this->_style_array[45].$this->Theme->_theme_array[4].'images/misc/';
 				}
 				elseif($IMG_TYPE == "AJAX"){
-					return $this->_style_array[35].$this->Theme->_theme_array[4].'images/ajax/';
+					return $this->_style_array[44].$this->Theme->_theme_array[4].'images/ajax/';
 				}
 				else{}
 			}
 			elseif($ZONE == "ACP"){
-				return $this->_style_array[35].$this->Theme->_theme_array[5].$this->QUERY("SETTINGS_STYLE","IMAGES_DIR");
+				if($IMG_TYPE == "WP"){
+					return $this->_style_array[44].$this->Theme->_theme_array[5].$this->QUERY("SETTINGS_STYLE","IMAGES_DIR");
+				}
+				elseif($IMG_TYPE == "C_WP"){
+					return $this->_style_array[44].$this->Theme->_theme_array[5].$this->QUERY("SETTINGS_STYLE","IMAGES_DIR");
+				}
 			}
 		}
 		function UNI_IMAGES_DIR($ZONE){
@@ -322,39 +376,39 @@
 		}
 		function FONTS_DIR(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","FONTS_DIR");
-			return $this->_style_array[37].$this->QUERY;
+			return $this->_style_array[46].$this->QUERY;
 		}
 		function FONTAWESOME_DIR(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","FONTAWESOME_DIR");
-			return $this->_style_array[39].$this->QUERY;
+			return $this->_style_array[48].$this->QUERY;
 		}
 		function FONTAWESOME_CSS(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","FONTAWESOME_CSS");
-			return $this->_style_array[40].'css/'.$this->QUERY;
+			return $this->_style_array[49].'css/'.$this->QUERY;
 		}
 		function FONTICONS_DIR(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","FONTICONS_DIR");
-			return $this->_style_array[39].$this->QUERY;
+			return $this->_style_array[48].$this->QUERY;
 		}
 		function FONTICONS_CSS(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","FONTICONS_CSS");
-			return $this->_style_array[42].'css/'.$this->QUERY;
+			return $this->_style_array[51].'css/'.$this->QUERY;
 		}
 		function CUSTOM_DIR(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","CUSTOM_DIR");
-			return $this->_style_array[37].'Custom/'.$this->QUERY;
+			return $this->_style_array[46].$this->QUERY;
 		}
 		function ICONS_DIR(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","ICONS_DIR");
-			return $this->_style_array[37].$this->QUERY;
+			return $this->_style_array[46].$this->QUERY;
 		}
 		function LOADLAB_DIR(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","LOADLAB_DIR");
-			return $this->_style_array[37].$this->QUERY;
+			return $this->_style_array[46].$this->QUERY;
 		}
 		function LOADER_CSS(){
 			$this->QUERY	=	$this->QUERY("SETTINGS_STYLE","LOADER_CSS");
-			return $this->_style_array[44].$this->QUERY;
+			return $this->_style_array[53].$this->QUERY;
 		}
 		function Props(){
 			echo '<div class="col-md-12">';

@@ -4,7 +4,7 @@
 	$Tasks			=	1;
 	$Transactions	=	1;
 
-	# CONTENT
+	# Welcome
 	$this->Tpl->TitleBar("Welcome To Your Administration Panel");
 	echo '<div class="row">';
 		echo '<div class="col-lg-12">';
@@ -18,6 +18,7 @@
 		echo '</div>';
 	echo '</div>';
 
+	# Notices & Updates
 	$this->Tpl->TitleBar("Notices & Updates");
 	echo '<div class="row">';
 		echo '<div class="col-lg-12">';
@@ -50,13 +51,17 @@
 		echo '</div>';
 	echo '</div>';
 
-	if(isset($_SESSION["AdminLevel"]) && $_SESSION["AdminLevel"] > 0){
+	if(
+		isset($_SESSION["AdminLevel"]) && 
+		$this->User->_is_ADM() ||
+		$this->User->_is_GM()
+	){
 /*
 		# Comments/Chat Messages
 		echo '<div class="row">';
 			echo '<div class="col-lg-12">';
 				echo '<div class="badge badge-secondary b_i f20" style="width:100%;">Forte Statistics</div>';
-			echo '<div class="separator_10"></div>';
+				echo '<div class="separator_10"></div>';
 				# COMMENTS
 				echo '<div class="col-xl-3 col-lg-6">';
 				echo '<div id="title" class="tac">Forte - New Inquiries</div>';
@@ -138,74 +143,16 @@
 		echo '</div>';
 */
 
-		echo '<div class="container-fluid">';
-			echo '<div class="row ap_content">';
-				$this->Tpl->TitleBar("Administration Panel Access & Sales Logs");
-				if($Tasks == 1 || $Transactions == 1){
-					# Tasks
-					if($Tasks == 1){
-						if($Transactions == 1){echo '<div class="col-md-6 m_t_10">';}
-						else{echo '<div class="col-md-12 m_t_10">';}
-							echo '<div class="card text-white bg-dark">';
-								echo '<div class="card-header card-primary text-center"><i class="fa fa-clock-o fa-fw"></i> Admin Panel Action Log</div>';
-								echo '<div class="card-body">';
-									echo '<div class="table-responsive">';
-										echo '<table class="table table-sm table-bordered table-hover table-striped acp_table tac">';
-											echo '<thead>';
-												echo '<tr>';
-													echo '<th>Action</th>';
-													echo '<th>Time</th>';
-												echo '</tr>';
-											echo '</thead>';
-											echo '<tbody>';
-												$this->SQL->ActionLogs();
-											echo '</tbody>';
-										echo '</table>';
-										echo '<div class="tac">';
-											echo '<a class="badge badge-pill badge-primary b_i f14" href="?'.$this->Setting->PAGE_PREFIX.'=STF_PNL_LOG">View All Activity</a>';
-										echo '</div>';
-									echo '</div>';
-								echo '</div>';
-							echo '</div>';
-						echo '</div>';
-					}
-
-					# Transactions
-					if($Transactions == 1){
-						if($Tasks == 1){echo '<div class="col-md-6 m_t_10">';}
-						else{echo '<div class="col-md-12 m_t_10">';}
-							echo '<div class="card text-white bg-dark">';
-								echo '<div class="card-header card-primary text-center"><i class="fa fa-money fa-fw"></i> Transactions</div>';
-								echo '<div class="card-body">';
-									echo '<div class="table-responsive">';
-										echo '<table class="table table-sm table-bordered table-striped acp_table tac">';
-											echo '<thead>';
-												echo '<tr>';
-													echo '<th>Order #</th>';
-													echo '<th>Order Date</th>';
-													echo '<th>Order Time</th>';
-													echo '<th>Amount (USD)</th>';
-													echo '<th>Transaction ID</th>';
-													echo '<th>Status</th>';
-												echo '</tr>';
-											echo '</thead>';
-											echo '<tbody>';
-												$this->SQL->TransactionLogs();
-											echo '</tbody>';
-										echo '</table>';
-										echo '<div class="tac">';
-											echo '<a class="badge badge-pill badge-primary b_i f14" href="javascript:;">View All Transactions</a>';
-										echo '</div>';
-									echo '</div>';
-								echo '</div>';
-							echo '</div>';
-						echo '</div>';
-					}
-				}
-			echo '</div>';
+		# Logs
+		$this->Tpl->TitleBar("System Logs");
+		echo '<div class="row ap_content">';
+			# Tasks
+			$this->LogSys->_get_logs("6","actions");
+			# Transactions
+			$this->LogSys->_get_logs("6","transactions");
 		echo '</div>';
 	}
-	$this->Modal->Display($this->Paging->PAGE_ZONE,'updater_modal','<i class="fa fa-pencil"></i>','0','2','Update Information');
+		$this->Modal->Display($this->Paging->PAGE_ZONE,'updater_modal','<i class="fa fa-pencil"></i>','0','2','Update Information');
 ?>
 <script>
 	$(document).ready(function(){

@@ -1,28 +1,15 @@
 <?php
 	class User{
 
-		private $sql;
-		private $res;
-		private $fet;
+		private $sql;private $res;private $fet;
+		public $UserUID;public $UserID;public $Status;public $UseQueue;public $RegDate;public $LeaveDate;public $Point;public $UserIP;public $Email;
+		public $LoginStatus;public $LoginGuest;
 
-		public $UserUID;
-		public $UserID;
-		public $Status;
-		public $UseQueue;
-		public $RegDate;
-		public $LeaveDate;
-		public $Point;
-		public $UserIP;
-		public $Email;
-
-		public $LoginStatus;
-		public $LoginGuest;
-
-		function __construct($v2,$v4,$v1,$v3){
-			$this->Browser	=	$v2;
-			$this->Data		=	$v4;
-			$this->db		=	$v1;
-			$this->Setting	=	$v3;
+		function __construct($Browser,$Data,$db,$Setting){
+			$this->Browser	=	$Browser;
+			$this->Data		=	$Data;
+			$this->db		=	$db;
+			$this->Setting	=	$Setting;
 
 			if(isset($_SESSION) && isset($_SESSION["UserID"])){
 				$this->sql		=	("
@@ -43,27 +30,27 @@
 				$this->Email		=	$this->fet["Email"];
 			}
 
-			$this->LoggedIn();
+			$this->_is_Logged_In();
 		}
-		function isAdmin(){
+		function _is_ADM(){
 			if($this->Status == 16){
 				return true;
 			}
 			return false;
 		}
-		function isGameMaster(){
+		function _is_GM(){
 			if($this->Status == 32 || $this->Status == 64 || $this->Status == 80){
 				return true;
 			}
 			return false;
 		}
-		function isGameSage(){
+		function _is_GS(){
 			if($this->Status == 128){
 				return true;
 			}
 			return false;
 		}
-		function LoggedIn(){
+		function _is_Logged_In(){
 			if(!empty($this->UserUID) && !empty($this->UserID) && is_numeric($this->UserUID)){
 				$this->LoginStatus	=	1;
 				return true;
@@ -84,13 +71,6 @@
 				return true;
 			}
 		}
-		function get_isLoggedIn(){
-			# User Login Check
-			if(isset($this->UserUID) && isset($this->UserID) && is_numeric($this->UserUID)){
-				return true;
-			}
-			return false;
-		}
 		function get_isLoggedInName(){
 			# User Login Check
 			$UserLoginStatus=false;
@@ -102,7 +82,7 @@
 			return $UserLoginStatus;
 		}
 		function Auth(){
-			if(!$this->LoggedIn()){
+			if(!$this->_is_Logged_In()){
 				header('location: ?'.$this->Setting->PAGE_PREFIX.'=AUTH');
 				die();
 			}
@@ -210,11 +190,15 @@
 				return $return;
 			}
 		}
+		# MISC
 		function Props(){
-			echo '<b>User Class => Display Properties:</b>';
-			echo '<pre>';
-				print_r(get_object_vars($this));
-			echo '</pre>';
+			echo '<div class="col-md-12">';
+				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
+				echo '<pre>';
+					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
 		}
 	}
 ?>

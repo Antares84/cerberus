@@ -29,7 +29,7 @@
 			$this->DIR_PAYPAL_IPN	=	$this->DIR_PLUGINS.'PayPal_IPN/';
 		}
 		function DIR_PLUGINS(){
-			$this->DIR_PLUGINS		=	$this->DIR_ASSETS.'plugins/';
+			$this->DIR_PLUGINS		=	$this->DIR_ASSETS.'Plugins/';
 		}
 		function DIR_PHPMAILER(){
 			$this->DIR_PHPMAILER	=	$this->DIR_PLUGINS.'PHPMailer/';

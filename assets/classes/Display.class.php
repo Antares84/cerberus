@@ -9,11 +9,12 @@
 		public $PP_DEBUG;public $PP_USE_SB;public $PP_URI;
 
 		# CONSTRUCTOR
-		function __construct($Content,$Data,$db,$Messenger,$Nav,$Paging,$Setting,$Stats,$Style,$Table,$Template,$Theme,$User,$Version){
+		function __construct($Content,$Data,$db,$Messenger,$Modal,$Nav,$Paging,$Setting,$Stats,$Style,$Table,$Template,$Theme,$User,$Version){
 			$this->Content		=	$Content;
 			$this->Data			=	$Data;
 			$this->db			=	$db;
 			$this->Messenger	=	$Messenger;
+			$this->Modal		=	$Modal;
 			$this->Nav			=	$Nav;
 			$this->Paging		=	$Paging;
 			$this->Setting		=	$Setting;
@@ -95,11 +96,11 @@
 			# BOOTSTRAP
 			echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[13].'" media="all">';
 			# WOW
-#			echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[34].'" media="all">';
+			echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[43].'" media="all">';
 
 			if($this->Paging->PAGE_INDEX === "LANDING" || $this->Paging->PAGE_INDEX === "MAINTENANCE"){
 				# MDB
-				echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[9].'MDB/CSS/mdb.css" media="screen">'; # add to class {STYLE}
+				echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[24].'" media="screen">';
 			}
 			else{
 				# MAIN
@@ -110,9 +111,9 @@
 					echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->UNI_CSS($this->Paging->PAGE_ZONE,"THEME","THEME_CSS").'" media="all">';
 				}
 				# LoadLab Loaders
-				echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[46].'bt-spinner.css" media="all">';
+				echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[55].'bt-spinner.css" media="all">';
 				# FONTSAWESOME
-				echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[41].'" media="screen">';
+				echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[50].'" media="screen">';
 				# JQUERYUI
 				echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[7].'" media="all">';
 				echo '<link rel="stylesheet" type="text/css" href="'.$this->Style->_style_array[8].'" media="all">';
@@ -123,7 +124,7 @@
 			echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[2].'"></script>';
 			# JQUERYUI
 			echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[5].'"></script>';
-			# GOOGLE ANALYTICS - fix loading error
+			# GOOGLE ANALYTICS
 			echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[18].'"></script>';
 
 			if($this->Paging->PAGE_ZONE == "CMS"){
@@ -138,28 +139,31 @@
 		}
 		function UNI_JS_ADDONS(){
 			echo '<div class="addons_js">';
-				echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>';
+				# POPPERJS
+				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[32].'"></script>';
 				# TETHER
-				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[30].'"></script>';
+			#	echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[30].'"></script>';
 				# BOOTSTRAP
 				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[14].'"></script>';
 				# MODERNIZR
-				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[23].'"></script>';
+			#	echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[23].'"></script>';
 				# JQUERY FADERS
-				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[10].'custom.faders.js"></script>';
+			#	echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[10].'custom.faders.js"></script>';
 				# TINYMCE TEXTBOX
-				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[26].'"></script>';
-				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[27].'"></script>';
+				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[35].'"></script>';
+				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[36].'"></script>';
 				# WOW
-				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[33].'"></script>';
+				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[42].'"></script>';
 
 			if($this->Paging->PAGE_ZONE == "CMS"){
 				# TICKET SYSTEM
-				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[10].'TicketSys.js"></script>';
+			#	echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[10].'TicketSys.js"></script>';
+				# CUSTOM THEME JS
+			#	echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[9].'Themes/'.$this->Theme->_theme_array[4].'theme.js"></script>';
 			}
-			if($this->Paging->PAGE_ZONE == "CMS" && $this->Paging->PAGE_TITLE === "Landing"){
+			if($this->Paging->PAGE_ZONE == "CMS" && $this->Paging->PAGE_INDEX === "LANDING" || $this->Paging->PAGE_INDEX === "MAINTENANCE"){
 				# MDB
-				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[10].'MDB/v4.3.2/mdb.js"></script>'; # add to class {STYLE}
+				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[9].'MDB/v4.3.2/js/mdb.js"></script>'; # add to class {STYLE}
 			}
 			elseif($this->Paging->PAGE_ZONE == "ACP"){
 				# PLUPLOAD
@@ -168,16 +172,14 @@
 
 				# INITIALIZERS - MUST BE LOADED LAST!
 				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[10].'jquery_init.js"></script>';
-				# CUSTOM THEME JS
-				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[9].'Themes/'.$this->Theme->_theme_array[4].'theme.js"></script>';
 			echo '</div>';
 		}
 		# DISPLAY LOADERS
-		function LaunchDisplay(){
-			$this->Load_Head();
-			$this->Load_Content($this->Paging->PAGE_ZONE);
+		function _do_LAUNCH_DISPLAY(){
+			$this->_get_HEAD();
+			$this->_get_CONTENT($this->Paging->PAGE_ZONE);
 		}
-		function Load_Head(){
+		function _get_HEAD(){
 			echo '<head>';
 				$this->UNI_HEAD_CORE();
 				$this->UNI_HEAD_PAGINATION();
@@ -185,10 +187,10 @@
 				$this->UNI_HEAD_CACHE();
 				$this->UNI_HEAD_TITLE();
 				$this->UNI_HEAD_SS();
-				$this->UNI_HEAD_JS(); # fix loading error for Google Analytics
+				$this->UNI_HEAD_JS();
 			echo '</head>';
 		}
-		function Load_Nav($Zone){
+		function _get_NAV($Zone){
 			if($Zone == "CMS"){
 				if($this->Paging->PAGE_INDEX === "LANDING" || $this->Paging->PAGE_INDEX === "MAINTENANCE"){
 					
@@ -210,14 +212,16 @@
 				$this->Nav->NavTop($this->Paging->PAGE_ZONE);
 			}
 		}
-		function Load_Content($Zone){
-			$this->Tpl->BG_IMG($Zone);
-
-			if($Zone == "CMS"){
-				$this->Load_Nav($Zone);
+		function _get_CONTENT($Zone){
+			if($Zone == "CMS" && $this->Setting->MAINTENANCE){
+				$this->Content->_get_CONTENT($Zone);
+			}
+			elseif($Zone == "CMS"){
+				$this->Tpl->BG_IMG($Zone);
+				$this->_get_NAV($Zone);
 
 				if($this->Paging->PAGE_INDEX === "LANDING" || $this->Paging->PAGE_INDEX === "MAINTENANCE"){
-					$this->Content->PAGE_landing($this->Paging->PAGE);
+					$this->Content->_get_LANDING($this->Paging->PAGE);
 				}
 				elseif(
 					$this->Paging->PAGE_INDEX === "AUTH" ||
@@ -232,25 +236,25 @@
 						echo $this->Tpl->LOGO_IMG($Zone,"C_LOGO");
 					}
 
-					$this->Content->C_MESSENGER();
+					$this->Content->_get_MESSENGER();
 					echo $this->Tpl->Separator('10');
 
 					if($this->Theme->_theme_array[0] === "1"){
-						$this->Content->C_CONTENT($Zone);
+						$this->Content->_get_CONTENT($Zone);
 					}
 					else{
 						if($this->Theme->_theme_array[1] === "0"){
-							$this->Content->C_CONTENT($this->Paging->PAGE_ZONE);
+							$this->Content->_get_CONTENT($this->Paging->PAGE_ZONE);
 						}
 						elseif($this->Theme->_theme_array[1] === "1"){
-							$this->Content->C_CONTENT($this->Paging->PAGE_ZONE);
+							$this->Content->_get_CONTENT($this->Paging->PAGE_ZONE);
 						}
 						elseif($this->Theme->_theme_array[1] === "2"){
-							$this->Content->C_CONTENT($this->Paging->PAGE_ZONE);
+							$this->Content->_get_CONTENT($this->Paging->PAGE_ZONE);
 						}
 					}
 					echo $this->Tpl->Separator('60');
-					$this->Content->body_footer($Zone);
+					$this->Content->_get_FOOTER($Zone);
 				}
 				else{
 					if(!empty($this->Tpl->LOGO_IMG($this->Paging->PAGE_ZONE,"LOGO"))){
@@ -260,35 +264,37 @@
 						echo $this->Tpl->LOGO_IMG($this->Paging->PAGE_ZONE,"C_LOGO");
 					}
 					echo $this->Tpl->Separator('10');
-					$this->Content->C_HEADER();
+					$this->Content->_get_BREADCRUMB();
 
-					$this->Content->C_MESSENGER();
+					$this->Content->_get_MESSENGER();
 					echo $this->Tpl->Separator('10');
 
 					if($this->Theme->_theme_array[0] === "1"){
-						$this->Content->C_CONTENT($this->Paging->PAGE_ZONE);
+						$this->Content->_get_CONTENT($this->Paging->PAGE_ZONE);
 					}
 					else{
 						if($this->Theme->_theme_array[1] === "0"){
-							$this->Content->C_CONTENT($this->Paging->PAGE_ZONE);
+							$this->Content->_get_CONTENT($this->Paging->PAGE_ZONE);
 						}
 						elseif($this->Theme->_theme_array[1] === "1"){
-							$this->Content->C_CONTENT($this->Paging->PAGE_ZONE);
+							$this->Content->_get_CONTENT($this->Paging->PAGE_ZONE);
 						}
 						elseif($this->Theme->_theme_array[1] === "2"){
-							$this->Content->C_CONTENT($this->Paging->PAGE_ZONE);
+							$this->Content->_get_CONTENT($this->Paging->PAGE_ZONE);
 						}
 					}
 					echo $this->Tpl->Separator('60');
-					$this->Content->body_footer($this->Paging->PAGE_ZONE);
+					$this->Content->_get_FOOTER($this->Paging->PAGE_ZONE);
 				}
 			}
 			elseif($Zone == "ACP"){
-				$this->Content->C_CONTENT($Zone);
+				$this->Tpl->BG_IMG($Zone);
+				$this->Content->_get_CONTENT($Zone);
 			}
 
 			$this->Messenger->Close();
-			// Load jQuery Addons Array
+			$this->Modal->_get_MDOAL_LINKS();
+			$this->Modal->_get_MODAL_SCRIPTS();
 			$this->UNI_JS_ADDONS();
 		}
 		# MISC

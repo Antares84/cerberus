@@ -72,32 +72,59 @@
 			}
 		}
 		function CLOSE_SESSION($UserUID){
-			$sql	=	('
-							UPDATE '.$this->db->get_TABLE("LOG_SESSION").'
-							SET LogoutDate	=	?
-							WHERE UserUID	=	?
-			');
-			$stmt	=	odbc_prepare($this->db->conn,$sql);
-			$args	=	array(date('Y-m-d H:i:s'),$UserUID);
-			odbc_execute($stmt,$args);
-
-			if($this->Setting->SITE_TYPE == "SHAIYA"){
-/*
+			if($UserUID){
 				$sql	=	('
-								UPDATE '.$this->db->get_TABLE("SH_USERDATA").'
-								SET LeaveDate	=	?,
-									Leave		=	?
+								UPDATE '.$this->db->get_TABLE("LOG_SESSION").'
+								SET LogoutDate	=	?
 								WHERE UserUID	=	?
 				');
 				$stmt	=	odbc_prepare($this->db->conn,$sql);
-				$args	=	array(date('Y-m-d H:i:s'),0,$UserUID);
+				$args	=	array(date('Y-m-d H:i:s'),$UserUID);
 				odbc_execute($stmt,$args);
-*/
-			}
-			$this->LOGOUT();
 
-			session_unset();
-			session_destroy();
+				if($this->Setting->SITE_TYPE == "SHAIYA"){
+
+					$sql	=	('
+									UPDATE '.$this->db->get_TABLE("SH_USERDATA").'
+									SET LeaveDate	=	?,
+										Leave		=	?
+									WHERE UserUID	=	?
+					');
+					$stmt	=	odbc_prepare($this->db->conn,$sql);
+					$args	=	array(date('Y-m-d h:i:s'),0,$UserUID);
+					@odbc_execute($stmt,$args);
+				}
+				$this->LOGOUT();
+
+				session_unset();
+				session_destroy();
+			}
+			else{
+				session_unset();
+				session_destroy();
+			}
+		}
+		function _do_login($UserUID,$UserID,$Status,$AdminLevel,$Email){
+			session_name("CMS_SESS_VALIDATED");
+
+			$_SESSION["UserUID"]		=	$UserUID;
+			$_SESSION["UserID"]			=	$UserID;
+			$_SESSION["Status"]			=	$Status;
+			$_SESSION["AdminLevel"]		=	$AdminLevel;
+			$_SESSION["Email"]			=	$Email;
+
+			$_SESSION["CMS_SID"]		=	$this->CREATE_SESSION($UserID);
+			$this->STORE_SESSION('Logged In - UserID/Pw Access for '.$UserID.' from '.$this->Browser->UserIP);
+		}
+		# MISC
+		function Props(){
+			echo '<div class="col-md-12">';
+				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
+				echo '<pre>';
+					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
 		}
 	}
 

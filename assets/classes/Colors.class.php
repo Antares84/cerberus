@@ -1,44 +1,89 @@
 <?php
 	class Colors{
 
-		public $_colors_array;
+		protected $Alpha		=	false;
+		protected $BGColor		=	false;
+		protected $Color		=	false;
+		protected $ColorType	=	false;
+		protected $Hex			=	false;
+		protected $RGB			=	false;
+		protected $Type			=	false;
 
-		function __construct(){
-			#$this->_colors_array();
+		function __construct($db){
+			$this->db	=	$db;
 		}
-		function GetHEX($color){
-			return '#'.$this->HEX($color);
+		function _do_ColorBuilder($Type,$Color=false,$Alpha=false){
+			$return=false;
+
+			if(!$Type || $Type == ''){throw new SystemException('[Type] must be defined! Check your code and try again.',0,0,__FILE__,__LINE__);}
+			else{$this->Type=$Type;}
+
+			if(!$Color || $Color == ''){throw new SystemException('Color is either undefined or null. A color must be defined!',0,0,__FILE__,__LINE__);}
+			else{$this->Color=$Color;}
+
+			if(!empty($Alpha) || $Alpha !== ''){$this->Alpha=$this->_do_Alpha($Alpha);}
+
+			if($this->Type == 'HEX'){
+				$this->ColorType	=	'HEX';
+				$this->Hex			=	$this->_do_db_colors($this->Color);
+				$return				=	$this->Hex;
+			}
+			elseif($this->Type == 'RGBa'){
+				$this->ColorType	=	'RGB';
+				$this->RGB			=	$this->_do_db_colors($this->Color);
+				$return				=	'rgba('.$this->RGB.','.$this->Alpha.') !important;';
+			}
+			elseif($this->Type == 'COLOR'){
+				$this->ColorType	=	'HEX';
+				$this->Color		=	$this->_do_db_colors();
+				$return				=	'color:#'.$this->Color.' !important;';
+			}
+			elseif($this->Type == 'BGColor'){
+				if($this->Alpha){
+					$this->ColorType	=	'RGB';
+					$this->RGB			=	$this->_do_db_colors();
+					$return				=	'background-color:rgba('.$this->RGB.','.$this->Alpha.') !important;';
+				}
+				else{
+					$this->ColorType	=	'HEX';
+					$this->BGColor		=	$this->_do_db_colors();
+					$return				=	'background-color:'.$this->BGColor.' !important;';
+				}
+				
+			}
+
+			return $return;
 		}
-		function GetRGBa($color,$variant){
-			return 'color:rgba('.$this->RGB($color).','.$this->ALPHA($variant).') !important;';
-		}
-		function GetBgRGBa($color,$variant){
-			return 'background-color:rgba('.$this->RGB($color).','.$this->ALPHA($variant).') !important;';
-		}
-		function GetChat($num){
-			switch($num){
-				case 1: return $this->GetBgRGBa("WHITE","10"); break;
-				case 2: return $this->GetBgRGBa("FUCHSIA","10"); break;
-				case 3: return $this->GetBgRGBa("PURPLE","10"); break;
-				case 4: return $this->GetBgRGBa("GREEN","10"); break;
-				case 5: return $this->GetBgRGBa("GOLD","10"); break;
-				case 6: return $this->GetBgRGBa("ORANGE","10"); break;
-				case 7: return $this->GetBgRGBa("BLUE","10"); break;
+		function GetChat($data){
+			if(!ctype_digit($data)){
+				switch($data){
+					case 1: return $this->_do_ColorBuilder('COLOR','White'); break;
+					case 2: return $this->_do_ColorBuilder('COLOR','Magenta'); break;
+					case 3: return $this->_do_ColorBuilder('COLOR','Purple'); break;
+					case 4: return $this->_do_ColorBuilder('COLOR','Green1'); break;
+					case 5: return $this->_do_ColorBuilder('COLOR','Gold3'); break;
+					case 6: return $this->_do_ColorBuilder('COLOR','Orange2'); break;
+					case 7: return $this->_do_ColorBuilder('COLOR','DarkBlue'); break;
+				}
+			}
+			else{
+				throw new SystemException('<b>'. __METHOD__ .' only accepts numerical values!',0,0,__FILE__,__LINE__);
 			}
 		}
-		function ALPHA($data){
+		function _do_Alpha($data){
 			switch($data){
-				case '1'	:	return '0.1';break;
-				case '2'	:	return '0.2';break;
-				case '25'	:	return '0.25';break;
-				case '3'	:	return '0.3';break;
-				case '4'	:	return '0.4';break;
-				case '5'	:	return '0.5';break;
-				case '6'	:	return '0.6';break;
-				case '7'	:	return '0.7';break;
-				case '8'	:	return '0.8';break;
-				case '9'	:	return '0.9';break;
-				case '100'	:	return '1.0';break;
+				case '0.1':return '0.1';break;
+				case '0.2':return '0.2';break;
+				case '0.25':return '0.25';break;
+				case '0.3':return '0.3';break;
+				case '0.4':return '0.4';break;
+				case '0.5':return '0.5';break;
+				case '0.6':return '0.6';break;
+				case '0.7':return '0.7';break;
+				case '0.8':return '0.8';break;
+				case '0.9':return '0.9';break;
+				case '1':return '1';break;
+				default:return $data;break;
 			}
 		}
 		function HEX($data){
@@ -1141,16 +1186,44 @@
 				case 'YellowGreen'				:	return '154,205,050';	break;
 			}
 		}
-		function _colors_array(){
-			$_array	=	array();
+		function _do_db_colors(){
+			$sql	=	('
+							SELECT TOP 1 *
+							FROM '.$this->db->get_TABLE("SETTINGS_COLORS").'
+							WHERE Color=?
+			');
+			$stmt	=	odbc_prepare($this->db->conn,$sql);
+			$args	=	array($this->Color);
+			$prep	=	odbc_execute($stmt,$args);
 
-			$_array[] = array('Yellow1','FFFF00','255,255,000');  
-			$_array[] = array('Yellow2','EEEE00','238,238,000');  
-#			$_array['Yellow3'][] = array("HEX"=>'CDCD00', "RGB"=>'205,205,000');  
-#			$_array['Yellow4'][] = array("HEX"=>'8B8B00', "RGB"=>'139,139,000');  
-#			$_array['YellowGreen'][] = array("HEX"=>'9ACD32', "RGB"=>'154,205,050');  
-
-			$this->_colors_array	=	$_array;
+			if($prep){
+				if(odbc_num_rows($stmt)>0){
+					while($ColorData=odbc_fetch_array($stmt)){
+						if($this->ColorType == 'RGB'){
+							return $ColorData["RGB"];
+						}
+						elseif($this->ColorType == 'HEX'){
+							return $ColorData["HEX"];
+						}
+						elseif($this->ColorType == 'COLOR'){
+							return $ColorData["COLOR"];
+						}
+					}
+				}
+				else{
+					throw new SystemException('The chosen color doesn\'t exist. If you believe this to be in error, please add the color information so that it can be retrieved.',0,0,__FILE__,__LINE__);
+				}
+			}
+		}
+		# MISC
+		function Props(){
+			echo '<div class="col-md-12">';
+				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
+				echo '<pre>';
+					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
 		}
 	}
 ?>

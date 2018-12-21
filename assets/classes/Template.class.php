@@ -4,36 +4,62 @@
 		public $NoMsgArr;
 		public $output;
 
-		function __construct($Setting,$Select,$Style,$Theme){
-			$this->Setting		=	$Setting;
+		function __construct($Data,$Messenger,$Select,$Style,$Theme){
+			$this->Data			=	$Data;
+			$this->Messenger	=	$Messenger;
+			$this->Select		=	$Select;
 			$this->Style		=	$Style;
 			$this->Theme		=	$Theme;
-			$this->Select		=	$Select;
 		}
-		function alert($AlertColor=null,$AlertDismiss=null){
-			echo '<div class="container no_padding">';
+		function _do_alert($Color,$Body,$Error=false,$Dismiss=null){
+			echo '<div class="container no_padding wow bounceInUp" data-wow-duration="5s" data-wow-delay="2s">';
 				echo '<div class="row">';
 					echo '<div class="col-md-12">';
 						echo '<div class="alert';
-						if($AlertColor){
-							echo ' '.$AlertColor.'';
+						if($Color){
+							echo ' '.$this->_alert_color($Color);
 						}
-						if($AlertDismiss){
-							echo ' '.$AlertDismiss.'';
+						if($Dismiss){
+							echo ' '.$Dismiss;
 						}
 						echo '" role="alert">';
 
-						if($AlertDismiss){
+						if($Dismiss){
 							echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
 								echo '<span aria-hidden="true">&times;</span>';
 							echo '</button>';
 						}
-							echo '<h4 class="alert-heading"><i class="fa fa-info-circle"></i> <strong>Notice</strong></h4>';
-							echo 'some text';
+						if($Body){
+							if($Error){
+								echo '<h4 class="alert-heading"><i class="fa fa-info-circle"></i> <strong>'.$Body.'</strong></h4>';
+							}
+							$text=$this->Messenger->MessagesArr($Body);
+
+							if(!$text){
+								echo $Body;
+							}
+							else{
+								echo $text;
+							}
+						}
+						#	echo '<h4 class="alert-heading"><i class="fa fa-info-circle"></i> <strong>'.$Body.'</strong></h4>';
+						# 	echo 'some text';
 						echo '</div>';
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';
+		}
+		function _alert_color($data){
+			switch($data){
+				case	'0'	:	return 'badge-primary';		break;
+				case	'1'	:	return 'badge-secondary';	break;
+				case	'2'	:	return 'badge-success';		break;
+				case	'3'	:	return 'badge-danger';		break;
+				case	'4'	:	return 'badge-warning';		break;
+				case	'5'	:	return 'badge-info';		break;
+				case	'6'	:	return 'badge-light';		break;
+				case	'7'	:	return 'badge-dark';		break;
+			}
 		}
 		function badge($BadgeColor,$BadgeText){
 			echo '<span class="badge '.$BadgeColor.'">'.$BadgeText.'</span>';
@@ -228,6 +254,12 @@
 				}
 			echo '</div>';
 		}
+		function input_label_group(){
+			echo '<div class="form-label-group">';
+				echo '<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">';
+				echo '<label for="inputEmail">Email address</label>';
+			echo '</div>';
+		}
 		function input_select($SELECT){
 			echo '<div class="input-group input-group-sm mb-3">';
 				echo $SELECT;
@@ -266,13 +298,23 @@
 			$head	=	$this->SQL->output["head"];
 			$body	=	$this->SQL->output["body"];
 		#	$row	=	$this->SQL->output["body"][];
-			
+
 			echo '<pre>';
 				var_dump($row);
 			echo '</pre>';
 			exit();
 			$this->OUTPUT_TABLE_HEAD($this->SQL->output);
 			#$this->
+		}
+		# MISC
+		function Props(){
+			echo '<div class="col-md-12">';
+				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
+				echo '<pre>';
+					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
 		}
 	}
 ?>

@@ -4,7 +4,7 @@
 
 	echo '<div class="row" id="TableLoader">';
 		echo '<div class="col-lg-12" id="TabularData">';
-			$this->SQL->Options('SETTINGS_MAIN','ReCaptcha Settings','SEC');
+			$this->SQL->_get_Options('SETTINGS_MAIN','ReCaptcha Settings','SEC');
 		echo '</div>';
 	echo '</div>';
 

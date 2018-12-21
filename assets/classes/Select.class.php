@@ -136,7 +136,6 @@
 			echo '</select>';
 		}
 		function sec_question(){
-			# Security Questions
 			$secArr = array(
 				"Please select a security question.",
 				"What is your Favorite color?",
@@ -193,8 +192,8 @@
 				"What is your mothers middle name?"
 			);
 
-			$return = '<select class="form-control tac" name="SecQuestion">';
-			for($i = 0;$i < count($secArr);$i++){
+			$return='<select class="form-control tac" name="SecQuestion">';
+			for($i=0;$i<count($secArr);$i++){
 				$return.='<option value="'.$i.'">'.$secArr[$i].'</option>';
 			}
 			$return.='</select>';
@@ -889,6 +888,13 @@
 				echo '<option value=".90">90%</option>';
 				echo '<option value=".95">95%</option>';
 				echo '<option value="1">100%</option>';
+			echo '</select>';
+		}
+		function ENABLE(){
+			echo '<select class="form-control" name="ENABLE">';
+				echo '<option disabled selected>Enable/Disable*</option>';
+				echo '<option value="true">Enable</option>';
+				echo '<option value="false">Disable</option>';
 			echo '</select>';
 		}
 	}

@@ -1,4 +1,4 @@
 <?php
 	# Content
-	$this->SQL->LOAD_HP();
+	$this->SQL->_do_LOAD_HP();
 ?>

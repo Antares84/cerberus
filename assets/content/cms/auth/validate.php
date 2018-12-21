@@ -5,6 +5,7 @@
 	echo '</pre>';
 	exit();
 */
+	if(!$MESSAGES)
 	if(isset($_POST["sub_login"])){
 		$UserID	=	isset($_POST["UserID"])	?	$this->Data->escData(trim($_POST["UserID"]))	:	false;
 		$Pw		=	isset($_POST["Pw"])		?	$this->Data->escData(trim($_POST["Pw"]))		:	false;

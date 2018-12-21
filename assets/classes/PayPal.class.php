@@ -1,50 +1,18 @@
 <?php
 	class PayPal{
 
-		# PayPal Debug Status
-		public $PAYPAL_DEBUG;
-		# PayPal Receiver E-mail Address
-		public $PAYPAL_RECEIVER;
-		# PayPal Sandbox URI
-		public $PAYPAL_SANDBOX_URI;
-		# PayPal Standard URI
-		public $PAYPAL_STANDARD_URI;
-		# PayPal URI
-		public $PAYPAL_URI;
-		# PayPal Sandbox Status
-		public $PAYPAL_SANDBOX;
-		# PayPal Send Confirmation E-mail
-		public $PAYPAL_CONF_EMAIL;
-		# @var bool $use_local_certs
-		# Indicates if the local certificates are used.
+		public $PAYPAL_DONATE;public $PAYPAL_DEBUG;public $PAYPAL_RECEIVER;
+		public $PAYPAL_SANDBOX_URI;public $PAYPAL_STANDARD_URI;public $PAYPAL_URI;
+		public $PAYPAL_SANDBOX;public $PAYPAL_CONF_EMAIL;
 		private $use_local_certs = false;
-		# Production Postback URL
-		private $VERIFY_URI;
-		# Sandbox Postback URL
-		private $SANDBOX_VERIFY_URI;
-		# Response from PayPal indicating validation was successful
-		private $VALID;
-		# Response from PayPal indicating validation failed
-		private $INVALID;
+
+		private $VERIFY_URI;private $SANDBOX_VERIFY_URI;
+		private $VALID;private $INVALID;
 
 		function __construct($db,$Plugins,$Setting){
 			$this->db		=	$db;
 			$this->Plugins	=	$Plugins;
 			$this->Setting	=	$Setting;
-
-#			$this->sql	=	("SELECT [SETTING]
-#							  FROM [NDF_ADMIN_PANEL].[dbo].[ACP_SETTINGS]
-#							  WHERE [TYPE] = 'PAYPAL'"
-#			);
-#			$this->res	=	odbc_exec($this->db->conn,$this->sql);
-#			$this->fet	=	odbc_fetch_array($this->res);
-
-#			$this->PAYPAL_DEBUG			= $this->fet['PAYPAL_DEBUG'];
-#			$this->PAYPAL_RECEIVER		= $this->fet['PAYPAL_RECEIVER'];
-#			$this->PAYPAL_SANDBOX_URI	= $this->fet['PAYPAL_SANDBOX_URI'];
-#			$this->PAYPAL_STANDARD_URI	= $this->fet['PAYPAL_STANDARD_URI'];
-#			$this->PAYPAL_SANDBOX		= $this->fet['PAYPAL_SANDBOX'];
-#			$this->PAYPAL_CONF_EMAIL	= $this->fet['PAYPAL_CONF_EMAIL'];
 
 			$this->get_PAYPAL_DEBUG();
 			$this->get_PAYPAL_RECEIVER();
@@ -56,6 +24,9 @@
 			
 
 			$this->get_VALID();$this->get_INVALID();
+		}
+		function _get_PAYPAL_DONATE(){
+			$this->PAYPAL_DONATE = $this->db->do_QUERY("VALUE","SETTINGS_MAIN","SETTING","PAYPAL_DONATE");
 		}
 		function get_PAYPAL_DEBUG(){
 			$this->PAYPAL_DEBUG = $this->db->do_QUERY("VALUE","SETTINGS_MAIN","SETTING","PAYPAL_DEBUG");
@@ -155,7 +126,6 @@
 			}
 			return $this->PAYPAL_STANDARD_URI;
 		}
-
 		# Verification Function
 		# Sends the incoming post data back to PayPal using the cURL library.
 		# @return bool
@@ -210,17 +180,22 @@
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT,30);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
 			$res = curl_exec($ch);
+
 			if(!($res)){
 				$errno = curl_errno($ch);
 				$errstr = curl_error($ch);
 				curl_close($ch);
 				throw new Exception("cURL error: [$errno] $errstr");
 			}
+
 			$info = curl_getinfo($ch);
+
 			$http_code = $info['http_code'];
+
 			if($http_code != 200){
 				throw new Exception("PayPal responded with http code $http_code");
 			}
+
 			curl_close($ch);
 			// Check if PayPal verifies the IPN data, and if so, return true.
 			if($res == $this->VALID){

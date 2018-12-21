@@ -71,13 +71,33 @@ INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
 VALUES (N'Jquery Mask Plugin JScript',						N'JQUERY_MP_CORE_JS',			N'JS',		N'jquery.mask.js',					0);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
 VALUES (N'Jquery Mask Plugin JScript (Minified)',			N'JQUERY_MP_CORE_MIN_JS',		N'JS',		N'jquery.mask.min.js',				0);
+-- JQUERY ADDONS : MDB
+INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
+VALUES (N'Jquery MDB Directory',							N'JQUERY_MDB_DIR',				N'DIR',		N'MDB/',							0);
+INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
+VALUES (N'Jquery MDB Version',								N'JQUERY_MDB_VERSION',			N'VER',		N'v4.5.16',							0);
+INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
+VALUES (N'Jquery MDB CSS Directory',						N'JQUERY_MDB_CSS_DIR',			N'DIR',		N'css/',							0);
+INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
+VALUES (N'Jquery MDB CSS Stylesheet',						N'JQUERY_MDB_CSS',				N'DIR',		N'mdb.css',							0);
+INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
+VALUES (N'Jquery MDB JScript Directory',					N'JQUERY_MDB_JS_DIR',			N'DIR',		N'js/',								0);
+INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
+VALUES (N'Jquery MDB JScript (Minified)',					N'JQUERY_MDB_JS',				N'JS',		N'mdb.min.js',						0);
 -- JQUERY ADDONS : MODERNIZR
 INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
-VALUES (N'Jquery Modernizr Directory',						N'JQUERY_MODERNIZR_DIR',		N'DIR',		N'modernizr/',						0);
+VALUES (N'Jquery Modernizr Directory',						N'JQUERY_MODERNIZR_DIR',		N'DIR',		N'Modernizr/',						0);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
 VALUES (N'Jquery Modernizr Version',						N'JQUERY_MODERNIZR_VERSION',	N'VER',		N'v2.8.3',							0);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
 VALUES (N'Jquery Modernizr JScript',						N'JQUERY_MODERNIZR_JS',			N'JS',		N'modernizr.custom.js',				0);
+-- JQUERY ADDONS : POPPERJS
+INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
+VALUES (N'Jquery PopperJS Directory',						N'JQUERY_POPPERJS_DIR',			N'DIR',		N'PopperJS/',						0);
+INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
+VALUES (N'Jquery PopperJS Version',							N'JQUERY_POPPERJS_VERSION',		N'VER',		N'v1.14.6',							0);
+INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
+VALUES (N'Jquery PopperJS JScript',							N'JQUERY_POPPERJS_JS',			N'JS',		N'popper.min.js',					0);
 -- JQUERY ADDONS : TINYMCE
 INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
 VALUES (N'Jquery TinyMCE Directory',						N'JQUERY_TINYMCE_DIR',			N'DIR',		N'TinyMCE/',						0);
@@ -158,7 +178,7 @@ VALUES (N'Custom Stylesheet Directory',						N'CUSTOM_DIR',					N'DIR',		N'Custo
 INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
 VALUES (N'Icons Directory',									N'ICONS_DIR',					N'DIR',		N'Icons/',							0);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
-VALUES (N'LoadLab Directory',								N'LOADLAB_DIR',					N'DIR',		N'LoadLab/',					0);
+VALUES (N'LoadLab Directory',								N'LOADLAB_DIR',					N'DIR',		N'LoadLab/',						0);
 INSERT INTO [Cerberus].[dbo].[SETTINGS_STYLE]
 VALUES (N'Preloader Stylesheet',							N'LOADER_CSS',					N'SS',		N'Preloader.css',					0);
 GO

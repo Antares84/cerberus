@@ -30,6 +30,9 @@
 			$_array[]	=	$this->FOOTER();				#16
 			$_array[]	=	$this->PANE_BG();				#17
 			$_array[]	=	$this->PANE_BG_TRANS();			#18
+			$_array[]	=	$this->FOOTER_BLOCK_A();		#19
+			$_array[]	=	$this->FOOTER_BLOCK_B();		#20
+			$_array[]	=	$this->FOOTER_BLOCK_C();		#21
 
 			$this->_theme_array	=	$_array;
 		}
@@ -58,7 +61,7 @@
 			return $this->QUERY;
 		}
 		function NAV_SERVER_STATUS(){
-			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","NAV_SERVER_STATUS",0);
+			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","NAV_SERVER_STATUS",1);
 			return $this->QUERY;
 		}
 		# STYLE
@@ -128,6 +131,18 @@
 			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","FOOTER",1);
 			return $this->QUERY;
 		}
+		function FOOTER_BLOCK_A(){
+			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","FOOTER_BLOCK_A",0);
+			return $this->QUERY;
+		}
+		function FOOTER_BLOCK_B(){
+			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","FOOTER_BLOCK_B",0);
+			return $this->QUERY;
+		}
+		function FOOTER_BLOCK_C(){
+			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","FOOTER_BLOCK_C",0);
+			return $this->QUERY;
+		}
 		# MISC
 		function Props(){
 			echo '<div class="col-md-12">';
@@ -139,3 +154,4 @@
 			exit();
 		}
 	}
+?>

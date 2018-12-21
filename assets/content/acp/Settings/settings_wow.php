@@ -5,7 +5,7 @@
 	# CONTENT
 	echo '<div class="row" id="TableLoader">';
 		echo '<div class="col-lg-12" id="TabularData">';
-			$this->Setting->SettingsOptions('SETTINGS_MAIN','WoW Settings','WOW');
+			$this->Setting->_get_Options('SETTINGS_MAIN','WoW Settings','WOW');
 		echo '</div>';
 	echo '</div>';
 

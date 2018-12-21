@@ -1,12 +1,7 @@
 <?php
 	require_once('../../Autoloader.php');
 
-	$db			=	new Database();
-	$Data		=	new Data($db);
-	$Theme		=	new Theme($db);
-	$Style		=	new Style($db,$Theme);
-	$Template	=	new Template($Data,$Style,$Theme);
-	$Setting	=	new Setting($Data,$db,$Template);
+	$Browser=new Browser();$db=new Database();$Select=new Select();$Data=new Data($db);$Theme=new Theme($db);$Messenger=new Messenger($Browser);$Style=new Style($db,$Theme);$Tpl=new Template($Data,$Messenger,$Select,$Style,$Theme);$Setting=new Setting($Data,$db,$Tpl);
 
 	$Edit_Arr	=	array(0=>1,1=>0);
 

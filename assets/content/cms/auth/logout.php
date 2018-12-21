@@ -1,5 +1,5 @@
 <?php
-	if($this->User->isAdmin()){
+	if($this->User->_is_ADM()){
 		$this->Setting->SET_DEFAULTS();
 	}
 

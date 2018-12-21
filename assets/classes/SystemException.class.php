@@ -17,7 +17,7 @@
 			echo '<html>';
 			echo '<head>';
 			echo '<title>ERROR!</title>';
-			echo '<link rel="stylesheet" type="text/css" href="assets/jquery/addons/bootstrap/v4.0.0/js/bootstrap.css" media="all">';
+			echo '<link rel="stylesheet" type="text/css" href="assets/jquery/Addons/Bootstrap/v4.1.3/css/bootstrap.css" media="all">';
 			echo '<link rel="stylesheet" type="text/css" href="assets/styles/Standard/css/master.css" media="all">';
 			echo '</head>';
 			echo '<body style="background-color:#000;">';
