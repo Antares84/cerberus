@@ -1,7 +1,12 @@
 <?php
+	#############################################################################################
+	#	Title: Database.class.php																#
+	#	Author: Bradley Sweeten																	#
+	#	Rel: CMS Database class, used for loading all database resources						#
+	#	Last Update Date: 12.29.2018 1940														#
+	#############################################################################################
 	class Database{
-		private $Type	=	"DEV";
-
+		
 		protected $dns;protected $user;protected $pw;
 
 		# Public Vars
@@ -58,22 +63,22 @@
 				case "SETTINGS_PAGES"		:	return "[Cerberus].[dbo].[SETTINGS_PAGES]";					break;
 				# SHAIYA
 				case "SH_BANNED_PLAYERS"	:	return "[Cerberus].[dbo].[BANNED_PLAYERS]";					break;
-				case "SH_ACTIONLOG"			:	return "[PS_WEB].[PS_GameLog].[dbo].[Actionlog]";			break;
-				case "SH_CHATLOG"			:	return "[PS_WEB].[SDM_ChatLog].[dbo].[Chatlog]";				break;
-				case "SH_CHARDATA"			:	return "[PS_WEB].[SDM_GameData].[dbo].[Chars]"; 				break;
-				case "SH_CHARSKILLS"		:	return "[PS_WEB].[PS_GameData].[dbo].[CharSkills]"; 		break;
-				case "SH_CHARAPPSKILLS"		:	return "[PS_WEB].[PS_GameData].[dbo].[CharApplySkills]"; 	break;
-				case "SH_CHARITEMS"			:	return "[PS_WEB].[PS_GameData].[dbo].[CharItems]"; 			break;
-				case "SH_GUILDS"			:	return "[PS_WEB].[PS_GameData].[dbo].[Guilds]";				break;
-				case "SH_GUILD_CHARS"		:	return "[PS_WEB].[PS_GameData].[dbo].[GuildChars]";			break;
-				case "SH_GUILD_DETAILS"		:	return "[PS_WEB].[PS_GameData].[dbo].[GuildDetails]"; 		break;
-				case "SH_ITEMS"				:	return "[PS_WEB].[PS_GameDefs].[dbo].[Items]";				break;
-				case "SH_MAPS"				:	return "[PS_WEB].[PS_GameDefs].[dbo].[MapNames]";			break;
-				case "SH_MOBS"				:	return "[PS_WEB].[PS_GameDefs].[dbo].[Mobs]";				break;
-				case "SH_MOBITEMS"			:	return "[PS_WEB].[PS_GameDefs].[dbo].[MobItems]";			break;
-				case "SH_SKILLS"			:	return "[PS_WEB].[PS_GameDefs].[dbo].[Skills]"; 			break;
-				case "SH_UMG"				:	return "[PS_WEB].[PS_GameData].[dbo].[UserMaxGrow]";		break;
-				case "SH_USERDATA"			:	return "[PS_WEB].[PS_UserData].[dbo].[Users_Master]";		break;
+				case "SH_ACTIONLOG"			:	return "[NDF_SHAIYA].[PS_GameLog].[dbo].[Actionlog]";			break;
+				case "SH_CHATLOG"			:	return "[NDF_SHAIYA].[SDM_ChatLog].[dbo].[Chatlog]";				break;
+				case "SH_CHARDATA"			:	return "[NDF_SHAIYA].[SDM_GameData].[dbo].[Chars]"; 				break;
+				case "SH_CHARSKILLS"		:	return "[NDF_SHAIYA].[PS_GameData].[dbo].[CharSkills]"; 		break;
+				case "SH_CHARAPPSKILLS"		:	return "[NDF_SHAIYA].[PS_GameData].[dbo].[CharApplySkills]"; 	break;
+				case "SH_CHARITEMS"			:	return "[NDF_SHAIYA].[PS_GameData].[dbo].[CharItems]"; 			break;
+				case "SH_GUILDS"			:	return "[NDF_SHAIYA].[PS_GameData].[dbo].[Guilds]";				break;
+				case "SH_GUILD_CHARS"		:	return "[NDF_SHAIYA].[PS_GameData].[dbo].[GuildChars]";			break;
+				case "SH_GUILD_DETAILS"		:	return "[NDF_SHAIYA].[PS_GameData].[dbo].[GuildDetails]"; 		break;
+				case "SH_ITEMS"				:	return "[NDF_SHAIYA].[PS_GameDefs].[dbo].[Items]";				break;
+				case "SH_MAPS"				:	return "[NDF_SHAIYA].[PS_GameDefs].[dbo].[MapNames]";			break;
+				case "SH_MOBS"				:	return "[NDF_SHAIYA].[PS_GameDefs].[dbo].[Mobs]";				break;
+				case "SH_MOBITEMS"			:	return "[NDF_SHAIYA].[PS_GameDefs].[dbo].[MobItems]";			break;
+				case "SH_SKILLS"			:	return "[NDF_SHAIYA].[PS_GameDefs].[dbo].[Skills]"; 			break;
+				case "SH_UMG"				:	return "[NDF_SHAIYA].[PS_GameData].[dbo].[UserMaxGrow]";		break;
+				case "SH_USERDATA"			:	return "[NDF_SHAIYA].[PS_UserData].[dbo].[Users_Master]";		break;
 				# ENTROPIA UNIVERSE
 				case "EU_SHOPS"				:	return "[Cerberus].[dbo].[Shops]";							break;
 			}

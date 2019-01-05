@@ -1,4 +1,10 @@
 <?php
+	#############################################################################################
+	#	Title: Setting.class.php																#
+	#	Author: Bradley Sweeten																	#
+	#	Rel: CMS Setting class, used for loading all CMS settings resources						#
+	#	Last Update Date: 12.31.2018 1801														#
+	#############################################################################################
 	class Setting{
 
 		public $PAGE_PREFIX;public $SETUP;
@@ -8,7 +14,7 @@
 		public $AUTHOR;public $WEBMASTER;public $SITE_TITLE;public $ACP_SITE_TITLE;public $SITE_DOMAIN;public $METATAG_TITLE;public $METATAG_DESC;public $METATAG_KEYWORDS;
 		public $DEBUG;public $LOGGING;public $HTTPS_SSL;public $SITE_TYPE;
 		public $RECAPTCHA_SITE_KEY;public $RECAPTCHA_SEC_KEY;
-		public $VERSION;public $UPDATER_KEY;
+		public $VERSION;public $VERSION_ID;public $UPDATER_URI;
 		public $MAINTENANCE;
 
 		# SQL
@@ -32,9 +38,6 @@
 			$this->SITE_TITLE();
 			$this->ACP_SITE_TITLE();
 			$this->SITE_DOMAIN();
-#			$this->METATAG_TITLE();
-#			$this->METATAG_DESC();
-#			$this->METATAG_KEYWORDS();
 			$this->DEBUG();
 			$this->LOGGING();
 			$this->HTTPS_SSL();
@@ -42,8 +45,9 @@
 			$this->RECAPTCHA_SITE_KEY();
 			$this->RECAPTCHA_SEC_KEY();
 			$this->VERSION();
-			$this->UPDATER_KEY();
+			$this->VERSION_ID();
 			$this->MAINTENANCE();
+			$this->UPDATER_URI();
 		}
 		function QUERY($DB,$DATA,$ALERT){
 			$this->QUERY = $this->db->do_QUERY("VALUE",$DB,"SETTING",$DATA);
@@ -64,9 +68,10 @@
 			$sql	=	('
 							UPDATE '.$this->db->get_TABLE("SETTINGS_MAIN").'
 							SET EDIT=?
+							WHERE EDIT=?
 			');
 			$stmt	=	odbc_prepare($this->db->conn,$sql);
-			$args	=	array(0);
+			$args	=	array(0,1);
 			odbc_execute($stmt,$args);
 		}
 		# MAIN
@@ -189,9 +194,13 @@
 			$this->QUERY				=	$this->QUERY("SETTINGS_MAIN","VERSION",1);
 			$this->VERSION				=	$this->QUERY;
 		}
-		function UPDATER_KEY(){
-			$this->QUERY				=	$this->QUERY("SETTINGS_MAIN","UPDATER_KEY",1);
-			$this->UPDATER_KEY			=	$this->QUERY;
+		function VERSION_ID(){
+			$this->QUERY				=	$this->QUERY("SETTINGS_MAIN","VERSION_ID",1);
+			$this->VERSION_ID			=	$this->QUERY;
+		}
+		function UPDATER_URI(){
+			$this->QUERY				=	$this->QUERY("SETTINGS_MAIN","UPDATER_URI",1);
+			$this->UPDATER_URI			=	$this->QUERY;
 		}
 		# MAINTENANCE
 		function MAINTENANCE(){

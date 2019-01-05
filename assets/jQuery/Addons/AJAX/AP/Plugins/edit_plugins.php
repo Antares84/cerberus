@@ -18,8 +18,8 @@
 	echo '<form class="edit_page">';
 		echo '<input class="form-control" id="RowID" name="RowID" type="hidden" value="'.$RowID.'" readonly/>';
 
-		$Template->input_select($Select->PluginOrder());
-		$Template->input_select($Select->PluginEnable());
+		$Tpl->input_select($Select->_get_select('plugin_order'));
+		$Tpl->input_select($Select->_get_select('plugin_enable'));
 
 		echo '<div class="text-center f_20">';
 			echo '<button type="button" class="badge badge-warning" id="edit_page"><i class="fa fa-check-circle"></i> Update Plugin</button>';
@@ -34,7 +34,7 @@
 				url:"<?php echo $Style->_style_array[9];?>AJAX/AP/Plugins/edit_plugins_submit.php",
 				data: $('form.edit_page').serialize(),
 				success: function(message){
-					$('#settings_modal #dynamic-content').html(message);
+					$('#pl_stng_modal #dynamic-content').html(message);
 					<?php if($Setting->DEBUG === "1"){ ?>
 						console.log('Reloading tabular data...');
 					<?php } ?>

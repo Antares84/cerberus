@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function(e){
 	// Msg Array Reload
 	$(".msg_container").load(location.href + " .msg_data");
 	// WOW
@@ -11,28 +11,22 @@ $(document).ready(function(){
 	setTimeout(function(){
 		$('body').addClass('loaded');
 	}, 3000);
-});
-
-// Tabs
-$("#tabs_profile").tabs();
-$("#tabs_nav").tabs();
-$(function(){
+	// Tabs
+	$("#tabs_profile").tabs();
+	$("#tabs_nav").tabs();
 	$("#tabs").tabs();
-});
-$(function(){
 	$("#tabs2").tabs();
-});
-$(function(){
-	$("#tabs2-h").tabs();
-});
-$(function(){
-	$("#tabs2-e").tabs();
-});
-$(function(){
-	$("#tabs2-n").tabs();
-});
-$(function(){
-	$("#tabs2-v").tabs();
+	// jQuery Datepicker
+	$(".jQuery-Date").datepicker({
+		changeMonth:true,
+		changeYear:true,
+		yearRange: "1940:2012"
+	});
+	// AP Sidenav Show/hide
+	$('#sidebarCollapse').on('click',function(){
+		$('#sidebar').toggleClass('active');
+		$(this).toggleClass('active');
+	});
 });
 
 // Prevent Enter Key Usage On Forms
@@ -46,18 +40,4 @@ $('form input').keydown(function(e){
 		e.preventDefault();
 		return false;
 	}
-});
-
-// jQuery Datepicker
-$(".jQuery-Date").datepicker({
-	changeMonth:true,
-	changeYear:true,
-	yearRange: "1940:2012"
-});
-// AP Sidenav Show/hide
-$(document).ready(function(){
-	$('#sidebarCollapse').on('click',function(){
-		$('#sidebar').toggleClass('active');
-		$(this).toggleClass('active');
-	});
 });

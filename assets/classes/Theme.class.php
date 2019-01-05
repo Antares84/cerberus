@@ -61,7 +61,7 @@
 			return $this->QUERY;
 		}
 		function NAV_SERVER_STATUS(){
-			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","NAV_SERVER_STATUS",1);
+			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","NAV_SERVER_STATUS",0);
 			return $this->QUERY;
 		}
 		# STYLE
@@ -94,7 +94,7 @@
 			return $this->QUERY;
 		}
 		function FAVICON_IMAGE(){
-			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","FAVICON_IMAGE",1);
+			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","FAVICON_IMAGE",0);
 			return $this->QUERY;
 		}
 		function NAV_BG(){
@@ -123,7 +123,7 @@
 		}
 		# PLUGINS
 		function USE_PLUGINS(){
-			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","USE_PLUGINS",1);
+			$this->QUERY				=	$this->QUERY("SETTINGS_THEME","USE_PLUGINS",0);
 			return $this->QUERY;
 		}
 		# FOOTER

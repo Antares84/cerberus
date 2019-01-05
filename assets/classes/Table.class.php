@@ -1,23 +1,21 @@
 <?php
-	/*
-		Description:	Table Builder API
-		Build Date:		11.21.2018
-	*/
+	#############################################################################################
+	#	Title: Table.class.php																	#
+	#	Author: Bradley Sweeten																	#
+	#	Rel: CMS Table class, used for auto-building tables										#
+	#	Last Update Date: 12.31.2018 0000														#
+	#############################################################################################
 	class Table{
 		# Head
-		protected $head=array();
-		protected $h_level;
+		protected $head=array();protected $h_level;
 
 		# Body
-		protected $body=array();
-		protected $b_level;
+		protected $body=array();protected $b_level;
 		# Misc
 		protected $debug=0;
-		protected $h_pre=1;
-		protected $b_pre=1;
+		protected $h_pre=0;
+		protected $b_pre=0;
 		protected $zone;
-
-		public	$align_arr=array();
 
 		function array_depth(array $array){
 			$max_depth = 1;
@@ -34,29 +32,20 @@
 
 			return $max_depth;
 		}
-		function align_arr(){
-			$this->align_arr	=	array(
-											'1',
-											'2',
-											'4',
-											'5',
-											'Page Zone'
-			);
-		}
-		function _build($data){
+		function _do_build_table($data,$source=false){
 			if($data["head"]){
 				$this->h_level	=	$this->array_depth($data["head"]);
 				if($this->h_level == 1){
 					if($this->h_pre){$this->_pre('Table Builder: Head L1');}
-					$this->_builder_L1($data["head"],'th');
+					$this->_builder_L1($data["head"],'th',$source);
 				}
 				elseif($this->h_level == 2){
 					if($this->h_pre){$this->_pre('Table Builder: Head L2');}
-					$this->_builder_L2($data["head"],'th');
+					$this->_builder_L2($data["head"],'th',$source);
 				}
 				elseif($this->h_level == 3){
 					if($this->h_pre){$this->_pre('Table Builder: Head L3');}
-					$this->_builder_L3($data["head"],'th');
+					$this->_builder_L3($data["head"],'th',$source);
 				}
 			}
 
@@ -64,49 +53,77 @@
 				$this->b_level	=	$this->array_depth($data["body"]);
 				if($this->b_level == 1){
 					if($this->b_pre){$this->_pre('Table Builder: Body L1');}
-					$this->_builder_L1($data["body"],'td');
+					$this->_builder_L1($data["body"],'td',$source);
 				}
 				elseif($this->b_level == 2){
 					if($this->b_pre){$this->_pre('Table Builder: Body L2');}
-					$this->_builder_L2($data["body"],'td');
+					$this->_builder_L2($data["body"],'td',$source);
 				}
 				elseif($this->b_level == 3){
 					if($this->b_pre){$this->_pre('Table Builder: Body L3');}
-					$this->_builder_L3($data["body"],'td');
+					$this->_builder_L3($data["body"],'td',$source);
 				}
 			}
 
-			$this->_ds_table($this->head,$this->body);
+			$this->_ds_table($this->head,$this->body,$source);
 		}
-		function _builder_L1($data,$zone){
+		function _builder_L1($data,$zone,$source=false){
 			$h_array	=	array();
 			$b_array	=	array();
 
 			if($zone == 'th'){
-				$h_array[]	=	'<thead>';
-					$h_array[]	=	'<tr>';
-					foreach($data as $value){
-						$h_array[]	=	'<th>'.$value.'</th>';
-					}
-					$h_array[]	=	'</tr';
-				$h_array[]	=	'</thead>';
+				if(!$source || $source){
+					$h_array[]	=	'<thead>';
+						$h_array[]	=	'<tr>';
+						foreach($data as $value){
+							$h_array[]	=	'<th>'.$value.'</th>';
+						}
+						$h_array[]	=	'</tr';
+					$h_array[]	=	'</thead>';
+				}
 
 				$this->head	=	$h_array;
 			}
 
 			if($zone == 'td'){
-				foreach($data as $key=>$value){
-					echo $value;
-					#array_push($this->body,$value);
+				if(!$source){
+					$b_array[]	=	'<tbody>';
+						$b_array[]	=	'<tr>';
+						foreach($data as $value){
+							$b_array[]	=	'<td>'.$value.'</td>';
+						}
+						$h_array[]	=	'</tr';
+					$b_array[]	=	'</tbody>';
 				}
+				else{
+					if($source == 'k_info'){
+						$b_array[]	=	'<tbody>';
+						foreach($data as $value){
+							$b_array[]	=	'<tr>';
+								$b_array[]	=	'<td>'.$value.'</td>';
+							$h_array[]	=	'</tr';
+						}
+						$b_array[]	=	'</tbody>';
+					}
+					else{
+						$b_array[]	=	'<tbody>';
+							$b_array[]	=	'<tr>';
+							foreach($data as $value){
+								$b_array[]	=	'<td>'.$value.'</td>';
+							}
+							$h_array[]	=	'</tr';
+						$b_array[]	=	'</tbody>';
+					}
+				}
+
+				$this->body	=	$b_array;
 			}
 		}
-		function _builder_L2($data,$zone){
+		function _builder_L2($data,$zone,$source=false){
 			$h_array	=	array();
 			$b_array	=	array();
 
 			if($zone == 'td'){
-				#if($this->b_pre){$this->_pre(__FUNCTION__ .': Body (data)',$data,1);}
 				foreach($data as $key=>$value){
 					$b_array[]	.=	'<tbody>';
 						$b_array[]	.=	'<tr>';
@@ -119,15 +136,11 @@
 				$this->body	=	$b_array;
 			}
 		}
-		function _ds_table($head=false,$body=false){
-			if($this->debug){
-				if($head){$this->_debug('head',$head);}
-				if($body){$this->_debug('body',$body);}
-			}
+		function _ds_table($head=false,$body=false,$source=false){
 			echo '<div class="row" id="TableLoader">';
 				echo '<div class="col-lg-12" id="TabularData">';
 					echo '<div class="table-responsive">';
-						echo '<table id="mytable" class="table table-sm acp_table">';
+						echo '<table class="table table-sm auto-table acp_table">';
 						if($head){
 							foreach($head as $key=>$value){
 								echo $value;
@@ -183,12 +196,4 @@
 			exit();
 		}
 	}
-
-	/*
-			foreach($products as $key=>$value){
-				foreach($value as $k => $v){
-					
-				}
-			}
-*/
 ?>

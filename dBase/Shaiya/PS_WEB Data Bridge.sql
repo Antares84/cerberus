@@ -1,6 +1,9 @@
+-- The PS_WEB Data Bridge is used for bridging your web server database with your Shaiya database
+-- if your Shaiya database is stored on a separate host.
+
 USE [master];
-EXEC master.dbo.sp_addlinkedserver @server = N'PS_WEB', @srvproduct=N'', @provider=N'SQLNCLI', @datasrc=N'192.168.20.50';
-EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname=N'PS_WEB',@useself=N'False',@locallogin=NULL,@rmtuser=N'Azriphen',@rmtpassword='Platinum1520';
+EXEC master.dbo.sp_addlinkedserver @server = N'PS_WEB', @srvproduct=N'', @provider=N'SQLNCLI', @datasrc=N'SERVER_IP';
+EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname=N'PS_WEB',@useself=N'False',@locallogin=NULL,@rmtuser=N'DB_USER',@rmtpassword='DB_PASS';
 EXEC master.dbo.sp_serveroption @server=N'PS_WEB', @optname=N'collation compatible', @optvalue=N'false';
 EXEC master.dbo.sp_serveroption @server=N'PS_WEB', @optname=N'data access', @optvalue=N'true';
 EXEC master.dbo.sp_serveroption @server=N'PS_WEB', @optname=N'dist', @optvalue=N'false';

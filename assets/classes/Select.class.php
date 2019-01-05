@@ -1,6 +1,15 @@
 <?php
 	class Select{
-		function dobm(){
+		function _get_select($Type){
+			$method = '_get_select_'.$Type;
+
+			if(method_exists($this,$method)){
+				return $this->$method();
+			}
+
+			return 'Defined selector not found';
+		}
+		function _get_select_dobm(){
 			echo '<select class="form-control" name="DOB_M">';
 				echo '<option value="na">Month</option>';
 				echo '<option value="1">January</option>';
@@ -17,7 +26,7 @@
 				echo '<option value="12">December</option>';
 			echo '</select>';
 		}
-		function dobd(){
+		function _get_select_dobd(){
 			echo '<select class="form-control" name="DOB_D">';
 				echo '<option value="na">Day</option>';
 				echo '<option value="1">1</option>';
@@ -53,7 +62,7 @@
 				echo '<option value="31">31</option>';
 			echo '</select>';
 		}
-		function doby(){
+		function _get_select_doby(){
 			echo '<select class="form-control" name="DOB_Y">';
 				echo '<option value="N/A">Year</option>';
 				echo '<option value="2016">2016</option>';
@@ -135,7 +144,7 @@
 				echo '<option value="1940">1940</option>';
 			echo '</select>';
 		}
-		function sec_question(){
+		function _get_select_sec_question(){
 			$secArr = array(
 				"Please select a security question.",
 				"What is your Favorite color?",
@@ -200,7 +209,7 @@
 
 			return $return;
 		}
-		function gender(){
+		function _get_select_gender(){
 			echo '<select class="form-control tac" name="Gender">';
 				echo '<option value="N/A">Gender</option>';
 				echo '<option value="Male">Male</option>';
@@ -210,8 +219,8 @@
 				echo '<option value="Other">Prefer Not To Say</option>';
 			echo '</select>';
 		}
-		function color(){
-			echo '<select class="form-control tac" name="Color">';
+		function _get_select_color(){
+			echo '<select class="form-control tac" name="VALUE">';
 				echo '<option										value="na">Color</option>';
 				echo '<option class="badge badge-primary tac"		value="0">Primary</option>';
 				echo '<option class="badge badge-secondary tac"		value="1">Secondary</option>';
@@ -223,27 +232,27 @@
 				echo '<option class="badge badge-dark tac"			value="7">Dark</option>';
 			echo '</select>';
 		}
-		function PageShow(){
+		function _get_select_page_show(){
 			echo '<select class="form-control" id="PAGE_SHOW" name="PAGE_SHOW">';
 				echo '<option disabled selected>Show Page?</option>';
 				echo '<option value="1">Yes</option>';
 				echo '<option value="0">No</option>';
 			echo '</select>';
 		}
-		function ReqLogin(){
+		function _get_select_req_login(){
 			echo '<select class="form-control" id="req_login_select REQ_LOGIN" name="REQ_LOGIN">';
 				echo '<option disabled selected>Require Login?</option>';
 				echo '<option value="1">Yes</option>';
 				echo '<option value="0">No</option>';
 			echo '</select>';
 		}
-		function ACPStyle(){
+		function _get_select_acp_style(){
 			echo '<select class="form-control" name="STYLE_NAME">';
 				echo '<option disabled selected>Select Theme*</option>';
 				echo '<option value="Admin">Admin</option>';
 			echo '</select>';
 		}
-		function PluginOrder(){
+		function _get_select_plugin_order(){
 			echo '<select class="form-control" name="PLUGIN_ORDER">';
 				echo '<option disabled selected>Plugin Order*</option>';
 				echo '<option value="0">0</option>';
@@ -258,15 +267,15 @@
 				echo '<option value="9">9</option>';
 			echo '</select>';
 		}
-		function PluginEnable(){
+		function _get_select_plugin_enable(){
 			echo '<select class="form-control" name="PLUGIN_ENABLE">';
 				echo '<option disabled selected>Enable Plugin*</option>';
 				echo '<option value="0">No</option>';
 				echo '<option value="1">Yes</option>';
 			echo '</select>';
 		}
-		function BackgroundColor(){
-			echo '<select class="form-control tac col-md-6" name="VALUE">';
+		function _get_select_background_color(){
+			echo '<select class="form-control tac" name="VALUE">';
 				echo '<option class="tac" disabled selected>Background Color</option>';
 				echo '<option 												value="">None</option>';
 				echo '<option class="badge badge-primary tac"				value="bg-primary">Primary</option>';
@@ -282,14 +291,14 @@
 				echo '<option class="badge badge-white tac bg-grey-black"	value="bg-grey black">Grey-Black</option>'; # custom color
 			echo '</select>';
 		}
-		function Bit(){
+		function _get_select_bit(){
 			echo '<select class="form-control" name="VALUE">';
 				echo '<option disabled selected>Enable/Disable</option>';
 				echo '<option value="1">Enabled</option>';
 				echo '<option value="0">Disabled</option>';
 			echo '</select>';
 		}
-		function CMSTheme(){
+		function _get_select_cms_theme(){
 			echo '<select class="form-control" name="VALUE">';
 				echo '<option disabled selected>Choose a Theme</option>';
 				echo '<option value="Glazed">Glazed</option>';
@@ -297,7 +306,7 @@
 				echo '<option value="Surface">Surface</option>';
 			echo '</select>';
 		}
-		function SidebarPos(){
+		function _get_select_sidebar_pos(){
 			echo '<select class="form-control tac col-md-6" name="VALUE">';
 				echo '<option disabled selected>Sidebar Position</option>';
 				echo '<option value="0">No Sidebar</option>';
@@ -305,7 +314,7 @@
 				echo '<option value="2">Right</option>';
 			echo '</select>';
 		}
-		function AcctBan(){
+		function _get_select_acct_ban(){
 			echo '<select class="form-control" name="Length">';
 				echo '<option disabled selected>Ban Length</option>';
 				echo '<option value="12hr">12 Hours</option>';
@@ -314,7 +323,7 @@
 				echo '<option value="perma">Permanent</option>';
 			echo '</select>';
 		}
-		function PANE_BG_COLOR(){
+		function _get_select_pane_bg_color(){
 			echo '<select class="form-control" id="VALUE" name="VALUE">';
 				echo '<option disabled selected>Color Picker</option>';
 				echo '<option class="badge badge-white tac" style="background-color:#F0F8FF" value="240,248,255">AliceBlue</option>';
@@ -865,7 +874,7 @@
 				echo '<option class="badge badge-white tac" style="background-color:#9ACD32" value="154,205,050">YellowGreen</option>';
 			echo '</select>';
 		}
-		function PANE_BG_TRANS(){
+		function _get_select_pane_bg_trans(){
 			echo '<select class="form-control" id="VALUE" name="VALUE">';
 				echo '<option disabled selected>Color Transparency</option>';
 				echo '<option value=".05">5%</option>';
@@ -890,11 +899,11 @@
 				echo '<option value="1">100%</option>';
 			echo '</select>';
 		}
-		function ENABLE(){
-			echo '<select class="form-control" name="ENABLE">';
+		function _get_select_enable(){
+			echo '<select class="form-control tac" name="VALUE">';
 				echo '<option disabled selected>Enable/Disable*</option>';
-				echo '<option value="true">Enable</option>';
-				echo '<option value="false">Disable</option>';
+				echo '<option value="1">Enable</option>';
+				echo '<option value="0">Disable</option>';
 			echo '</select>';
 		}
 	}

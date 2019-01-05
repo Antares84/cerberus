@@ -1,21 +1,28 @@
 <?php
+	#############################################################################################
+	#	Title: Modal.class.php																	#
+	#	Author: Bradley Sweeten																	#
+	#	Rel: CMS modal class, used for loading all modal resources								#
+	#	Last Update Date: 12.31.2018 1824														#
+	#																							#
+	#	USAGE																					#
+	#	@Zone	(string)	gets the zone you're in, ie. CMS || ACP								#
+	#	@ID		(string)	name of the id for the modal (custom for each modal to				#
+	#						prevent duplicates)													#
+	#	@Icon	(string)	icon that you want to use in front of the modal title 				#
+	#						(available icon libraries are Fontawesome && FontIcons)				#
+	#	@Pos	(int)		modal position, empty for default or 1 for centered					#
+	#	@Size	(int)		modal size, options are: modal-sm || modal-lg || modal-xl			#
+	#	@Title	(string)	modal title															#
+	#############################################################################################
 	class Modal{
-
-	/*
-		@Size	(void)	modal-sm || modal-lg
-		@Pos	(void)	modal-dialog-centered
-		@ID		(bool)
-		@Icon	(void)	can use either FontAwesome or FontIcons
-		@Title	(bool)
-	*/
-
 		function __construct($Colors,$Paging,$Setting,$Style){
 			$this->Colors		=	$Colors;
 			$this->Paging		=	$Paging;
 			$this->Setting		=	$Setting;
 			$this->Style		=	$Style;
 		}
-		function Display($Zone,$ID,$Icon,$Pos=NULL,$Size,$Title){
+		function Display($Zone,$ID,$Icon,$Pos=false,$Size=false,$Title){
 			echo '<div class="modal" id="'.$ID.'" tabindex="-1" role="dialog">';
 				echo '<div class="modal-dialog'.$this->ModalPos($Pos).$this->ModalSize($Size).'" role="document">';
 					echo '<div class="modal-content" style="'.$this->Colors->_do_ColorBuilder('BGColor','Black','0.4').'">';
@@ -37,6 +44,7 @@
 				case '0':	return '';			break;
 				case '1':	return ' modal-sm';	break;
 				case '2':	return ' modal-lg';	break;
+				case '3':	return ' modal-xl';	break;
 			}
 		}
 		function ModalHeader($ID,$Icon,$Title){
@@ -58,7 +66,6 @@
 							echo '</div>';
 						echo '</div>';
 					echo '</div>';
-					echo '<div id="error" style="border:1px dashed red;"></div>';
 					echo '<div id="dynamic-content"></div>';
 				echo '</div>';
 			echo '</div>';
@@ -72,7 +79,7 @@
 		function _get_MDOAL_LINKS(){
 			# Theme Modals
 			$this->Display($this->Paging->PAGE_ZONE,'bit_modal','<i class="fa fa-pencil"></i>','0','2','Edit Setting');
-			$this->Display($this->Paging->PAGE_ZONE,'text_modal','<i class="fa fa-pencil"></i>','0','2','Edit Setting');
+			$this->Display($this->Paging->PAGE_ZONE,'settings_modal','<i class="fa fa-pencil"></i>','0','2','Edit Setting');
 			$this->Display($this->Paging->PAGE_ZONE,'bgcolor_modal','<i class="fa fa-pencil"></i>','0','2','Edit Setting');
 			$this->Display($this->Paging->PAGE_ZONE,'sb_modal','<i class="fa fa-pencil"></i>','0','2','Edit Setting');
 			$this->Display($this->Paging->PAGE_ZONE,'theme_modal','<i class="fa fa-pencil"></i>','0','2','Edit Setting');
@@ -89,6 +96,13 @@
 			$this->Display($this->Paging->PAGE_ZONE,'verify_displayname_modal','<i class="fa fa-pencil"></i>','0','2','Check Display Name Availability');
 			# Mail Testing
 			$this->Display($this->Paging->PAGE_ZONE,'mail_test_modal','<i class="fa fa-pencil"></i>','0','2','Mail Test');
+			# Plugins
+			$this->Display($this->Paging->PAGE_ZONE,'pl_stng_modal','<i class="fa fa-pencil"></i>','1','2','Edit Setting');
+			$this->Display($this->Paging->PAGE_ZONE,'plugin_info_modal','<i class="fa fa-pencil"></i>','1','2','Plugin Info');
+			# Settings Modals
+			$this->Display($this->Paging->PAGE_ZONE,'settings_modal','<i class="fa fa-pencil"></i>','1','0','Edit Setting');
+			$this->Display($this->Paging->PAGE_ZONE,'lock_modal','<i class="fa fa-pencil"></i>','1','0','Lock Setting');
+			$this->Display($this->Paging->PAGE_ZONE,'unlock_modal','<i class="fa fa-pencil"></i>','1','0','Un-lock Setting');
 		}
 		function _get_MODAL_SCRIPTS(){
 			echo '<div class="modals_js">';
@@ -175,6 +189,7 @@
 							$('#mail_test_modal #modal-loader').hide();
 						});
 					});
+					// UserID Validator Modal
 					$(document).on('click','.open_verify_userid_modal',function(e){
 						e.preventDefault();
 
@@ -200,6 +215,7 @@
 							$('#verify_userid_modal #modal-loader').hide();
 						});
 					});
+					// Display Name Validator Modal
 					$(document).on('click','.open_verify_displayname_modal',function(e){
 						e.preventDefault();
 
@@ -470,6 +486,137 @@
 						.fail(function(){
 							$("#theme_unlock_modal #dynamic-content").html("<i class=\"fa fa-exclamation-triangle\"></i> Something went wrong, Please try again...");
 							$("#theme_unlock_modal #modal-loader").hide();
+						});
+					});
+					// Settings Editor Modal
+					$(document).on("click",".open_editor_modal",function(e){
+						e.preventDefault();
+
+						var uid = $(this).data("id");
+
+						$("#settings_modal #dynamic-content").html("");
+						$("#settings_modal #modal-loader").show();
+
+						$.ajax({
+							url: "<?php echo $this->Style->_style_array[9];?>AJAX/AP/Settings/edit_settings.php",
+							type: "POST",
+							data: "id="+uid,
+							dataType: "html"
+						})
+						.done(function(data){
+							$('#settings_modal #dynamic-content').html('');
+							$('#settings_modal #dynamic-content').hide().html(data).fadeIn("slow");
+							$('#settings_modal #modal-loader').hide("slow");
+						})
+						.fail(function(){
+							$("#settings_modal #dynamic-content").html("<i class=\"fa fa-exclamation-triangle\"></i> Something went wrong, Please try again...");
+							$("#settings_modal #modal-loader").hide();
+						});
+					});
+					// Settings Lock Modal
+					$(document).on("click",".open_lock_modal",function(e){
+						e.preventDefault();
+
+						var uid = $(this).data("id");
+
+						$("#lock_modal #dynamic-content").html("");
+						$("#lock_modal #modal-loader").show();
+
+						$.ajax({
+							url: "<?php echo $this->Style->_style_array[9];?>AJAX/AP/Access/access_lock.php",
+							type: "POST",
+							data: "id="+uid,
+							dataType: "html"
+						})
+						.done(function(data){
+							$('#lock_modal #dynamic-content').html('');
+							$('#lock_modal #dynamic-content').hide().html(data).fadeIn("slow");
+							$('#lock_modal #modal-loader').hide("slow");
+						})
+						.fail(function(){
+							$("#lock_modal #dynamic-content").html("<i class=\"fa fa-exclamation-triangle\"></i> Something went wrong, Please try again...");
+							$("#lock_modal #modal-loader").hide();
+						});
+					});
+					// Settings Un-lock Modal
+					$(document).on("click",".open_unlock_modal",function(e){
+						e.preventDefault();
+
+						var uid = $(this).data("id");
+
+						$("#unlock_modal #dynamic-content").html("");
+						$("#unlock_modal #modal-loader").show();
+
+						$.ajax({
+							url: "<?php echo $this->Style->_style_array[9];?>AJAX/AP/Access/access_unlock.php",
+							type: "POST",
+							data: "id="+uid,
+							dataType: "html"
+						})
+						.done(function(data){
+							$('#unlock_modal #dynamic-content').html('');
+							$('#unlock_modal #dynamic-content').hide().html(data).fadeIn("slow");
+							$('#unlock_modal #modal-loader').hide("slow");
+						})
+						.fail(function(){
+							$("#unlock_modal #dynamic-content").html("<i class=\"fa fa-exclamation-triangle\"></i> Something went wrong, Please try again...");
+							$("#unlock_modal #modal-loader").hide();
+						});
+					});
+					// Plugin Editor Modal
+					$(document).on('click','.open_pl_editor_modal',function(e){
+						e.preventDefault();
+
+						var uid = $(this).data('id');
+
+						$('#pl_stng_modal #dynamic-content').html('');
+						$('#pl_stng_modal #modal-loader').show();
+
+						$.ajax({
+							url:"<?php echo $this->Style->_style_array[9];?>AJAX/AP/Plugins/edit_plugins.php",
+							type: "POST",
+							data: "id="+uid,
+							dataType: "html"
+						})
+						.done(function(data){
+						<?php if($this->Setting->DEBUG === "1"){ ?>
+							console.log(data);
+						<?php } ?>
+							$('#pl_stng_modal #dynamic-content').html('');
+							$('#pl_stng_modal #dynamic-content').hide().html(data).fadeIn("slow");
+							$('#pl_stng_modal #modal-loader').hide("slow");
+						})
+						.fail(function(){
+							$('#pl_stng_modal #dynamic-content').html('<i class="fa fa-exclamation-triangle"></i> Something went wrong, Please try again...');
+							$('#pl_stng_modal #modal-loader').hide();
+						});
+					});
+					// Plugin Info Modal
+					$(document).on('click','.open_plugin_info_modal',function(e){
+						e.preventDefault();
+
+						var uid = $(this).data('id');
+
+						$('#plugin_info_modal #dynamic-content').html('');
+						$('#plugin_info_modal #modal-loader').show();
+
+						$.ajax({
+							url:"<?php echo $this->Style->_style_array[9];?>AJAX/AP/Plugins/plugin_info.php",
+							type: "POST",
+							data: "id="+uid,
+							dataType: "html"
+						})
+						.done(function(data){
+						<?php if($this->Setting->DEBUG === "1"){ ?>
+							console.log(data);
+						<?php } ?>
+							$('#plugin_info_modal #dynamic-content').html('');
+							$('#plugin_info_modal #dynamic-content').hide().html(data).fadeIn("slow");
+							$('#plugin_info_modal #modal-loader').hide("slow");
+						})
+						.fail(function(){
+							$('#plugin_info_modal #dynamic-content').html('<i class="fa fa-exclamation-triangle"></i> Something went wrong, Please try again...');
+							$('#plugin_info_modal #modal-loader').hide();
 						});
 					});
 				});

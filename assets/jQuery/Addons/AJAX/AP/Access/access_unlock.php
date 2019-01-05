@@ -13,7 +13,7 @@
 		}
 	}
 
-	list($RowID,$EDIT) = explode("~",$_POST['id']);
+	list($RowID,$EDIT,$DB) = explode("~",$_POST['id']);
 
 	if(isset($_POST['id'])){
 		echo '<form class="record_unlock" name="record_unlock">';
@@ -22,7 +22,7 @@
 				echo 'Are you sure you want to un-lock this setting?';
 			echo '</div>';
 
-			echo '<input class="form-control" name="id" type="hidden" value="'.$RowID.'~'.$EDIT.'"/>';
+			echo '<input class="form-control" name="id" type="hidden" value="'.$RowID.'~'.$EDIT.'~'.$DB.'"/>';
 
 			echo '<div class="text-center f_20">';
 				echo '<button type="button" class="badge badge-warning" id="submit_unlock"><i class="fa fa-check-circle"></i> Un-lock Setting</button>';

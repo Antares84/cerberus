@@ -2,6 +2,9 @@
 $(".cNavbar").click(function(){
 	$(".container").fadeToggle(1500);
 });
+$(".f_Title").click(function(){
+	$(".f_Content").fadeToggle(1500);
+});
 //	News | Hide News Article After Title Click
 $(document).ready(function( e ) {
 	$('.nTitle').each(function(index, element) {

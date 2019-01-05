@@ -2,15 +2,14 @@
 	class SQL{
 
 		# ARRAYS
-		private $BG_COLOR_ARRAY;private $BIT_ARRAY;private $ENABLED_ARRAY;private $TXT_ARRAY;private $SB_ARRAY;private $PANE_ARRAY;
+		public $BG_COLOR_ARRAY;public $BIT_ARRAY;public $ENABLED_ARRAY;public $TXT_ARRAY;public $SB_ARRAY;public $PANE_ARRAY;
 		public $output;
 
-		function __construct($Data,$db,$Setting,$Template,$User){
+		function __construct($Data,$db,$Setting,$Template){
 			$this->db			=	$db;
 			$this->Data			=	$Data;
 			$this->Setting		=	$Setting;
 			$this->Tpl			=	$Template;
-			$this->User			=	$User;
 
 			# Launch Array Builder
 			$this->_array_builder();
@@ -24,23 +23,18 @@
 												'BREAD_BG_COLOR'
 			);
 
-			$this->BIT_ARRAY	=	array(
-											'SETUP',
-											'NAV_SERVER_STATUS',
-											'USE_PLUGINS'
-			);
-
 			$this->ENABLED_ARRAY	=	array(
 											'DEBUG',
+											'FOOTER_BLOCK_A',
+											'FOOTER_BLOCK_B',
+											'FOOTER_BLOCK_C',
 											'HTTPS_SSL',
 											'LOGGING',
 											'MAINTENANCE',
 											'NAV_SERVER_STATUS',
+											'SETUP',
 											'SHOW_SIDE_NAV',
-											'USE_PLUGINS',
-											'FOOTER_BLOCK_A',
-											'FOOTER_BLOCK_B',
-											'FOOTER_BLOCK_C'
+											'USE_PLUGINS'
 			);
 
 			$this->PANE_ARRAY	=	array(
@@ -59,9 +53,12 @@
 											'FAVICON_IMAGE',
 											'FOOTER'
 			);
+			$this->THEME_ARRAY	=	array(
+											'CMS_THEME_NAME'
+			);
 		}
 		# THEME FUNCTIONS
-		function _get_Options($DB,$TITLEBAR,$SECTION,$SHOWHEAD=false){
+		function _get_Options($DB,$TITLEBAR,$SECTION=false,$SHOWHEAD=false){
 			if($DB == "SETTINGS_MAIN"){
 				$sql	=	('
 								SELECT *
@@ -106,20 +103,17 @@
 								elseif(in_array($data["SETTING"],$this->TXT_ARRAY)){
 									echo '<td style="width:50%">'.$data["VALUE"].'</td>';
 								}
-								elseif($data["SETTING"] == "CMS_THEME_NAME"){
-									echo '<td style="width:50%">'.$data["VALUE"].'</td>';
-								}
 								else{
 									echo '<td style="width:50%">'.$data["VALUE"].'</td>';
 								}
 
 								if($data["EDIT"] == 0){
-									echo '<td class="tac badge-warning"><button class="badge badge-warning open_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
+									echo '<td class="tac badge-warning"><button class="badge badge-warning open_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'~'.$DB.'" data-target="#unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
 									echo '<td class="tac badge-danger"><i class="fa fa-lock"></i> Locked</td>';
 								}
 								elseif($data["EDIT"] == 1){
-									echo '<td class="tac badge-success"><button class="badge badge-warning open_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
-									echo '<td class="tac badge-success"><button class="badge badge-warning open_editor_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#settings_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
+									echo '<td class="tac badge-success"><button class="badge badge-warning open_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'~'.$DB.'" data-target="#lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
+									echo '<td class="tac badge-success"><button class="badge badge-warning open_editor_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'~'.$data["SETTING"].'~'.$DB.'" data-target="#settings_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
 								}
 								else{
 									echo '<td class="tac badge-secondary"><i class="fa fa-times"></i> Disabled</td>';
@@ -145,7 +139,7 @@
 
 				if($prep){
 					$this->Tpl->TitleBar($TITLEBAR);
-					echo '<div class="table-responsive">';
+					echo '<div class="table-responsive nContent">';
 						echo '<table id="mytable" class="table table-sm acp_table">';
 						if($SHOWHEAD){
 							echo '<thead>';
@@ -161,86 +155,84 @@
 							while($data = odbc_fetch_array($stmt)){
 								echo '<tr>';
 									echo '<td style="width:30%">'.$data["DESC"].'</td>';
-								if(in_array($data["SETTING"],$this->BIT_ARRAY)){
-									echo '<td style="width:50%">'.$this->Data->bit_2_text2($data["VALUE"]).'</td>';
-									if($data["EDIT"] == 0){
-										echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
-										echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
-									}
-									elseif($data["EDIT"] == 1){
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_bit_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#bit_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
-									}
-								}
-								elseif(in_array($data["SETTING"],$this->ENABLED_ARRAY)){
+								if(in_array($data["SETTING"],$this->ENABLED_ARRAY)){
 									echo '<td style="width:50%">'.$this->Data->ENABLE($data["VALUE"]).'</td>';
 									if($data["EDIT"] == 0){
-										echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
-										echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
+						#				echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
+						#				echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
 									}
 									elseif($data["EDIT"] == 1){
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_theme_enable_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#theme_enable_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_theme_enable_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#theme_enable_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
 									}
 								}
 								elseif(in_array($data["SETTING"],$this->TXT_ARRAY)){
 									echo '<td style="width:50%">'.$data["VALUE"].'</td>';
 									if($data["EDIT"] == 0){
-										echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
-										echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
+						#				echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
+						#				echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
 									}
 									elseif($data["EDIT"] == 1){
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_text_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#text_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_text_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#text_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
 									}
 								}
 								elseif(in_array($data["SETTING"],$this->BG_COLOR_ARRAY)){
 									echo '<td style="width:50%">'.$data["VALUE"].'</td>';
 									if($data["EDIT"] == 0){
-										echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
-										echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
+						#				echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
+						#				echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
 									}
 									elseif($data["EDIT"] == 1){
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_bgcolor_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#bgcolor_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_bgcolor_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#bgcolor_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
 									}
 								}
 								elseif(in_array($data["SETTING"],$this->PANE_ARRAY)){
 									echo '<td style="width:50%">'.$data["VALUE"].'</td>';
 									if($data["EDIT"] == 0){
-										echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
-										echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
+						#				echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
+						#				echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
 									}
 									elseif($data["EDIT"] == 1){
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_pane_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'~'.$data["SETTING"].'" data-target="#pane_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_pane_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'~'.$data["SETTING"].'" data-target="#pane_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
 									}
 								}
 								elseif(in_array($data["SETTING"],$this->SB_ARRAY)){
 									echo '<td style="width:50%">'.$data["VALUE"].'</td>';
 									if($data["EDIT"] == 0){
-										echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
-										echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
+						#				echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
+						#				echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
 									}
 									elseif($data["EDIT"] == 1){
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_sb_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#sb_modal" data-toggle="modal"><i class="fa fa-eye"></i> Edit</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_sb_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#sb_modal" data-toggle="modal"><i class="fa fa-eye"></i> Edit</button></td>';
 									}
-									
 								}
 								elseif($data["SETTING"] == "CMS_THEME_NAME"){
 									echo '<td style="width:50%">'.$data["VALUE"].'</td>';
 									if($data["EDIT"] == 0){
-										echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
-										echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
+						#				echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_theme_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
+						#				echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
 									}
 									elseif($data["EDIT"] == 1){
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
-										echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_theme_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#theme_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_theme_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'" data-target="#theme_lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
+						#				echo '<td class="tac badge-success align-middle" style="width:10%"><button class="btn btn-sm btn-primary open_theme_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'" data-target="#theme_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
 									}
 								}
 								else{
 									echo '<td style="width:50%">'.$data["VALUE"].'</td>';
+								}
+								if($data["EDIT"] == 0){
+									echo '<td class="tac badge-warning align-middle" style="width:10%"><button class="badge badge-warning open_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'~'.$DB.'" data-target="#unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
+									echo '<td class="tac badge-danger align-middle" style="width:10%"><i class="fa fa-lock"></i> Locked</td>';
+								}
+								elseif($data["EDIT"] == 1){
+									echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-warning open_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'~'.$DB.'" data-target="#lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
+									echo '<td class="tac badge-success align-middle" style="width:10%"><button class="badge badge-primary open_editor_modal" data-id="'.$data['RowID'].'~'.$data['DESC'].'~'.$data['VALUE'].'~'.$data["SETTING"].'~'.$DB.'" data-target="#settings_modal" data-toggle="modal"><i class="fa fa-eye"></i> Modify</button></td>';
+								}
+								else{
 									echo '<td class="tac badge-secondary" style="width:10%"><i class="fa fa-times"></i> Disabled</td>';
 									echo '<td class="tac badge-secondary" style="width:10%"><i class="fa fa-times"></i> Disabled</td>';
 								}
@@ -249,6 +241,54 @@
 							echo '</tbody>';
 						echo '</table>';
 					echo '</div>';
+				}
+			}
+			elseif($DB == "SETTINGS_PLUGINS"){
+				$sql	=	('
+								SELECT *
+								FROM '.$this->db->get_TABLE($DB).'
+				');
+				$stmt	=	odbc_prepare($this->db->conn,$sql);
+				$args	=	array();
+				$prep	=	odbc_execute($stmt,$args);
+
+				if($prep){
+					echo '<table id="mytable" class="table table-sm acp_table">';
+						echo '<thead>';
+							echo '<tr>';
+								echo '<th>Plugin Name</th>';
+								echo '<th>Version</th>';
+								echo '<th>Enabled</th>';
+								echo '<th>Plugin Order</th>';
+								echo '<th>Actions</th>';
+								echo '<th>Access</th>';
+								echo '<th>Info</th>';
+							echo '</tr>';
+						echo '</thead>';
+						echo '<tbody>';
+						while($data = odbc_fetch_array($stmt)){
+							echo '<tr>';
+								echo '<td>'.$data["PLUGIN_NAME"].'</td>';
+								echo '<td class="tac">'.$data["PLUGIN_VERSION"].'</td>';
+								echo '<td class="tac align-middle">'.$this->Data->bit_2_text($data["PLUGIN_ENABLED"]).'</td>';
+								echo '<td class="tac">'.$data["PLUGIN_ORDER"].'</td>';
+							if($data["EDIT"] === "0"){
+								echo '<td class="tac badge-danger b_i"><i class="fa fa-lock"></i> Locked</td>';
+							}
+							else{
+								echo '<td class="tac badge-primary align-middle"><button class="badge badge-info b_i open_pl_editor_modal" data-id="'.$data['RowID'].'~'.$data["PLUGIN_ORDER"].'~'.$data["PLUGIN_ENABLED"].'" data-target="#pl_stng_modal" data-toggle="modal"><i class="fa fa-gear"></i> Modify</button></td>';
+							}
+							if($data["EDIT"] === "0"){
+								echo '<td class="tac badge-warning align-middle"><button class="badge badge-warning b_i open_unlock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'~'.$DB.'" data-target="#unlock_modal" data-toggle="modal"><i class="fa fa-unlock"></i> Un-lock</button></td>';
+							}
+							else{
+								echo '<td class="tac badge-danger align-middle"><button class="badge badge-warning b_i open_lock_modal" data-id="'.$data['RowID'].'~'.$data['EDIT'].'~'.$DB.'" data-target="#lock_modal" data-toggle="modal"><i class="fa fa-lock"></i> Lock</button></td>';
+							}
+								echo '<td class="tac align-middle"><button class="tac badge-pill badge-info open_plugin_info_modal" data-id="'.$data['RowID'].'~'.$data['PLUGIN_VERSION'].'~'.$data['PLUGIN_DATE'].'~'.$data['PLUGIN_ORDER'].'~'.$data['PLUGIN_OPT_0'].'~'.$data['PLUGIN_OPT_1'].'~'.$data['PLUGIN_OPT_2'].'~'.$data['PLUGIN_OPT_3'].'~'.$data['PLUGIN_OPT_4'].'~'.$data['PLUGIN_OPT_5'].'~'.$data['PLUGIN_OPT_6'].'~'.$data['PLUGIN_OPT_7'].'~'.$data['PLUGIN_OPT_8'].'~'.$data['PLUGIN_OPT_9'].'" data-target="#plugin_info_modal" data-toggle="modal"><i class="fa fa-info-circle"></i></button></td>';
+							echo '</tr>';
+						}
+						echo '</tbody>';
+					echo '</table>';
 				}
 			}
 

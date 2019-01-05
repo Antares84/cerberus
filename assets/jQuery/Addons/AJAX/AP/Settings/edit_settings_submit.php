@@ -3,22 +3,23 @@
 
 	$Browser=new Browser();$db=new Database();$Select=new Select();$Data=new Data($db);$Theme=new Theme($db);$Messenger=new Messenger($Browser);$Style=new Style($db,$Theme);$Tpl=new Template($Data,$Messenger,$Select,$Style,$Theme);$Setting=new Setting($Data,$db,$Tpl);
 
-	if($Setting->DEBUG === "1" || $Setting->DEBUG === "2"){
+#	if($Setting->DEBUG === "1" || $Setting->DEBUG === "2"){
 		echo '<pre>';
 			echo var_dump($_POST);
 		echo '</pre>';
 
 		if($Setting->DEBUG === "2"){
-#			die();
+			die();
 		}
-	}
+#	}
 
 	if(isset($_POST["RowID"])){
 		$RowID	=	isset($_POST["RowID"])	?	trim($_POST["RowID"])	:	false;
 		$VALUE	=	isset($_POST["VALUE"])	?	trim($_POST["VALUE"])	:	false;
+		$DB		=	isset($_POST["DB"])		?	trim($_POST["DB"])		:	false;
 
 		$sql	=	('
-						UPDATE '.$db->get_TABLE("SETTINGS_MAIN").'
+						UPDATE '.$db->get_TABLE($DB).'
 						SET VALUE=?
 						WHERE RowID=?
 		');

@@ -89,8 +89,8 @@
 		}
 		function UNI_HEAD_SS(){
 			# FAVICON
-			echo '<link rel="Shortcut Icon" type="image/png" href="'.$this->Style->_style_array[45].$this->Theme->_theme_array[10].'">';
-			echo '<link rel="icon" type="image/png" href="'.$this->Style->_style_array[45].$this->Theme->_theme_array[10].'">';
+			echo '<link rel="Shortcut Icon" type="image/png" href="'.$this->Style->_style_array[54].$this->Theme->_theme_array[10].'">';
+			echo '<link rel="icon" type="image/png" href="'.$this->Style->_style_array[54].$this->Theme->_theme_array[10].'">';
 			# CUSTOM FONT
 			echo '<link href="https://fonts.googleapis.com/css?family=Tillana" rel="stylesheet" type="text/css">';
 			# BOOTSTRAP
@@ -141,14 +141,10 @@
 			echo '<div class="addons_js">';
 				# POPPERJS
 				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[32].'"></script>';
-				# TETHER
-			#	echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[30].'"></script>';
 				# BOOTSTRAP
 				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[14].'"></script>';
-				# MODERNIZR
-			#	echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[23].'"></script>';
 				# JQUERY FADERS
-			#	echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[10].'custom.faders.js"></script>';
+				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[10].'custom.faders.js"></script>';
 				# TINYMCE TEXTBOX
 				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[35].'"></script>';
 				echo '<script charset="utf-8" type="text/javascript" src="'.$this->Style->_style_array[36].'"></script>';
@@ -192,9 +188,7 @@
 		}
 		function _get_NAV($Zone){
 			if($Zone == "CMS"){
-				if($this->Paging->PAGE_INDEX === "LANDING" || $this->Paging->PAGE_INDEX === "MAINTENANCE"){
-					
-				}
+				if($this->Paging->PAGE_INDEX === "LANDING" || $this->Paging->PAGE_INDEX === "MAINTENANCE"){}
 				else{
 					if($this->Theme->_theme_array[2]){
 						$this->Nav->NAV_SERVER_STATUS();
@@ -303,6 +297,18 @@
 				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
 				echo '<pre>';
 					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
+		}
+		function _get_class_methods(){
+			$class_methods	=	get_class_methods($this);
+			echo '<div class="col-md-12">';
+				echo '<b>Class ('.get_class($this).') Methods:</b> <br>';
+				echo '<pre>';
+				foreach($class_methods as $method_name){
+					echo $method_name.'<br>';
+				}
 				echo '</pre>';
 			echo '</div>';
 			exit();

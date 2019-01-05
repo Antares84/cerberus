@@ -9,6 +9,6 @@
 	else{
 #		echo $this->MailSys->MAILDIAG();
 #		echo '<div class="separator_50"></div>';
-		echo $this->Tpl->PAGE_CARD($this->Lang->SITE_TITLE.' Donations',"",$this->Donate->DonateOptions(),"");
+		echo $this->Tpl->PAGE_CARD($this->Setting->SITE_TITLE.' Donations',"",$this->Donate->DonateOptions(),"");
 	}
 ?>

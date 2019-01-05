@@ -2,7 +2,6 @@
 	$this->User->Auth();
 	$this->LogSys->createLog("accessed page (Settings: Theme");
 
-	# CONTENT
 	echo '<div class="row" id="TableLoader">';
 		echo '<div class="col-lg-12" id="TabularData">';
 			$this->SQL->_get_Options("SETTINGS_THEME","Theme Names","THEME",1);

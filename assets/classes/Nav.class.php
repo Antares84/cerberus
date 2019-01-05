@@ -93,7 +93,7 @@
 						}
 /*
 						echo '<li class="nav-item dropdown">';
-							echo '<a class="nav-link dropdown-toggle m_t_5" href="javascript:;" id="Alerts" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope"></i></a>';
+							echo '<a class="nav-link dropdown-toggle m_t_5" href="#" id="Alerts" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope"></i></a>';
 							echo '<div class="dropdown-menu" aria-labelledby="Alerts">';
 								echo '<a class="dropdown-item" href="javascript:;"><span class="badge badge-primary">Alert Badge</span></a>';
 								echo '<a class="dropdown-item" href="javascript:;"><span class="badge badge-success">Alert Badge</span></a>';
@@ -107,15 +107,15 @@
 */
 							echo '<li class="dropdown nav-item">';
 							if($this->User->_is_Logged_In()){
-								echo '<a href="javascript:;" class="nav-link dropdown-toggle" id="Options" data-toggle="dropdown"><i class="fa fa-user"></i> '.$this->User->UserID.' <b class="caret"></b></a>';
+								echo '<a href="#" class="nav-link dropdown-toggle" id="Options" data-toggle="dropdown"><i class="fa fa-user"></i> '.$this->User->UserID.' <b class="caret"></b></a>';
 							}
 							else{
-								echo '<a href="javascript:;" class="nav-link dropdown-toggle" id="Options" data-toggle="dropdown">Options <b class="caret"></b></a>';
+								echo '<a href="#" class="nav-link dropdown-toggle" id="Options" data-toggle="dropdown">Options <b class="caret"></b></a>';
 							}
 								echo '<div class="dropdown-menu" aria-labelledby="Options">';
 								if($this->User->_is_ADM()){
-									#echo '<li class="dropdown-item"><a href="javascript:;"><i class="fa fa-fw fa-user"></i> Profile</a></li>';
-									#echo '<li class="dropdown-item"><a href="javascript:;"><i class="fa fa-fw fa-envelope"></i> Inbox</a></li>';
+									#echo '<li class="dropdown-item"><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a></li>';
+									#echo '<li class="dropdown-item"><a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a></li>';
 									#echo '<li class="divider"></li>';
 									echo '<a class="dropdown-item" href="?'.$this->Setting->PAGE_PREFIX.'=Logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>';
 								}
@@ -282,7 +282,7 @@
 			if($prep){
 				if(odbc_num_rows($stmt) > 0){
 					echo '<li class="nav-item dropdown">';
-						echo '<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="javascript:;" id="'.$PageCat.'" role="button" aria-haspopup="true" aria-expanded="false">'.$PageCat.'</a>';
+						echo '<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="'.$PageCat.'" role="button" aria-haspopup="true" aria-expanded="false">'.$PageCat.'</a>';
 						echo '<div class="dropdown-menu w_100_p bg-dark" aria-labelledby="'.$PageCat.'">';
 						while($res = odbc_fetch_array($stmt)){
 							echo '<a class="dropdown-item" href="?'.$this->Setting->PAGE_PREFIX.'='.$res["PAGE_INDEX"].'"><i class="fa fa-chevron-right"></i> '.$res["PAGE_TITLE"].'</a>';
@@ -378,7 +378,7 @@
 			if($prep){
 				if(odbc_num_rows($stmt) > 0){
 					echo '<li class="nav-item dropdown">';
-						echo '<a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$PageCat.'</a>';
+						echo '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$PageCat.'</a>';
 						echo '<div class="dropdown-menu';
 								if($this->Theme->_theme_array[12]){echo ' '.$this->Theme->_theme_array[12].'>';}
 								else{echo ' no_bg';}

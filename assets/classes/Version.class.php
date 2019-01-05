@@ -1,166 +1,66 @@
 <?php
 	class Version{
 
-		public $UPDATER_KEY;public $UPDATER_URI;
+		# From Settings class
+		public $updater_key;
+		public $updater_uri;
 
-		public $VERSION;public $CODENAME;public $RELEASE_DATE;public $CHANGELOG;public $VERSION_KEY;public $PATCH_DATA;
+		# From XML class
+		public $codename;
+		public $rel_date;
+		public $c_version;
+		public $c_versionID;
+		public $n_version;
+		public $n_versionID;
 
-		function __construct($db,$Data,$Setting){
+		function __construct($db,$Data,$XML){
 			$this->db		=	$db;
 			$this->Data		=	$Data;
-			$this->Setting	=	$Setting;
+			$this->XML		=	$XML;
 
-			$this->UPDATER_URI();
-			$this->UPDATER_KEY();
-
-			$this->Load_Version_XML();
+			$this->_get_version_data();
 		}
-		function QUERY($DB,$DATA,$ALERT){
-			$this->QUERY = $this->db->do_QUERY("VALUE",$DB,"SETTING",$DATA);
+		function _get_version_data(){
+			# Load data from XML class
+			$this->updater_key=$this->XML->updater_key;
+			$this->updater_uri=$this->XML->updater_uri;
 
-			if($ALERT){
-				if(!$this->QUERY){
-					throw new SystemException('Unable to load var <b>'.$DATA.'</b> from database!',0,0,__FILE__,__LINE__);
-				}
-				else{
-					return $this->QUERY;
-				}
+			$this->codename=$this->XML->codename;
+			$this->rel_date=$this->XML->rel_date;
+			$this->c_version=$this->XML->c_version;
+			$this->c_versionID=$this->XML->c_versionID;
+			$this->n_version=$this->XML->n_version;
+			$this->n_versionID=$this->XML->n_versionID;
+		}
+		function _do_validate_version($vi=false){
+			if($this->c_version!=$this->n_version){
+				if($vi){return false;}
+				$ret	=	'<div class="btn-danger">A new update is available: Version <font class="b_i>">'.$this->n_version.'</font></div>';
 			}
 			else{
-				return $this->QUERY;
-			}
-		}
-		function UPDATER_KEY(){
-			$this->QUERY				=	$this->QUERY("SETTINGS_MAIN","UPDATER_KEY",1);
-			$this->UPDATER_KEY			=	$this->QUERY;
-		}
-		function UPDATER_URI(){
-			$this->QUERY				=	$this->QUERY("SETTINGS_MAIN","UPDATER_URI",1);
-			$this->UPDATER_URI			=	$this->QUERY;
-		}
-		function do_VersionCheck(){
-			file_get_contents('http://fileserve.ndf-innovations.net/versioning/NHMzbFqcAFaFzSNH9MQO3VqB.pkey');
-		}
-		function ValidateVersion(){
-			$ret	=	false;
-
-			if($this->Setting->VERSION != $this->VERSION){
-				$ret	=	'<div class="btn-danger">A new update is available: Version <font class="b_i>">'.$this->VERSION.'</font></div>';
-			}
-			else{
+				if($vi){return true;}
 				$ret	=	'<div class="btn-success">Up To Date</div>';
 			}
 
 			return $ret;
-		}
-		function Load_Version_XML(){
-			$UPDATER_URI	=	$this->Data->urlsafe_b64decode($this->UPDATER_URI);
-			$VersionInfo	=	simplexml_load_file($this->Data->urlsafe_b64decode($this->UPDATER_URI)) or die('XMLParser: Failed to read object!');
-
-			foreach($VersionInfo as $vi){
-
-				$this->CODENAME		=	$vi->codename;
-				$this->VERSION		=	$vi->version;
-				$this->RELEASE_DATE	=	$vi->reldate;
-				if($vi->changelog){
-					echo 'is changelog';
-					$this->CHANGELOG	=	$vi->changelog;
-				}
-				elseif($vi->cl_node){
-					echo 'is cl_node';
-					$this->CHANGELOG	=	$vi->cl_node;
-				}
-				$this->VERSION_KEY	=	$vi['versionkey'];
-
-				if($vi['versionkey'] == $this->UPDATER_KEY){
-					$this->PATCH_DATA = '<div class="table-responsive">';
-						$this->PATCH_DATA	.=	'<table class="table table-sm table-bordered table-striped acp_table tac">';
-							$this->PATCH_DATA	.=	'<thead>';
-								$this->PATCH_DATA	.=	'<tr>';
-									$this->PATCH_DATA	.=	'<th>Codename</th>';
-									$this->PATCH_DATA	.=	'<th>Version</th>';
-									$this->PATCH_DATA	.=	'<th>Release Date</th>';
-								$this->PATCH_DATA	.=	'</tr>';
-							$this->PATCH_DATA	.=	'</thead>';
-							$this->PATCH_DATA	.=	'<tbody>';
-								$this->PATCH_DATA	.=	'<tr>';
-									$this->PATCH_DATA	.=	'<td>'.$this->CODENAME.'</td>';	
-									$this->PATCH_DATA	.=	'<td>'.$this->VERSION.'</td>';
-									$this->PATCH_DATA	.=	'<td>'.$this->RELEASE_DATE.'</td>';
-								$this->PATCH_DATA	.=	'</tr>';
-							$this->PATCH_DATA	.=	'</tbody>';
-						$this->PATCH_DATA	.=	'</table>';
-					$this->PATCH_DATA	.=	'</div>';
-
-					# Sub-section 1
-					if($this->CHANGELOG->subone){
-						foreach($this->CHANGELOG->subone as $key=>$value){
-							echo $value.'<br>';
-						}
-					}
-					exit();
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->title.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_1.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_2.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_3.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_4.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_5.'<br>';
-
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_6.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_7.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_8.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_9.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_10.'<br>';
-
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_11.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_12.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_13.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_14.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_15.'<br>';
-
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_16.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_17.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_18.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_19.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_1->c_20.'<br>';
-
-					# Sub-section 2
-					$this->PATCH_DATA	.=	'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->title.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_1.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_2.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_3.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_4.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_5.'<br>';
-
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_6.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_7.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_8.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_9.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_10.'<br>';
-
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_11.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_12.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_13.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_14.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_15.'<br>';
-
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_16.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_17.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_18.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_19.'<br>';
-					$this->PATCH_DATA	.=	$this->CHANGELOG->sub_2->c_20.'<br>';
-				}
-#				else{
-#					$this->PATCH_DATA	.=	'Your key is invalid! Please contact your developer for a valid key.';
-#				}
-			}
 		}
 		function Props(){
 			echo "<b>Class=>Version Properties:</b> ";
 			echo "<pre>";
 				print_r(get_object_vars($this));
 			echo "</pre>";
+		}
+		function _get_class_methods(){
+			$class_methods	=	get_class_methods($this);
+			echo '<div class="col-md-12">';
+				echo '<b>Class ('.get_class($this).') Methods:</b> <br>';
+				echo '<pre>';
+				foreach($class_methods as $method_name){
+					echo $method_name.'<br>';
+				}
+				echo '</pre>';
+			echo '</div>';
+			exit();
 		}
 	}
 ?>

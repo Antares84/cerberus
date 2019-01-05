@@ -3,17 +3,28 @@
 
 	$debug	=	0;
 #	if(isset($_SESSION["Status"]) && $_SESSION["Status"] == 16){
-		echo '<div style="background-color:#000;">';
+		echo '<div class="text-white" style="background-color:#000;">';
 		#	echo '<font style="'.$this->Colors->_do_ColorBuilder('COLOR','White').'">Normal</font>';
-			$this->SQL->_do_paging();
+		#	$this->SQL->_do_paging();
 		#	$this->Tpl->OUTPUT_TABLE_BODY();
-			$data = $this->SQL->output;
+		#	$data = $this->SQL->output;
 #			echo $this->Tbl->array_depth($data);
 #			echo $this->Tbl->array_depth($data["head"]);
 #			$this->Tbl->test($data);
 #			echo '<div class="col-md-12">';
 #			$this->Tbl->test_v2($data);
-			$this->Tbl->_build($data);
+#			$this->Tbl->_build($data);
+#			$this->Version->Props();
+#			$this->XML->_do_reset();
+#			$this->XML->_do_load_version_xml(true);
+#			$this->XML->_do_load_key_xml(true);
+
+		#	$this->XML->_do_pre($this->XML->v_info);
+		#	$this->Tpl->Separator("20");
+		#	$this->XML->test();
+#			$this->XML->Props();
+#			$this->XML->_do_pre($this->XML->v_info);
+		#	$this->XML->_do_pre($this->XML->xml_data,true);
 #			echo '</div>';
 #			echo $this->Tbl->_ds_level_1($this->Tbl->head,'head');
 #			$this->Tbl->Props();

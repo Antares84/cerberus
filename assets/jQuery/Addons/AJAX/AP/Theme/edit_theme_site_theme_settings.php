@@ -19,8 +19,8 @@
 		echo '<input class="form-control" id="RowID" name="RowID" type="hidden" value="'.$RowID.'"/>';
 
 		$Tpl->input_group('DESC','',$DESC,'readonly','<i class="fa fa-info-circle"></i>','');
-		$Tpl->input_group('VALUE','',$VALUE,'','<i class="fa fa-info-circle"></i>','');
-		$Tpl->input_select($Select->CMSTheme());
+	#	$Tpl->input_group('VALUE','',$VALUE,'','<i class="fa fa-info-circle"></i>','');
+		$Tpl->input_select($Select->_get_select('cms_theme'));
 
 		echo '<button type="button" class="btn btn-primary text-center tac" id="edit_setting"><i class="fa fa-check-circle"></i> Update Setting</button>';
 	echo '</form>';

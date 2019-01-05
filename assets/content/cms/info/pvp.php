@@ -16,7 +16,8 @@
 		if($pvp==1){$where='AND [C].[Level] BETWEEN 1 AND 15';}
 		elseif($pvp==2){$where='AND [C].[Level] BETWEEN 16 AND 30';}
 		elseif($pvp==3){$where='AND [C].[Level] BETWEEN 31 AND 45';}
-		elseif($pvp==4){$where='AND [C].[Level] > 46';}
+		elseif($pvp==4){$where='AND [C].[Level] BETWEEN 46 AND 60';}
+		elseif($pvp==5){$where='AND [C].[Level] > 61';}
 	}
 	# check current page
 	if(isset($_GET['page']) && !empty($_GET['page']) && preg_match('#^[0-9]*$#',$_GET['page'])){
@@ -30,15 +31,17 @@
 	$this->Tpl->Titlebar("PvP Rankings");
 	echo '<div class="card no_bg no_border no_radius">';
 		echo '<div class="card-header card_border tac title no_radius">';
-			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->PAGE_INDEX.'&pvp=1'.$addlink.'">1-15</a>';
+			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->Paging->PAGE_INDEX.'&pvp=1'.$addlink.'">1-15</a>';
 			echo '<div style="padding-left: 30px; display: inline;"></div>';
-			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->PAGE_INDEX.'&pvp=2'.$addlink.'">16-30</a>';
+			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->Paging->PAGE_INDEX.'&pvp=2'.$addlink.'">16-30</a>';
 			echo '<div style="padding-left: 30px; display: inline;"></div>';
-			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->PAGE_INDEX.'&pvp=3'.$addlink.'">31-45</a>';
+			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->Paging->PAGE_INDEX.'&pvp=3'.$addlink.'">31-45</a>';
 			echo '<div style="padding-left: 30px; display: inline;"></div>';
-			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->PAGE_INDEX.'&pvp=4'.$addlink.'">46-'.$maxlevel.'</a>';
+			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->Paging->PAGE_INDEX.'&pvp=4'.$addlink.'">46-60</a>';
 			echo '<div style="padding-left: 30px; display: inline;"></div>';
-			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->PAGE_INDEX.'&pvp=5'.$addlink.'">All</a>';
+			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->Paging->PAGE_INDEX.'&pvp=5'.$addlink.'">61-'.$maxlevel.'</a>';
+			echo '<div style="padding-left: 30px; display: inline;"></div>';
+			echo '<a href="?'.$this->Setting->PAGE_PREFIX.'='.$this->Paging->PAGE_INDEX.'&pvp=6'.$addlink.'">All</a>';
 		echo '</div>';
 		echo '<div class="card-block card_border content_bg content no_radius pContent">';
 			echo '<div id="no-padding" class="card-text">';

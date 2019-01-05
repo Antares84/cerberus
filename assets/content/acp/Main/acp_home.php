@@ -43,7 +43,7 @@
 					echo '<tr>';
 						echo '<td>CMS Version</td>';
 						echo '<td><div class="badge-info">'.$this->Setting->VERSION.'</div></td>';
-						echo '<td>'.$this->Version->ValidateVersion().'</td>';
+						echo '<td>'.$this->Version->_do_validate_version().'</td>';
 						echo '<td><button class="badge badge-info align-middle open_updater_modal" data-target="#updater_modal" data-toggle="modal"><i class="fa fa-gear"></i> Update Info</button></td>';
 					echo '</tr>';
 				echo '</table>';
@@ -152,7 +152,7 @@
 			$this->LogSys->_get_logs("6","transactions");
 		echo '</div>';
 	}
-		$this->Modal->Display($this->Paging->PAGE_ZONE,'updater_modal','<i class="fa fa-pencil"></i>','0','2','Update Information');
+		$this->Modal->Display($this->Paging->PAGE_ZONE,'updater_modal','<i class="fa fa-pencil"></i>','1','3','Update Information');
 ?>
 <script>
 	$(document).ready(function(){

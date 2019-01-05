@@ -10,16 +10,24 @@
 		$columns=array('UserID','UserUID','CharID','CharName','Slot','Family','Grow','Hair','Face','Size','Job','Sex','Level','StatPoint','SkillPoint','Str','Dex','Rec','Int','Luc','Wis','Map','Dir','Exp','Money','PosX','PosY','Posz','K1','K2','K3','K4','KillLevel','DeadLevel','OldCharName');
 		if(!sqlsrv_has_rows($res)){die("User ".$char." does not exist");}
 		else{
-			echo "Current Status of ".$char."";
-			echo '<form action=\"panel.php?action=player_edit_admin\" method=\"POST\">';
+			echo 'Current Status of '.$char;
+			echo '<form action="panel.php?action=player_edit_admin" method="POST">';
 				echo '<table cellspacing=1 cellpadding=1>';
 				foreach($columns as $value){
 					echo '<tr>';
-						echo '<th>".$count."</th>';
-						echo '<th>".$value." :</th>';
-					if (in_array($value, $greyed)){
-						echo "<td><input type=\"text\" readonly=\"readonly\" style=\"background:#D0D0D0;\" name=\"".$value."\" value=\"".$detail[$value]."\" /></td></tr>";
-					}else{echo "<td><input type=\"text\" name=\"".$value."\" value=\"".$detail[$value]."\" /></td></tr>";}
+						echo '<th>'.$count.'</th>';
+						echo '<th>'.$value.' :</th>';
+					if(in_array($value,$greyed)){
+						echo '<td>';
+							echo '<input type="text" readonly="readonly" style="background:#D0D0D0;" name="'.$value.'" value="'.$detail[$value].'"/>';
+						echo '</td>';
+						echo '</tr>';
+					}else{
+						echo '<td>';
+							echo '<input type="text" name="'.$value.'" value="'.$detail[$value].'"/>';
+						echo '</td>';
+						echo '</tr>';
+					}
 					$count++;
 				}
 				echo '</table>';

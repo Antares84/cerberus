@@ -2,7 +2,6 @@
 	class Template{
 
 		public $NoMsgArr;
-		public $output;
 
 		function __construct($Data,$Messenger,$Select,$Style,$Theme){
 			$this->Data			=	$Data;
@@ -137,7 +136,7 @@
 		}
 		# Misc Display Functions
 		function TitleBar($data){
-			echo '<div class="badge '.$this->Theme->_theme_array[13].' w_100_p b_i f_20 tac">'.$data.'</div>';
+			echo '<div class="badge '.$this->Theme->_theme_array[13].' w_100_p b_i f_20 tac nTitle">'.$data.'</div>';
 		}
 		function mail_diag(){
 			echo 'Debug : '.$this->PayPal->PAYPAL_DEBUG.'<br>';
@@ -237,8 +236,8 @@
 				}
 			}
 		}
-		function input_group($ID,$PLACEHOLDER,$VALUE,$ATTRIB,$PREPEND,$APPEND,$WIDTH=false){
-			echo '<div class="input-group input-group-sm mb-3 '.$WIDTH.'">';
+		function input_group($ID,$PLACEHOLDER,$VALUE,$ATTRIB,$PREPEND=false,$APPEND=false,$STYLE=false){
+			echo '<div class="input-group input-group-sm '.$STYLE.'">';
 				if($PREPEND){
 					echo '<div class="input-group-prepend">';
 						echo '<span class="input-group-text" id="basic-addon">'.$PREPEND.'</span>';
@@ -264,47 +263,6 @@
 			echo '<div class="input-group input-group-sm mb-3">';
 				echo $SELECT;
 			echo '</div>';
-		}
-		# OUTPUT
-		function OUTPUT_TABLE_HEAD($output=false){
-			echo '<div class="row" id="TableLoader">';
-				echo '<div class="col-lg-12" id="TabularData">';
-					echo '<div class="table-responsive">';
-						echo '<table id="mytable" class="table table-sm acp_table">';
-							echo '<thead>';
-								echo '<tr>';
-									if($output){
-										foreach($output as $key=>$value){
-											echo '<th>'.$value.'</th>';
-										}
-									}
-								echo '</tr>';
-							echo '</thead>';
-		}
-		function OUTPUT_TABLE_BODY($output=false){
-							echo '<tbody>';
-								echo '<tr>';
-									foreach($output as $key=>$value){
-										echo '<td>'.$value.'</td>';
-									}
-								echo '</tr>';
-							echo '</tbody>';
-						echo '</table>';
-					echo '</div>';
-				echo '</div>';
-			echo '</div>';
-		}
-		function OUTPUT_TABLE(){
-			$head	=	$this->SQL->output["head"];
-			$body	=	$this->SQL->output["body"];
-		#	$row	=	$this->SQL->output["body"][];
-
-			echo '<pre>';
-				var_dump($row);
-			echo '</pre>';
-			exit();
-			$this->OUTPUT_TABLE_HEAD($this->SQL->output);
-			#$this->
 		}
 		# MISC
 		function Props(){

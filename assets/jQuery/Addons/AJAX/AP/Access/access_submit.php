@@ -23,12 +23,12 @@
 		}
 	}
 
-	list($RowID,$EDIT) = explode("~",$_POST['id']);
+	list($RowID,$EDIT,$DB) = explode("~",$_POST['id']);
 
 	if(isset($_POST["id"])){
 		if($EDIT === "0"){
 			$sql	=	('
-							UPDATE '.$db->get_TABLE("SETTINGS_MAIN").'
+							UPDATE '.$db->get_TABLE($DB).'
 							SET EDIT=?
 							WHERE RowID=?
 			');
@@ -44,7 +44,7 @@
 		}
 		if($EDIT === "1"){
 			$sql	=	('
-							UPDATE '.$db->get_TABLE("SETTINGS_MAIN").'
+							UPDATE '.$db->get_TABLE($DB).'
 							SET EDIT=?
 							WHERE RowID=?
 			');

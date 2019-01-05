@@ -5,7 +5,7 @@
 
 		public $FULL_WIDTH_ARR;
 
-		function __construct($BossRecord,$Browser,$Colors,$Data,$db,$Dirs,$Donate,$LogSys,$MailSys,$Messenger,$Modal,$Nav,$Notices,$Paging,$PayPal,$PHP,$Plugins,$PvP,$Read,$Select,$Session,$Setting,$ShaiyaChar,$ShaiyaUser,$SQL,$Style,$Table,$Template,$Theme,$User,$Version){
+		function __construct($BossRecord,$Browser,$Colors,$Data,$db,$Dirs,$Donate,$LogSys,$MailSys,$Messenger,$Modal,$Nav,$Notices,$Paging,$PayPal,$PHP,$Plugins,$PvP,$Read,$Select,$Session,$Setting,$ShaiyaChar,$ShaiyaUser,$SQL,$Style,$Table,$Template,$Theme,$User,$Version,$Wow,$XML){
 			$this->BossRecord	=	$BossRecord;
 			$this->Browser		=	$Browser;
 			$this->Colors		=	$Colors;
@@ -37,6 +37,8 @@
 			$this->Theme		=	$Theme;
 			$this->User			=	$User;
 			$this->Version		=	$Version;
+			$this->Wow			=	$Wow;
+			$this->XML			=	$XML;
 
 			$this->_array_builder();
 		}
@@ -136,8 +138,14 @@
 							echo '</div>';
 						}
 						else{
-							# Sidebar Left
+							# No Sidebar
 							if($this->Theme->_theme_array[1] === "1"){
+								echo '<div class="col-md-12">';
+									require_once($this->Paging->PAGE);
+								echo '</div>';
+							}
+							# Sidebar Left
+							elseif($this->Theme->_theme_array[1] === "1"){
 								echo '<div class="col-md-12">';
 									echo '<div class="row">';
 										echo '<div class="col-md-3">';
@@ -264,6 +272,18 @@
 				echo '<b>Properties for class ('.get_class($this).'):</b><br>';
 				echo '<pre>';
 					echo print_r(get_object_vars($this));
+				echo '</pre>';
+			echo '</div>';
+			exit();
+		}
+		function _get_class_methods(){
+			$class_methods	=	get_class_methods($this);
+			echo '<div class="col-md-12">';
+				echo '<b>Class ('.get_class($this).') Methods:</b> <br>';
+				echo '<pre>';
+				foreach($class_methods as $method_name){
+					echo $method_name.'<br>';
+				}
 				echo '</pre>';
 			echo '</div>';
 			exit();

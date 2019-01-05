@@ -1225,5 +1225,17 @@
 			echo '</div>';
 			exit();
 		}
+		function _get_class_methods(){
+			$class_methods	=	get_class_methods($this);
+			echo '<div class="col-md-12">';
+				echo '<b>Class ('.get_class($this).') Methods:</b> <br>';
+				echo '<pre>';
+				foreach($class_methods as $method_name){
+					echo $method_name.'<br>';
+				}
+				echo '</pre>';
+			echo '</div>';
+			exit();
+		}
 	}
 ?>
