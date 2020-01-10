@@ -1,0 +1,112 @@
+<?php
+	# Content
+	$this->ds_FTWEmployees();
+	echo '<section class="contacts">';
+		echo '<div class="container">';
+			echo '<div class="row">';
+				echo '<div class="col-xs-7 wow fadeInLeft" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+					echo '<div class="contacts-find">';
+						echo '<h3 class="blog-title">How to find us<span class="line line--title line--blog-title"><span class="line__first"></span><span class="line__second"></span></span></h3>';
+						echo '<p class="blog-text blog-text--article"></p>';
+						echo '<div class="map">';
+							echo '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3574.879768837437!2d-80.08261798550986!3d26.362750489895948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8e1f40e088247%3A0x4faae29d360d69c4!2s1300+N+Federal+Hwy%2C+Boca+Raton%2C+FL+33432!5e0!3m2!1sen!2sus!4v1487975291922" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>';
+						echo '</div>';
+					echo '</div>';
+				echo '</div>';
+				echo '<div class="col-xs-5 wow fadeInRight" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+					echo '<div class="contacts-form">';
+						echo '<h3 class="blog-title">Drop us a line<span class="line line--title line--blog-title"><span class="line__first"></span><span class="line__second"></span></span></h3>';
+						echo '<div id="success"></div>';
+						echo '<p class="blog-text blog-text--article"></p>';
+						echo '<form id="contactForm" method="POST" class="comment-form">';
+							echo '<div class="comment-form__input"><input type="text" class="search-input" name="name" id="user-name" placeholder="Full Name" /></div>';
+							echo '<div class="comment-form__input"><input type="text" class="search-input" name="email" id="user-email" placeholder="Email" /></div>';
+							echo '<div class="comment-form__input"><input type="text" class="search-input" name="website" id="user-website" placeholder="Website" /></div>';
+							echo '<div class="comment-form__input"><textarea id="user-message" name="message" placeholder="Message" class="comment-textarea search-input"></textarea></div>';
+							echo '<button type="submit" class="btn button button--main button--grey transparent">submit</button>';
+						echo '</form>';
+					echo '</div>';
+				echo '</div>';
+			echo '</div>';
+			echo '<div class="social-blocks social-blocks--contacts">';
+				echo '<div class="row row--no-padding">';
+					echo '<div class="col-sm-2 col-xs-4 wow zoomInUp" data-wow-delay="0.7s" data-wow-duration="3s">';
+						echo '<div class="social-blocks__one social-blocks__one--fb">';
+							echo '<a href="#" class="social-blocks__logo"><span class="fa fa-facebook"></span></a>';
+							echo '<a href="#" class="social-blocks__action no-decoration">Like Us</a>';
+						echo '</div>';
+					echo '</div>';
+					echo '<div class="col-sm-2 col-xs-4 wow zoomInUp" data-wow-delay="0.7s" data-wow-duration="2s">';
+						echo '<div class="social-blocks__one social-blocks__one--twitter">';
+							echo '<a href="#" class="social-blocks__logo"><span class="fa fa-twitter"></span></a>';
+							echo '<a href="#" class="social-blocks__action no-decoration">Follow</a>';
+						echo '</div>';
+					echo '</div>';
+					echo '<div class="col-sm-2 col-xs-4 wow zoomInUp" data-wow-delay="0.7s" data-wow-duration="1s">';
+						echo '<div class="social-blocks__one social-blocks__one--google">';
+							echo '<a href="#" class="social-blocks__logo"><span class="fa fa-google-plus"></span></a>';
+							echo '<a href="#" class="social-blocks__action no-decoration">ADDTO CIRCLE</a>';
+						echo '</div>';
+					echo '</div>';
+					echo '<div class="col-sm-2 col-xs-4 wow zoomInUp" data-wow-delay="0.7s" data-wow-duration="1s">';
+						echo '<div class="social-blocks__one social-blocks__one--vimeo">';
+							echo '<a href="#" class="social-blocks__logo"><span class="fa fa-vimeo"></span></a>';
+							echo '<a href="#" class="social-blocks__action no-decoration">Subscribe</a>';
+						echo '</div>';
+					echo '</div>';
+					echo '<div class="col-sm-2 col-xs-4 wow zoomInUp" data-wow-delay="0.7s" data-wow-duration="2s">';
+						echo '<div class="social-blocks__one social-blocks__one--rss">';
+							echo '<a href="#" class="social-blocks__logo"><span class="fa fa-rss"></span></a>';
+							echo '<a href="#" class="social-blocks__action no-decoration">Subscribe</a>';
+						echo '</div>';
+					echo '</div>';
+					echo '<div class="col-sm-2 col-xs-4 wow zoomInUp" data-wow-delay="0.7s" data-wow-duration="3s">';
+						echo '<div class="social-blocks__one social-blocks__one--p">';
+							echo '<a href="#" class="social-blocks__logo"><span class="fa fa-pinterest-p"></span></a>';
+							echo '<a href="#" class="social-blocks__action no-decoration">Follow</a>';
+						echo '</div>';
+					echo '</div>';
+				echo '</div>';
+			echo '</div>';
+		echo '</div>';
+	echo '</section>'; # contacts
+
+	echo '<section class="link">';
+		echo '<div class="container">';
+			echo '<div class="row">';
+				echo '<div class="col-md-10 col-md-offset-1 col-xs-12">';
+					echo '<div class="row">';
+						echo '<div class="col-xs-4 wow zoomInLeft" data-wow-delay="0.7s" data-wow-duration="2s">';
+							echo '<div class="link__phone">';
+								echo '<div class="link__square triangle triangle--12"><span class="fa fa-mobile"></span></div>';
+								echo '<h3 class="black">PHONE</h3>';
+								echo '<p class="black">'.$this->Lang->PHONE_PRIMARY().'<br>'.$this->Lang->PHONE_SECONDARY().'</p>';
+							echo '</div>';
+						echo '</div>';
+						echo '<div class="col-xs-4 wow zoomInUp" data-wow-delay="0.7s" data-wow-duration="1s">';
+							echo '<div class="link__phone">';
+								echo '<div class="link__square triangle triangle--12">';
+									echo '<span class="fa fa-map-marker"></span></div>';
+								echo '<h3 class="black">ADDRESS</h3>';
+								echo '<p class="black">'.$this->Lang->ADDRESS_COMP().'</p>';
+							echo '</div>';
+						echo '</div>';
+						echo '<div class="col-xs-4 wow zoomInRight" data-wow-delay="0.7s" data-wow-duration="2s">';
+							echo '<div class="link__phone">';
+								echo '<div class="link__square triangle triangle--12"><span class="fa fa-envelope-o"></span></div>';
+								echo '<h3 class="black">EMAIL</h3>';
+								echo '<p class="black">';
+								if($this->Lang->EMAIL_SALES() !== NULL){
+									echo '<a href="mailto:'.$this->Lang->EMAIL_SALES().'">'.$this->Lang->EMAIL_SALES().'</a><br/>';
+								}
+								if($this->Lang->EMAIL_SUPPORT() !== NULL){
+									echo '<a href="mailto:'.$this->Lang->EMAIL_SUPPORT().'">'.$this->Lang->EMAIL_SUPPORT().'</a></p>';
+								}
+							echo '</div>';
+						echo '</div>';
+					echo '</div>';
+				echo '</div>';
+			echo '</div>';
+		echo '</div>';
+	echo '</section>'; # link
+?>

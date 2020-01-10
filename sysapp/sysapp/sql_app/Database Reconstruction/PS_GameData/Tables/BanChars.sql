@@ -1,0 +1,33 @@
+USE [PS_GameData]
+GO
+
+/****** Object:  Table [dbo].[BanChars]    Script Date: 8/14/2014 10:54:50 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[BanChars](
+	[RowID] [int] IDENTITY(1,1) NOT NULL,
+	[CharID] [int] NOT NULL,
+	[BanID] [int] NOT NULL,
+	[BanName] [varchar](30) NOT NULL,
+	[Memo] [varchar](50) NULL,
+	[BanDate] [datetime] NULL,
+ CONSTRAINT [PK_BanChars] PRIMARY KEY CLUSTERED 
+(
+	[CharID] ASC,
+	[BanID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

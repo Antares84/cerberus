@@ -1,0 +1,207 @@
+/*//////////////////////////////////////////////////////////////////////////////////////////*/
+/* CUSTOM CSS (ADD YOUR CSS HERE!) */
+/*//////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* NDF Custom CSS */
+.navbar-toggler{
+	background-color:#ff0000 !important;
+	color:#fff;
+	text-align:center;
+	margin:0 auto !important;
+}
+.navbar-brand.col-xs-12{
+/*
+	float:none !important;
+
+	text-align:center !important;
+*/
+}
+.center-block-nav{
+	margin-right:auto;
+	margin-left:auto;
+}
+
+/* Links */
+a.here {
+	font-weight:bold;
+	font-style:italic;
+}
+small {
+	font-size: 75%;
+	font-weight:bold;
+}
+.contract {
+	padding:15px 0;
+	background-color:#fff;
+}
+.contract__text {
+	text-align:left;
+	margin:0;
+	font:italic 700 20px 'Lato',sans-serif;
+	line-height:1.7;
+	color:#000 !important;
+}
+
+/* Floats */
+.fl {float:left !important;}
+.fr {float:right !important;}
+.fn {float:none !important;}
+.clear {clear:both !important;}
+
+/* Text Alignment */
+.tac {text-align:center !important;}
+.tal {text-align:left !important;}
+.tar {text-align:right !important;}
+
+/* Standard Spans */
+.span1 {width: 60px !important;}
+.span2 {width: 140px !important;}
+.span3 {width: 220px !important;}
+.span4 {width: 300px !important;}
+.span5 {width: 380px !important;}
+.span6 {width: 460px !important;}
+.span7 {width: 540px !important;}
+.span8 {width: 620px !important;}
+.span9 {width: 700px !important;}
+.span10 {width: 780px !important;}
+.span11 {width: 860px !important;}
+.span12 {width: 940px !important;}
+
+/* Margins */
+.ml_5 {margin-left:5px !important;}
+.ml_10 {margin-left:10px !important;}
+.ml_20 {margin-left:20px !important;}
+.mt_5 {margin-top:7px !important;}
+.mt_10 {margin-top:10px !important;}
+.mb_5 {margin-botom:5px !important;}
+.mb_10 {margin-bottom:10px !important;}
+.mb_20 {margin-bottom:20px !important;}
+.m_lr_10 {margin: 10 0 !important;}
+.m_lr_10_tb_5 {margin: 10 5 !important;}
+.m_auto {margin:0 auto !important;}
+.mlr_5 {margin: 0 5px !important;}
+.mlr_10 {margin: 0 10px !important;}
+.mlr_15 {margin: 0 15px !important;}
+.mtb_8_0 {margin-top:8px !important;margin-bottom:0 !important;}
+
+/* Padding */
+.pt_0 {padding-top:0 !important;}
+.pb_10 {padding-bottom:10px !important;}
+.p_tb_10 {padding: 10 0 !important;}
+.pt_10 {padding-top:10px !important;}
+.pl_0 {padding-left:0 !important;}
+.pl_10 {padding-left:10px !important;}
+.pr_0 {padding-right:0 !important;}
+.plr_0 {padding: 0 0 0 0 !important;}
+.plr_15 {padding: 0 15px !important;}
+
+/* Floats */
+.fl {float:left !important;}
+.fr {float:right !important;}
+.fn {float:none !important;}
+
+/* Borders */
+.lime_b {border:1px solid lime !important;}
+.red_b {border:1px solid red !important;}
+.yellow_b {border:1px solid yellow !important;}
+
+.quote_request {
+	background: #000 url('../images/backgrounds/pattern.png') no-repeat top left;
+	background-size:100% 100%;
+	border:2px solid #000;
+	border-radius:10px;
+}
+
+/* AngularJS Styles */
+.ng-valid.ng-dirty{
+	border-color: green;
+}
+.ng-invalid.ng-dirty{
+	border-color: red;
+}
+
+/* Separators */
+.field_separator {
+	clear:both !important;
+	height:10px !important;
+}
+[class*="separator"]{
+	color:white;
+	padding:5px;
+}
+.s_10 {height:10px !important;}
+.s_20 {height:20px !important;}
+.s_30 {height:30px !important;}
+.s_40 {height:40px !important;}
+.s_50 {height:50px !important;}
+.s_60 {height:60px !important;}
+.s_70 {height:70px !important;}
+.s_80 {height:80px !important;}
+.s_90 {height:90px !important;}
+
+/* Colored Opacity */
+.o_red_1 {
+	background-color:#ff0000 !important;
+	opacity:1;
+}
+.o_red_5 {
+	background-color:#ff0000 !important;
+	opacity:0.5;
+}
+.header-top-dark{
+	background-color:#000;
+}
+
+@media (max-width: 62em) {
+	.navbar-nav {
+		padding-top: .425rem;
+		padding-left: 0.75rem;
+	}
+	.navbar-nav .nav-item {
+		float: none;
+	}
+	.navbar-brand {
+
+	}
+	.navbar-brand,
+	.navbar-nav .nav-item {
+		display: block;
+	}
+	.navbar-nav .nav-item + .nav-item {
+		margin-left: 0;
+	}
+	.dropdown-menu {
+		position: relative;
+		float: none;
+	}
+}
+.articles p{
+	color:#000;
+}
+.event_block{
+	background-color:#FF0000;
+}
+a.nav-link{
+	color:#fff;
+}
+a.nav-link:focus, a.nav-link:hover {
+  color: #014c8c;
+}
+.anons{
+	background-color:#fff;
+}
+.anons__title .title{
+	color:#000 !important;
+}
+.about-us h1{
+	color:#000 !important;
+}
+.about-us__mission h2{
+	color:#000 !important;
+}
+.title.contact_us{
+	color:#000 !important;
+}
+.team .owl-buttons > div span.fa{
+	color:#000 !important;
+}

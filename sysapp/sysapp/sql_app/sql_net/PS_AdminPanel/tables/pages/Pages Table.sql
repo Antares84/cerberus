@@ -1,0 +1,67 @@
+USE [PS_AdminPanel]<br>
+GO
+<br><br>
+CREATE TABLE [dbo].[Pages] (<br>
+[Page] varchar(30) NOT NULL,<br>
+[Rank] int NOT NULL,<br>
+[PageDesc] varchar(MAX) NOT NULL <br>
+)<br>
+GO
+<br><br>
+-- ----------------------------<br>
+-- Records of Pages<br>
+-- ----------------------------<br>
+INSERT INTO [dbo].[Pages] VALUES (N'restore_um.php', N'3', N'UM Restoration');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'guild_leader_change.php', N'3', N'Change Guild Leader');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'login_status.php', N'3', N'Login Status');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'player_edit.php', N'3', N'Edit Player Info');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'player_search.php', N'1', N'Player Search');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'global_chat.php', N'0', N'Global Chat Array');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'ban_account.php', N'3', N'Account Ban');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'bansearch.php', N'3', N'Account Ban');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'unban_account.php', N'3', N'Unban Accounts');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'account_search.php', N'2', N'Account Search');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'item_view.php', N'1', N'View Player Items');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'log.php', N'3', N'Panel Access Logs');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'gmcomsrch.php', N'3', N'GM Commands Log');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'guild_search.php', N'1', N'Guild Member Search');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'staff.php', N'1', N'Staff Search');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'rankreq.php', N'0', N'Page Ranks');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'buff_view.php', N'2', N'View Player Buffs');<br>
+GO
+<br><br>
+INSERT INTO [dbo].[Pages] VALUES (N'Faction Change', N'3', N'Faction Change');<br>
+GO
+<br><br>

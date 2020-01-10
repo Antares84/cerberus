@@ -1,0 +1,104 @@
+/* 
+	Title: ws_Colors.css
+	Author: Bradley Sweeten
+	Rel: Site-wide Fonts Settings
+	Date: 12.27.2016
+*/
+
+/* Colors */
+.white{
+	color:#fff;
+}
+.white_bg{
+	background:white;
+}
+.green{
+	color:lime;
+}
+.red{
+	color:red;
+}
+.red_base {
+	background:transparent -webkit-radial-gradient(red,transparent) 0% 0% no-repeat;
+	background:transparent radial-gradient(red,transparent) 0% 0% no-repeat;
+	border:1px solid red;
+	color:white;
+	border-radius:10px;
+	padding:5px 0 5px 10px !important;
+}
+.red_bg{
+	background:#ff0000;
+	background-color:#ff0000;
+}
+.blue {color:#0094ff;}
+.blue_base {
+	background:transparent -webkit-radial-gradient(#0094ff,transparent) 0% 0% no-repeat;
+	background:transparent radial-gradient(#0094ff,transparent) 0% 0% no-repeat;
+	border:1px solid #0094ff;
+	color:white;
+	border-radius:10px;
+	padding:10px !important;
+}
+.green {color: green;}
+.green_base {
+	background:transparent -webkit-radial-gradient(green,transparent) 0% 0% no-repeat;
+	background:transparent radial-gradient(green,transparent) 0% 0% no-repeat;
+	border:1px solid green;
+	color:white;
+	border-radius:10px;
+	padding:5px 0 5px 10px !important;
+}
+.orange {color:orange;}
+.orange_base {
+	background:transparent -webkit-radial-gradient(orange,transparent) 0% 0% no-repeat;
+	background:transparent radial-gradient(orange,transparent) 0% 0% no-repeat;
+	border:1px solid orange;
+	color:white;
+	border-radius:10px;
+	padding:5px 0 5px 10px !important;
+}
+.skyblue {
+	color:#0094ff;
+}
+.trans {
+	color:transparent;
+}
+.trans:hover {
+	color: #fff;
+}
+.gold {color:gold;}
+.black {color:black !important;}
+.black_base {
+	background:#000;
+	border:1px solid #c0c0c0;
+	border-radius:10px;
+	padding:10px !important;
+}
+.black_base label {
+	color:#0094ff;
+	font-weight:bold;
+}
+.sb {
+	color:#fff;
+}
+.sb_container {
+	color:#fff;
+}
+.card-header {
+	color:#fff;
+	font-weight:bold;
+	font-style:italic;
+}
+.page-header {
+	color:#fff;
+}
+.page-header small {
+	color:#737373;
+}
+.Gray28{
+	background:#474747;
+	background-color:#474747;
+}
+.nav_bg{
+	background-color:#1b1b1b;
+}

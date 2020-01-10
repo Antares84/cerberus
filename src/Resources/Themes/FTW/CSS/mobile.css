@@ -1,0 +1,12 @@
+/* Mobile CSS Adjustments */
+@media only screen and (max-width: 768px) {
+	.status--dark{
+		background-image:url('../images/backgrounds/PracMark_Logo_banner_mobile.png') top left no-repeat;
+		background-size:contain;
+		background-size:100% 100%;
+		height:180px;
+	}
+	.ml_5{
+		margin-left:0 !important;
+	}
+}

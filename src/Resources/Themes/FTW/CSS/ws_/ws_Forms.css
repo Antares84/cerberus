@@ -1,0 +1,56 @@
+/* 
+	Title: ws_Forms.css
+	Author: Bradley Sweeten
+	Rel: Forms
+	Date: 12.21.2016
+*/
+
+/* Disabled Form Fields */
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+	background-color: #c0c0c0 !important;
+}
+.acp_form {
+	background:none !important;
+}
+form.acp_form .btn {
+	position:relative;
+	bottom:5px;
+	left:50%;
+	margin:10px 0;
+}
+form.acp_form .blue_base {
+	margin-bottom:10px;
+}
+form.login_form{
+	padding:10px 10px 5px 10px;
+
+}
+/* Login Panel - Input Fields */
+.form-control{
+	background-color:#212121 !important;
+	text-align:center !important;
+}
+.form-control input[type="email"],
+.form-control input[type="password"],
+.form-control input[type="text"],
+.form-control input[type="username"]{
+	background-color:#212121 !important;
+	text-align:center !important;
+}
+.form-control input[type="text"]:focus,
+.form-control input[type="password"]:focus{
+	background-color:#212121 !important;
+	border:1px solid lime !important;
+}
+.form-control input[type="text"]:hover,
+.form-control input[type="password"]:hover{
+	background-color:#212121 !important;
+	border:1px solid cyan !important;
+}
+.form-control input[type="submit"]{
+	position:absolute !important;
+	bottom:0 !important;
+	left:33% !important;
+}

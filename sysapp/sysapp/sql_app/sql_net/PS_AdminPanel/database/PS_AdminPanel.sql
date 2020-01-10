@@ -1,0 +1,109 @@
+USE [master]<br>
+GO
+<br><br>
+CREATE DATABASE [PS_AdminPanel]<br>
+CONTAINMENT = NONE<br>
+ON  PRIMARY ( NAME = N'PS_AdminPanel', FILENAME = N'C:\ShaiyaServer\DevData\PS_AdminPanel.mdf' , SIZE = 4096KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )<br>
+<br>
+LOG ON ( NAME = N'PS_AdminPanel_log', FILENAME = N'C:\ShaiyaServer\DevData\PS_AdminPanel_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)<br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET COMPATIBILITY_LEVEL = 100<br>
+GO
+<br><br>
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))<br>
+begin<br>
+EXEC [PS_AdminPanel].[dbo].[sp_fulltext_database] @action = 'enable'<br>
+end<br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET ANSI_NULL_DEFAULT OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET ANSI_NULLS OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET ANSI_PADDING OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET ANSI_WARNINGS OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET ARITHABORT OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET AUTO_CLOSE OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET AUTO_CREATE_STATISTICS ON <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET AUTO_SHRINK OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET AUTO_UPDATE_STATISTICS ON <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET CURSOR_CLOSE_ON_COMMIT OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET CURSOR_DEFAULT  GLOBAL <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET CONCAT_NULL_YIELDS_NULL OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET NUMERIC_ROUNDABORT OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET QUOTED_IDENTIFIER OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET RECURSIVE_TRIGGERS OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET  DISABLE_BROKER <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET AUTO_UPDATE_STATISTICS_ASYNC OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET DATE_CORRELATION_OPTIMIZATION OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET TRUSTWORTHY OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET ALLOW_SNAPSHOT_ISOLATION OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET PARAMETERIZATION SIMPLE <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET READ_COMMITTED_SNAPSHOT OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET HONOR_BROKER_PRIORITY OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET RECOVERY SIMPLE <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET  MULTI_USER <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET PAGE_VERIFY CHECKSUM  <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET DB_CHAINING OFF <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET TARGET_RECOVERY_TIME = 0 SECONDS <br>
+GO
+<br><br>
+ALTER DATABASE [PS_AdminPanel] SET  READ_WRITE <br>
+GO
+<br><br>

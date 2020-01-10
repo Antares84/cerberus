@@ -1,0 +1,86 @@
+/*-------------------------------------------------------------------------------------------------------------
+  Universal Fonts Layout
+-------------------------------------------------------------------------------------------------------------*/
+@font-face {
+	font-family: 'Tillana';
+	src: url('../fonts/Tillana/Tillana-Regular.eot');
+	src: url('../fonts/Tillana/Tillana-Regular.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Tillana/Tillana-Regular.ttf') format('truetype'),
+		url('../fonts/Tillana/Tillana-Regular.svg#Tillana-Regular.svg') format('svg');
+}
+/*-------------------------------------------------------------------------------------------------------------
+	Designer Borders
+-------------------------------------------------------------------------------------------------------------*/
+/*body { border: 2px solid white;}
+#main { border: 2px solid green;}
+#prawy_panel {border: 1px solid pink;}
+div.pojemnik { border: 1px solid lime;}
+#lewy_panel { border: 1px solid red;}*/
+#panel_info { border: 1px solid blue; border-top-left-radius: 20px; border-top-right-radius: 20px;}
+#main_panel { border-right: 1px solid blue; border-bottom: 1px solid blue; border-left: 1px solid blue; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;}
+/*-------------------------------------------------------------------------------------------------------------
+	Core Layout
+-------------------------------------------------------------------------------------------------------------*/
+body { background-color: #000; color: #FFF; border-radius: 10px; height:98%;}
+/*-------------------------------------------------------------------------------------------------------------
+	Links Layout
+-------------------------------------------------------------------------------------------------------------*/
+a { font-family: 'Tillana', cursive; text-decoration: none; color: red; font-size: 12pt;}
+a:visited { font-family: 'Tillana', cursive; color: red; text-decoration: none; font-size: 12pt;}
+a:hover, a:focus { font-family: 'Tillana', cursive; color: gray; text-decoration: none; font-size: 12pt;}
+/*-------------------------------------------------------------------------------------------------------------
+	Table Section
+-------------------------------------------------------------------------------------------------------------*/
+#panel_info { height: 20px; font-family: 'Tillana', cursive; font-size: 11pt; font-style: normal; height: 45px;}
+.panel_info_left { margin-left: 38%; display: inline; float: left; color: #FFF; padding-left: 30px;}
+.panel_info_right { margin: 12px 24px 0 0; display: inline; float: right;}
+#main_panel { position: absolute; top: 56px; left: 8px; width: 99.1%; height: 93%;}
+#lewy_panel { 	position: relative; float: left; width: auto; height: 94.3%; font: inherit; vertical-align: top; padding-top: 5px;}
+#prawy_panel { position: absolute; top: 0; left: 0px; float: right; width: 98.9%; height: 97.5%; margin: 10px; font: inherit; text-align: justify; vertical-align: top; background: url('../images/right_panel_bg.png') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: 98% 98%;}
+/*-------------------------------------------------------------------------------------------------------------
+	Content Panel
+-------------------------------------------------------------------------------------------------------------*/
+div.pojemnik { font-family: 'Tillana', cursive; overflow-y: auto; width: 98.9%; height: 97.5%; margin: 10px; color: white; font-size: 16px; text-align: center;}
+
+/**************************************************************************************************************
+	Universal Layout
+**************************************************************************************************************/
+h1 { text-align: center; font-family: 'Tillana', cursive; font-size: 26px; color: silver;}
+
+/* Form Input Layout 
+#pl_edit_html input[type="submit"],
+.acct_ban_html_form input[type="submit"],
+.acct_ban_srch_html_table input[type="submit"],
+.guild_search_html_form input[type="submit"],
+.acct_unban_html_form input[type="submit"],
+.acct_srch_html_form input[type="submit"],
+.buff_view_html_form input[type="submit"],
+.pl_item_search_html_form input[type="submit"],
+.pl_search_html_form input[type="submit"],
+.pl_um_res input[type="submit"],
+.fc_html input[type="submit"] { background: transparent linear-gradient(red, black, red) repeat scroll 0% 0%; font-size: 14px; font-family: Tillana, cursive; border: 1px solid #61C4E0; border-radius: 5px; color: white; text-align: center; margin-top: 10px;}
+
+input[type="text"] { width:550px;}
+
+.pl_edit_sub2 {
+	border: 1px solid lime;}
+*/
+
+#active_fleet_roster {}
+/*.ac_fl_roster_data { table-layout: fixed; width: 70%;}*/
+.ac_fl_count { background: transparent linear-gradient(transparent, red, transparent) repeat scroll 0% 0%;  text-align: center;}
+.ac_fl_fill { background: transparent linear-gradient(#19293E, blue, #19293E) repeat scroll 0% 0%; width: 20%; text-align: center;}
+.ac_fl_career { background: transparent linear-gradient(#19293E, transparent, #19293E) repeat scroll 0% 0%; padding: 0 20px; }
+
+td {
+	border: 1px solid cyan;
+	border-radius: 5px;
+}
+
+table { 
+    border-spacing: 2px 3px;
+    border-collapse: separate;
+}
+
+th { background-color: #294876; border: 1px solid #61C4E0; border-radius: 5px; color: white; text-align: center;}
+tr { background: transparent linear-gradient(transparent, #19293E) repeat scroll 0% 0%; border: 1px solid #09283D; border-radius: 5px;}

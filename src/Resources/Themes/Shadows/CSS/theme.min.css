@@ -1,0 +1,7 @@
+/**************************************************************************************************************
+	Title: theme.css
+	Author: Bradley Sweeten
+	Rel: Shadows Theme Stylesheet
+	Date: 01.19.2019	1422
+**************************************************************************************************************/
+#bread.container,#content.container,#logo.container{margin-top:10px !important;border-radius:15px !important;}.content_bg,.title,.cms_footer{background:#0e0e0e !important;background-color:#0e0e0e !important;}/* Card - Content */#content_card.card,#plugin_card.card{margin-bottom:20px !important;box-shadow:7px 7px 5px rgba(0,0,0,1) !important;border:none !important;}#content_card.card-header,#plugin_card.card-header{border-top-left-radius:15px;border-top-right-radius:15px;}#content_card.card .card-block .card-text{padding-left:10px !important;}#no-padding.card-text{padding:0 !important;}.no_border{border:none !important;border-top:none !important;border-right:none !important;border-bottom:none !important;border-left:none !important;}.title{border-bottom:1px solid #fff !important;}/* Card Content */.card-footer.footer{border-top:none !important;}/* Plugin Card */.no_radius{border-radius:0 !important;}a.nav-link, a.dropdown-item{color:#fff;}.dropdown-menu{background-color:#0e0e0e;}nav.navbar{background-color:#0e0e0e;}a.nav-link:focus,a.nav-link:hover,a.dropdown-item:focus,a.dropdown-item:hover{color:#e62020;}.breadcrumb-item{color:#fff !important;}

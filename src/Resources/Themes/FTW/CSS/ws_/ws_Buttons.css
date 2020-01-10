@@ -1,0 +1,27 @@
+/* 
+	Title:	ws_Buttons.css
+	Author:	Bradley Sweeten
+	Rel:	Bootstrap Buttons
+	Date:	05.13.2017
+*/
+
+.btn {
+	padding:2px 12px !important;
+}
+.btn_center {
+	position:relative;
+	left:50%;
+	bottom:10px;
+}
+.btn_center2{
+	position:relative;
+	left:50%;
+	top:10px;
+	margin-bottom:10px;
+}
+.btn_donate{
+	position:relative;
+	left:45%;
+	top:10px;
+	margin-bottom:10px;
+}

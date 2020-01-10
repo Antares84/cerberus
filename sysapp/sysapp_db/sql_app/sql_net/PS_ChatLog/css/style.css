@@ -1,0 +1,501 @@
+/**
+* Creator: Divine Innovations aka [Dev] Ash Artanis
+* E-mail: tridentsblue@gmail.com
+* Date: 1/26/2013
+* Fully customizeable site with static background
+*/
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	color: #0094FF;
+	text-decoration: none;
+}
+
+a:hover {
+ 	color: gold;
+	text-decoration: none;
+}
+
+body {
+
+background: url(/././images/bg3.png);
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center top;
+background-size: 100% 100%;
+font-size: 12.5pt;
+line-height: 1.75em;
+}
+
+body,input {
+	font-family: Arial, sans-serif;
+}
+
+br.clearfix {
+	clear: both;
+}
+
+h1,h2,h3,h4 {
+	letter-spacing: -1px;
+	font-weight: normal;
+	text-transform: normal;
+}
+
+h2 {
+	font-size: 1.75em;
+}
+
+h2,h3,h4 {
+	margin-bottom: 1em;
+	font-family: 'Oleo Script', cursive;
+	color: #0094FF;
+	text-decoration: underline;
+	font-size: 23pt;
+}
+
+h3 {
+	font-family: 'Oleo Script', cursive;
+	font-size: 24pt;
+	color: #0094FF;
+}
+
+h4 {
+	font-size: 1.25em;
+}
+
+img.alignleft {
+	float: left;
+	margin: 5px 20px 20px 0;
+}
+
+img.aligntop {
+	margin: 5px 0 20px 0;
+}
+
+p {
+	margin-bottom: 1.5em;
+}
+
+ul {
+	margin-bottom: 1.5em;
+}
+
+ul h4 {
+	margin-bottom: 0.35em;
+}
+
+#content {
+	padding: 0;
+	width: 655px;
+	margin: 0 0 0 255px;
+}
+
+#footer {
+	font-family: 'Oleo Script', cursive;
+	margin: 0 0 40px 0;
+	padding: 70px 0 20px 0;
+	text-align: center;
+	color: #0094FF;
+	border-top: solid 2px #5D00B5;
+}
+
+#footer a {
+	color: #7C6143;
+}
+
+#header {
+	position: relative;
+	height: 90px;
+	padding: 35px;
+}
+
+#logo {
+	line-height: 0px;
+	width: 910px;
+	position: absolute;
+	text-align: center;
+	height: 160px;
+	bottom: 50px;
+	color: #5F0FD0;
+	text-decoration: underline;
+}
+
+#logo a {
+	color: #FFA719;
+	text-decoration: none;
+}
+
+#logo h1 {
+	font-family: 'Oleo Script', cursive;
+	font-size: 5em;
+}
+
+#menu {
+	font-family: 'Oleo Script', cursive;
+	left: 0;
+	width: 980px;
+	height: 57px;
+	top: 0;
+	line-height: 285px;
+	position: absolute;
+}
+
+#menu a {
+	letter-spacing: -1px;
+	color: #4435FF;
+	text-decoration: none;
+	text-transform: normal;
+	font-size: 1.75em;
+}
+
+#menu ul {
+	width: 980px;
+	list-style: none;
+	text-align: center;
+}
+
+#menu ul li {
+	padding: 0 15px 0 15px;
+	text-align: center;
+	display: inline;
+}
+
+#page {
+	font-family: 'Oleo Script', cursive;
+	position: relative;
+	width: 910px;
+	margin: 0 0 0 0;
+	color: #0094FF;
+	border-top: solid 3px #5D00B5;
+	padding: 55px 35px 0 35px;
+	background: transparent;
+}
+
+#page .section-list {
+	list-style: none;
+	padding-left: 0;
+}
+
+#page .section-list li {
+	padding: 20px 0 20px 0;
+	clear: both;
+}
+
+#page h2, #page h3, #page h4 {
+	color: #4435FF;
+}
+
+#page strong {
+	color: #FDEFDD;
+}
+
+#page ul {
+ 	list-style: none;
+}
+
+#page ul li {
+	padding: 10px 0 10px 0;
+	list-style: square url('/./images/li.png');
+}
+
+#page ul li a {
+	color: #0094FF;
+	font-family: 'Oleo Script', cursive;
+	font-size: 16pt;
+}
+
+#page ul li.first {
+	padding-top: 0;
+	border-top: 0;
+}
+
+#page-bottom {
+	width: 910px;
+	padding: 35px 35px 0 35px;
+	position: relative;
+	border-top: solid 2px #5D00B5;
+}
+
+#page-bottom h2, #page-bottom h3, #page-bottom h4 {
+	color: #4435FF;
+}
+
+#page-bottom ul {
+	list-style: none;
+}
+
+#page-bottom ul li.first {
+	padding-top: 0;
+	border-top: 0;
+}
+
+#page-bottom-sidebar-center {
+	margin: 0 0 0 370px;
+	width: 250px;
+}
+
+#page-bottom-sidebar-left {
+	margin: 0px 0 0 0;
+	float: left;
+	width: 280px;
+}
+
+#page-bottom ul li {
+	font-family: 'Oleo Script', cursive;
+	padding: 10px 0 10px 0;
+	color: #0094FF;
+}
+
+#post1 {
+	overflow: hidden;
+	margin: 0 0 30px 0;
+}
+
+#post2 {
+	overflow: hidden;
+	margin: 0 0 30px 0;
+}
+
+#post2 ul {
+	list-style: none;
+}
+
+#post2 ul li {
+	padding: 10px 0 10px 0;
+}
+
+#post2 ul li a {
+	color: #0094FF;
+	font-family: 'Oleo Script', cursive;
+	font-size: 16pt;
+}
+
+#sidebar {
+	float: left;
+	padding: 0;
+	width: 225px;
+}
+
+#wrapper {
+	width: 980px;
+	position: relative;
+	margin: 85px auto 0 auto;
+}
+
+.uploadify {
+	position: relative;
+	margin-bottom: 1em;
+}
+.uploadify-button {
+	background-color: #505050;
+	background-image: linear-gradient(bottom, #505050 0%, #707070 100%);
+	background-image: -o-linear-gradient(bottom, #505050 0%, #707070 100%);
+	background-image: -moz-linear-gradient(bottom, #505050 0%, #707070 100%);
+	background-image: -webkit-linear-gradient(bottom, #505050 0%, #707070 100%);
+	background-image: -ms-linear-gradient(bottom, #505050 0%, #707070 100%);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, #505050),
+		color-stop(1, #707070)
+	);
+	background-position: center top;
+	background-repeat: no-repeat;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	border: 2px solid #808080;
+	color: #FFF;
+	font: bold 12px Arial, Helvetica, sans-serif;
+	text-align: center;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+	width: 100%;
+}
+.uploadify:hover .uploadify-button {
+	background-color: #606060;
+	background-image: linear-gradient(top, #606060 0%, #808080 100%);
+	background-image: -o-linear-gradient(top, #606060 0%, #808080 100%);
+	background-image: -moz-linear-gradient(top, #606060 0%, #808080 100%);
+	background-image: -webkit-linear-gradient(top, #606060 0%, #808080 100%);
+	background-image: -ms-linear-gradient(top, #606060 0%, #808080 100%);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, #606060),
+		color-stop(1, #808080)
+	);
+	background-position: center bottom;
+}
+.uploadify-button.disabled {
+	background-color: #D0D0D0;
+	color: #808080;
+}
+.uploadify-queue {
+	margin-bottom: 1em;
+}
+.uploadify-queue-item {
+	background-color: #F5F5F5;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font: 11px Verdana, Geneva, sans-serif;
+	margin-top: 5px;
+	max-width: 350px;
+	padding: 10px;
+}
+.uploadify-error {
+	background-color: #FDE5DD !important;
+}
+.uploadify-queue-item .cancel a {
+	background: url('../img/uploadify-cancel.png') 0 0 no-repeat;
+	float: right;
+	height:	16px;
+	text-indent: -9999px;
+	width: 16px;
+}
+.uploadify-queue-item.completed {
+	background-color: #E5E5E5;
+}
+.uploadify-progress {
+	background-color: #E5E5E5;
+	margin-top: 10px;
+	width: 100%;
+}
+.uploadify-progress-bar {
+	background-color: #0099FF;
+	height: 3px;
+	width: 1px;
+}
+
+/* SQL Nav Menu Properties */
+
+#nav,#nav ul {
+    background-color: #00158E;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+#nav {
+    display: block;
+    padding: 5px;
+    position: relative;
+    width: 112px;
+
+    -moz-perspective: 200px;
+    -ms-perspective: 200px;
+    -webkit-perspective: 200px;
+    -o-perspective: 200px;
+    perspective: 200px;
+}
+#nav ul {
+    left: -9999px;
+    opacity:0;
+    overflow: hidden;
+    padding: 5px;
+    position: absolute;
+    top: -9999px;
+
+    -moz-transform: rotateY(70deg);
+    -ms-transform: rotateY(70deg);
+    -o-transform: rotateY(70deg);
+    -webkit-transform: rotateY(70deg);
+    transform: rotateY(70deg);
+
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+
+    -moz-transition: -moz-transform 0.3s linear, opacity 0.3s linear;
+    -ms-transition: -ms-transform 0.3s linear, opacity 0.3s linear;
+    -o-transition: -o-transform 0.3s linear, opacity 0.3s linear;
+    -webkit-transition: -webkit-transform 0.3s linear, opacity 0.3s linear;
+    transition: transform 0.3s linear, opacity 0.3s linear;
+}
+#nav li {
+    background-color: #00158E;
+    position: relative;
+}
+#nav > li {
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+#nav li a {
+    background-color: #AABBCC;
+    border-color: #DDDDDD #555555 #555555 #DDDDDD;
+    border-style: solid;
+    border-width: 1px;
+    color: #000000;
+    display: block;
+    font-size: 15px;
+    padding: 8px 10px 8px 5px;
+    text-decoration: none;
+    width:95px;
+
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+#nav li:hover > a {
+    background-color: #5694FF;
+    border-color: #8899AA;
+    color: #FFFFFF;
+}
+#nav li:hover ul.subs {
+    left: 114px;
+    opacity:1;
+    top: 0;
+
+    -moz-transition-delay: 0.3s;
+    -ms-transition-delay: 0.3s;
+    -o-transition-delay: 0.3s;
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+}
+#nav ul li {
+    width: 100%;
+}
+
+/* colors */
+.colorScheme {
+    list-style: none outside none;
+    overflow: hidden;
+    width: 120px;
+}
+.colorScheme a {
+    cursor: pointer;
+    float: left;
+    height: 30px;
+    margin: 0 5px 5px;
+    width: 30px;
+}
+.colorScheme .clr {
+    background-color: #00158E;
+}
+
+#clr:target ~ #nav, #clr:target ~ #nav ul {
+    background-color: #8899AA;
+}
+
+#clr:target ~ #nav li:hover > a {
+    background-color: #8899AA;
+    border-color: #c0c0c0;
+}

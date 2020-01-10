@@ -1,0 +1,284 @@
+<?php
+	Design::get_other_header();
+	Design::get_other_navigation();
+	echo '<section class="status status--dark dark-bg--about"></section>'; # status
+
+	echo '<div class="blog-page">';
+		echo '<div class="container">';
+			echo '<div class="row">';
+				echo '<div class="col-md-9 col-sm-8 col-xs-7">';
+					echo '<div class="blog-main">';
+						echo '<div class="articles">';
+
+						$sql	=	('SELECT * FROM '.$cfg['FTW_BLOG_CONTENT'].' WHERE blog_category=?');
+						$stmt	=	odbc_prepare($cxn,$sql);
+						$args	=	array('Events');
+						$prep	=	odbc_execute($stmt,$args);
+
+						if(!$prep || odbc_num_rows($stmt) == 0){
+							echo '<h3 class="article-title wow slideInUp" data-wow-delay="0.7s" data-wow-duration="1.5s">FTW Blog</h3>';
+							echo '<p class="blog-text blog-text--article wow slideInUp" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+							echo 'No blog info to show! Looks like someone forgot to post something...';
+							echo '</p>';
+						}else{
+							while($data = odbc_fetch_array($stmt)){
+								echo '<div class="article">';
+									echo '<div class="blog-date triangle triangle--big wow slideInLeft" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+										echo '<div class="blog-date__num">'.$data['blog_date_day'].'</div>';
+										echo '<div class="blog-date__month-year">'.Data::convert_month_to_text($data['blog_date_month']).'</div>';
+										echo '<div class="blog-date__month-year">'.$data['blog_date_year'].'</div>';
+									echo '</div>';
+
+								if($data['blog_image'] !== NULL){
+									echo '<div class="article__img wow slideInLeft" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+										echo '<img src="'.$cfg["FTW_EVENTS"].$data['blog_image'].'" alt="" class="img-responsive" />';
+									echo '</div>';
+								}else{
+									echo '<div class="article__img wow slideInLeft separator_60" data-wow-delay="0.7s" data-wow-duration="1.5s"></div>';
+								}
+								#	echo '<div class="article__comments-author wow slideInUp" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+								#		echo '<span class="article__author"><span class="fa fa-user"></span>Posted By: FTW Site Admin</span>';
+								#		echo '<span class="article__comments"><span class="fa fa-comment-o"></span>20 Comments</span>';
+								#	echo '</div>';
+
+									echo '<h3 class="article-title wow slideInUp" data-wow-delay="0.7s" data-wow-duration="1.5s">'.$data['blog_title'].'</h3>';
+									echo '<p class="blog-text blog-text--article wow slideInUp" data-wow-delay="0.7s" data-wow-duration="1.5s">'.$data['blog_content'].'</p>';
+								
+
+								#	echo '<span class="line line--title line--blog-title line--article wow slideInLeft" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+								#		echo '<span class="line__first"></span>';
+								#		echo '<span class="line__second"></span>';
+								#	echo '</span>';
+								echo '</div>'; # end article
+							}
+							odbc_free_result($stmt);
+							odbc_close($cxn);
+						}
+						echo '</div>'; # end articles
+					echo '</div>';
+				echo '</div>';
+
+				echo '<div class="col-md-3 col-sm-4 col-xs-5">';
+					echo '<aside class="blog-aside">';
+						# Categories
+						echo '<div class="blog-aside__block wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+							echo '<h3 class="blog-title">Categories<span class="line line--title line--blog-title"><span class="line__first"></span><span class="line__second"></span></span></h3>';
+							echo '<div class="categories">';
+								echo '<div class="categories__one">';
+									echo '<header class="categories__head clearfix">';
+										echo '<h5 class="pull-left"><a class="no-decoration" href="#">Members\' Rides</a></h5>';
+										echo '<div class="categories__count pull-right">[21]</div>';
+									echo '</header>';
+									echo '<p class="categories__desc">Post your riding experiences.</p>';
+								echo '</div>';
+								echo '<div class="categories__one">';
+									echo '<header class="categories__head clearfix">';
+										echo '<h5 class="pull-left"><a class="no-decoration" href="#">Swap Meets</a></h5>';
+										echo '<div class="categories__count pull-right">[5]</div>';
+									echo '</header>';
+									echo '<p class="categories__desc">';
+										echo 'Members\' Buy, Sell & Trading Area';
+									echo '</p>';
+								echo '</div>';
+								echo '<div class="categories__one">';
+									echo '<header class="categories__head clearfix">';
+										echo '<h5 class="pull-left"><a class="no-decoration" href="#">Upcoming Local Events</a></h5>';
+										echo '<div class="categories__count pull-right">[12]</div>';
+									echo '</header>';
+									echo '<p class="categories__desc">Poker Runs & Other Events</p>';
+								echo '</div>';
+								echo '<div class="categories__one">';
+									echo '<header class="categories__head clearfix">';
+										echo '<h5 class="pull-left"><a class="no-decoration" href="#">Monthly Newsletters</a></h5>';
+										echo '<div class="categories__count pull-right">[3]</div>';
+									echo '</header>';
+								echo '</div>';
+							echo '</div>';
+						echo '</div>';
+					# 
+					/*	echo '<div class="blog-aside__block wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+							echo '<div class="aside-tabs">';
+								echo '<div class="aside-tabs__links">';
+									echo '<a href="#" class="no-decoration aside-tabs__active-link js-tab-link" data-for="#block1">Popular</a>';
+									echo '<a href="#" class="no-decoration js-tab-link" data-for="#block2">Recent</a>';
+								echo '</div>';
+								echo '<div class="aside-tabs__blocks js-tab-block" id="block1">';
+									echo '<div class="aside-tabs__block">';
+										echo '<div class="row row--no-padding">';
+											echo '<div class="col-xs-4">';
+												echo '<img src="'.$cfg["FTW_MEDIA"].'72x72/popular1.jpg" alt="moto" class="img-responsive" />';
+											echo '</div>';
+											echo '<div class="col-xs-7">';
+												echo '<div class="aside-tabs__anons">';
+													echo '<p><a class="no-decoration" href="article.html">Nunc molestie sapien tempor placerat ...</a></p>';
+													echo '<div class="aside-tabs__date">March 30, 2015</div>';
+												echo '</div>';
+											echo '</div>';
+										echo '</div>';
+									echo '</div>';
+									echo '<div class="aside-tabs__block">';
+										echo '<div class="row row--no-padding">';
+											echo '<div class="col-xs-4">';
+												echo '<img src="'.$cfg["FTW_MEDIA"].'72x72/popular2.jpg" alt="moto" class="img-responsive" />';
+											echo '</div>';
+											echo '<div class="col-xs-7">';
+												echo '<div class="aside-tabs__anons">';
+													echo '<p> <a class="no-decoration" href="article.html">Cras et lectus. Etiam amet turpis diset ...</a></p>';
+													echo '<div class="aside-tabs__date">March 30, 2015</div>';
+												echo '</div>';
+											echo '</div>';
+										echo '</div>';
+									echo '</div>';
+									echo '<div class="aside-tabs__block">';
+										echo '<div class="row row--no-padding">';
+											echo '<div class="col-xs-4">';
+												echo '<img src="'.$cfg["FTW_MEDIA"].'72x72/popular3.jpg" alt="moto" class="img-responsive" />';
+											echo '</div>';
+											echo '<div class="col-xs-7">';
+												echo '<div class="aside-tabs__anons">';
+													echo '<p><a class="no-decoration" href="article.html">Nunc molestie sapien tempor placerat ...</a></p>';
+													echo '<div class="aside-tabs__date">March 30, 2015</div>';
+												echo '</div>';
+											echo '</div>';
+										echo '</div>';
+									echo '</div>';
+									echo '<div class="aside-tabs__block">';
+										echo '<div class="row row--no-padding">';
+											echo '<div class="col-xs-4">';
+												echo '<img src="'.$cfg["FTW_MEDIA"].'72x72/popular4.jpg" alt="moto" class="img-responsive" />';
+											echo '</div>';
+											echo '<div class="col-xs-7">';
+												echo '<div class="aside-tabs__anons">';
+													echo '<p><a class="no-decoration" href="article.html">Amet turpis disce erat Ut proin a ipsum</a></p>';
+													echo '<div class="aside-tabs__date">March 30, 2015</div>';
+												echo '</div>';
+											echo '</div>';
+										echo '</div>';
+									echo '</div>';
+								echo '</div>';
+								echo '<div class="aside-tabs__blocks js-tab-block" id="block2">';
+									echo '<div class="aside-tabs__block">';
+										echo '<div class="row row--no-padding">';
+											echo '<div class="col-xs-4">';
+												echo '<img src="'.$cfg["FTW_MEDIA"].'72x72/popular2.jpg" alt="moto" class="img-responsive" />';
+											echo '</div>';
+											echo '<div class="col-xs-7">';
+												echo '<div class="aside-tabs__anons">';
+													echo '<p><a class="no-decoration" href="article.html"> Cras et lectus. Etiam amet turpis diset ...</a></p>';
+													echo '<div class="aside-tabs__date">March 30, 2015</div>';
+												echo '</div>';
+											echo '</div>';
+										echo '</div>';
+									echo '</div>';
+									echo '<div class="aside-tabs__block">';
+										echo '<div class="row row--no-padding">';
+											echo '<div class="col-xs-4">';
+												echo '<img src="'.$cfg["FTW_MEDIA"].'72x72/popular3.jpg" alt="moto" class="img-responsive" />';
+											echo '</div>';
+											echo '<div class="col-xs-7">';
+												echo '<div class="aside-tabs__anons">';
+													echo '<p><a class="no-decoration" href="article.html">Nunc molestie sapien tempor placerat ...</a></p>';
+													echo '<div class="aside-tabs__date">March 30, 2015</div>';
+												echo '</div>';
+											echo '</div>';
+										echo '</div>';
+									echo '</div>';
+									echo '<div class="aside-tabs__block">';
+										echo '<div class="row row--no-padding">';
+											echo '<div class="col-xs-4">';
+												echo '<img src="'.$cfg["FTW_MEDIA"].'72x72/popular4.jpg" alt="moto" class="img-responsive" />';
+											echo '</div>';
+											echo '<div class="col-xs-7">';
+												echo '<div class="aside-tabs__anons">';
+													echo '<p><a class="no-decoration" href="article.html">Amet turpis disce erat Ut proin a ipsum</a></p>';
+													echo '<div class="aside-tabs__date">March 30, 2015</div>';
+												echo '</div>';
+											echo '</div>';
+										echo '</div>';
+									echo '</div>';
+								echo '</div>';
+							echo '</div>';
+						echo '</div>';
+					
+						# Photos
+						echo '<div class="blog-aside__block wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+							echo '<h3 class="blog-title">Photos<span class="line line--title line--blog-title"><span class="line__first"></span><span class="line__second"></span></span></h3>';
+							echo '<div class="blog-aside__photos">';
+								echo '<div class="row row--small-padding">';
+									echo '<div class="col-xs-4">';
+										echo '<a class="fancyimage" data-fancybox-group="group" href="'.$cfg["FTW_MEDIA"].'530x360/bike1.jpg"><img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'80x80/photo1.jpg" /></a>';
+									echo '</div>';
+									echo '<div class="col-xs-4">';
+										echo '<a class="fancyimage" data-fancybox-group="group" href="'.$cfg["FTW_MEDIA"].'530x360/bike1.jpg"><img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'80x80/photo2.jpg" /></a>';
+									echo '</div>';
+									echo '<div class="col-xs-4">';
+										echo '<a class="fancyimage" data-fancybox-group="group" href="'.$cfg["FTW_MEDIA"].'530x360/bike1.jpg"><img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'80x80/photo3.jpg" /></a>';
+									echo '</div>';
+									echo '<div class="col-xs-4">';
+										echo '<a class="fancyimage" data-fancybox-group="group" href="'.$cfg["FTW_MEDIA"].'530x360/bike1.jpg"><img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'80x80/footer1.jpg" /></a>';
+									echo '</div>';
+									echo '<div class="col-xs-4">';
+										echo '<a class="fancyimage" data-fancybox-group="group" href="'.$cfg["FTW_MEDIA"].'530x360/bike1.jpg"><img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'80x80/footer2.jpg" /></a>';
+									echo '</div>';
+									echo '<div class="col-xs-4">';
+										echo '<a class="fancyimage" data-fancybox-group="group" href="'.$cfg["FTW_MEDIA"].'530x360/bike1.jpg"><img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'80x80/footer3.jpg" /></a>';
+									echo '</div>';
+									echo '<div class="col-xs-4">';
+										echo '<a class="fancyimage" data-fancybox-group="group" href="'.$cfg["FTW_MEDIA"].'530x360/bike1.jpg"><img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'80x80/photo4.jpg" /></a>';
+									echo '</div>';
+									echo '<div class="col-xs-4">';
+										echo '<a class="fancyimage" data-fancybox-group="group" href="'.$cfg["FTW_MEDIA"].'530x360/bike1.jpg"><img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'80x80/photo5.jpg" /></a>';
+									echo '</div>';
+									echo '<div class="col-xs-4">';
+										echo '<a class="fancyimage" data-fancybox-group="group" href="'.$cfg["FTW_MEDIA"].'530x360/bike1.jpg"><img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'80x80/photo6.jpg" /></a>';
+									echo '</div>';
+								echo '</div>';
+							echo '</div>';
+						echo '</div>';
+						echo '<div class="blog-aside__block wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+							echo '<h3 class="blog-title">Tags<span class="line line--title line--blog-title"><span class="line__first"></span><span class="line__second"></span></span></h3>';
+							echo '<div class="blog-aside__tags">';
+								echo '<a href="#" class="btn button button--grey button--tag triangle">Latest Bikes</a>';
+								echo '<a href="#" class="btn button button--grey button--tag triangle">Motorcycles</a>';
+								echo '<a href="#" class="btn button button--grey button--tag triangle">SEO</a>';
+								echo '<a href="#" class="btn button button--grey button--tag triangle">Races</a>';
+								echo '<a href="#" class="btn button button--grey button--tag triangle">Club Membership</a>';
+								echo '<a href="#" class="btn button button--grey button--tag triangle">Event</a>';
+								echo '<a href="#" class="btn button button--grey button--tag triangle">Upcoming Events</a>';
+								echo '<a href="#" class="btn button button--grey button--tag triangle">2015 Bikes</a>';
+							echo '</div>';
+						echo '</div>';
+						echo '<div class="blog-aside__block wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="1.5s">';
+							echo '<h3 class="blog-title">Latest Models<span class="line line--title line--blog-title"><span class="line__first"></span><span class="line__second"></span></span></h3>';
+							echo '<ul class="js-latest-slider enable-bx-slider" data-auto="true" data-auto-hover="true" data-mode="horizontal" data-pager="false" data-pager-custom="null" data-prev-selector="null" data-next-selector="null">';
+								echo '<li>';
+									echo '<div class="latest-model">';
+										echo '<div class="latest-model__img">';
+											echo '<img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'270x270/latest.jpg" />';
+										echo '</div>';
+										echo '<div class="latest-model__info">';
+											echo '<h5><a class="no-decoration" href="item.html">KTM 1190 RC8 R</a></h5>';
+											echo '<p class="blog-text">Nunc molestie sapien tempor placerater ras et lectus. Etiam sit amet turpis disce le proin aipsum vitae orci pords.</p>';
+										echo '</div>';
+									echo '</div>';
+								echo '</li>';
+								echo '<li>';
+									echo '<div class="latest-model">';
+										echo '<div class="latest-model__img">';
+											echo '<img alt="bike" class="img-responsive" src="'.$cfg["FTW_MEDIA"].'270x270/latest.jpg" />';
+										echo '</div>';
+										echo '<div class="latest-model__info">';
+											echo '<h5><a class="no-decoration" href="item.html">KTM 1190 RC8 R</a></h5>';
+											echo '<p class="blog-text">Nunc molestie sapien tempor placerater ras et lectus. Etiam sit amet turpis disce le proin aipsum vitae orci pords.</p>';
+										echo '</div>';
+									echo '</div>';
+								echo '</li>';
+							echo '</ul>';
+						echo '</div>';
+						*/
+					echo '</aside>';
+				echo '</div>';
+			echo '</div>';
+		echo '</div>';
+	echo '</div>'; # blog-page
+?>

@@ -1,0 +1,48 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+- FONTS
+- PLUGIN CSS
+- MAIN CSS
+
+Author:     Andrey Sokoltsov
+Profile:    http://themeforest.net/user/andreysokoltsov
+-------------------------------------------------------------------*/
+
+/* FONTS */
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900,700italic,300italic');
+
+/* MAIN CSS */
+@import url('theme.css');
+@import url('blog.css');
+@import url('page.css');
+@import url('shop.css');
+@import url('responsive.css');
+@import url('animate.css');
+@import url('colors.css');
+@import url('mobile.css');
+@import url('calendar.css');
+
+/* Custom CSS MUST load last */
+@import url('../../Core/Custom/Borders.css') screen;
+@import url('../../Core/Custom/Buttons.css') screen;
+@import url('../../Core/Custom/Colors.css') screen;
+@import url('../../Core/Custom/Fonts.css') screen;
+@import url('../../Core/Custom/Footer.css') screen;
+@import url('../../Core/Custom/Forms.css') screen;
+@import url('../../Core/Custom/Labels.css') screen;
+@import url('../../Core/Custom/Margins.css') screen;
+@import url('../../Core/Custom/Nav.css') screen;
+@import url('../../Core/Custom/Modal.css') screen;
+@import url('../../Core/Custom/Offsets.css') screen;
+@import url('../../Core/Custom/Padding.css') screen;
+@import url('../../Core/Custom/Plugins.css') screen;
+@import url('../../Core/Custom/Pre.css') screen;
+@import url('../../Core/Custom/Pulse.css') screen;
+@import url('../../Core/Custom/Separators.css') screen;
+@import url('../../Core/Custom/Sizing.css') screen;
+@import url('../../Core/Custom/Spans.css') screen;
+@import url('../../Core/Custom/Tables.css') screen;
+@import url('../../Core/Custom/TicketSys.css') screen;
+@import url('../../Core/Custom/Modular.css') screen;
+@import url('custom.css');

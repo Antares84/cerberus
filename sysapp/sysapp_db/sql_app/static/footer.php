@@ -1,0 +1,1 @@
+<h2>Nexus Development Foundation &copy; 2010-2014. All Rights Reserved.</h2>

@@ -1,0 +1,107 @@
+<?
+	echo '<div id="pocp1" class="pocp_left">';
+		echo '<div class="pocp">';
+			echo '<div class="pocp_content">';
+				echo '<h2>Menu Legend</h2>';
+				echo '<p class="green">Databases</p>';
+				echo '<p class="blue">Tables</p>';
+				echo '<p class="yellow">Stored Procedures</p>';
+				echo '<p class="red">Triggers</p>';
+#				echo '<p class="brown">This is a text contained into a <strong>blue</strong> container with a border.</p>';
+#				echo '<p class="dark">This is a text contained into a <strong>green</strong> container with a border.</p>';
+				echo '<br /><br />';
+				echo '<h2>Navigation</h2>';
+				echo '<ul class="pocp_toggle">';
+# Home Page link
+					echo '<li>';
+						echo '<span class="pocp_toggle_title teal"><a href="?p=home">Home</a></span>';
+					echo '</li>';
+# PS Database Links
+					echo '<li>';
+						echo '<span class="pocp_toggle_title green"><i class="icon-plus"></i>PS Database</span>';
+						echo '<div class="pocp_panel pocp_panel_parent">';
+							echo '<ul class="pocp_toggle">';
+	# Chatlog
+								echo '<li>';
+									echo '<span class="pocp_toggle_title"><i class="icon-plus"></i>PS_ChatLog</span>';
+									echo '<div class="pocp_panel">';
+										echo '<a class="green" href="?p=ps_chatlog_db_str">ChatLog DB Structure</a><br />';
+										echo '<a class="blue" href="?p=chatlog_tbl">PS_ChatLog ChatLog Table</a><br />';
+										echo '<a class="yellow" href="?p=usp_Insert_Chat_Log_E">usp_Insert_Chat_Log_E</a><br />';
+									echo '</div>';
+								echo '</li>';
+	# GameData
+								echo '<li>';
+									echo '<span class="pocp_toggle_title"><i class="icon-plus"></i>PS_GameData</span>';
+									echo '<div class="pocp_panel">';
+										echo '<a class="green" href="?p=ps_gamedata_db_str">GameData DB Structure</a><br />';
+										echo '<a class="blue" href="?p=banchars">BanChars</a><br />';
+										echo '<a class="blue" href="?p=charapplyskills">CharApplySkills</a><br />';
+										echo '<a class="blue" href="?p=charevents">CharEvents</a><br />';
+										echo '<a class="blue" href="?p=charitems">CharItems</a><br />';
+										echo '<a class="blue" href="?p=charquests">CharQuests</a><br />';
+										echo '<a class="blue" href="?p=charquickslots">CharQuickSlots</a><br />';
+										echo '<a class="blue" href="?p=charrenamelog">CharRenameLog</a><br />';
+										echo '<a class="blue" href="?p=chars">Chars</a><br />';
+										echo '<a class="blue" href="?p=charsavepoint">CharSavePoint</a><br />';
+										echo '<a class="blue" href="?p=charskills">CharSkills</a><br />';
+										echo '<a class="blue" href="?p=createdchars">CreatedChars</a><br />';
+										echo '<a class="blue" href="?p=deletedchars">DeletedChars</a><br />';
+										echo '<a class="blue" href="?p=charskill1">EventLog_CharSkill1</a><br />';
+										echo '<a class="blue" href="?p=charskill2">EventLog_CharSkill2</a><br />';
+										echo '<a class="blue" href="?p=charstat">EventLog_CharStat</a><br />';
+										echo '<a class="blue" href="?p=friendchars">FriendChars</a><br />';
+										echo '<a class="blue" href="?p=guildchars">GuildChars</a><br />';
+										echo '<a class="blue" href="?p=guilddetails">GuildDetails</a><br />';
+										echo '<a class="blue" href="?p=guildnpclevel">GuildNpcLv</a><br />';
+										echo '<a class="blue" href="?p=guildranklog">GuildRankLog</a><br />';
+										echo '<a class="blue" href="?p=guildranklog2">GuildRankLog2</a><br />';
+										echo '<a class="blue" href="?p=guilds">Guilds</a><br />';
+										echo '<a class="blue" href="?p=guildstoreditems">GuildStoredItems</a><br />';
+										echo '<a class="blue" href="?p=keeps">Keeps</a><br />';
+										echo '<a class="blue" href="?p=market">Market</a><br />';
+										echo '<a class="blue" href="?p=marketcharconcern">MarketCharConcern</a><br />';
+										echo '<a class="blue" href="?p=marketcharresultitems">MarketCharResultItems</a><br />';
+										echo '<a class="blue" href="?p=marketcharresultitems_dellog">MarketCharResultItems_DelLog</a><br />';
+										echo '<a class="blue" href="?p=marketcharresultmoney">MarketCharResultMoney</a><br />';
+										echo '<a class="blue" href="?p=marketcharresultmoney_dellog">MarketCharResultMoney_DelLog</a><br />';
+										echo '<a class="blue" href="?p=marketitems">MarketItems</a><br />';
+										echo '<a class="blue" href="?p=marketitems_dellog">MarketItems_DelLog</a><br />';
+										echo '<a class="blue" href="?p=pointerrorlog">PointErrorLog</a><br />';
+										echo '<a class="blue" href="?p=pointgiftnotify">PointGiftNotify</a><br />';
+										echo '<a class="blue" href="?p=pointlog">PointLog</a><br />';
+										echo '<a class="blue" href="?p=usermaxgrow">UserMaxGrow</a><br />';
+										echo '<a class="blue" href="?p=userstoreditems">UserStoredItems</a><br />';
+										echo '<a class="blue" href="?p=userstoredmoney">UserStoredMoney</a><br />';
+										echo '<a class="blue" href="?p=userstoredpointitems">UserStoredPointItems</a><br />';
+										echo '<a class="blue" href="?p=users_product">Users_Product</a><br />';
+										echo '<a class="blue" href="?p=worldinfo">WorldInfo</a><br />';
+#										echo '<a class="yellow" href="?p=pagename">pagetitle</a><br />';
+									echo '</div>';
+								echo '</li>';
+								echo '<li>';
+									echo '<span class="pocp_toggle_title"><i class="icon-plus"></i>PS_GameDefs</span>';
+									echo '<div class="pocp_panel">';
+
+									echo '</div>';
+								echo '</li>';
+								echo '<li>';
+									echo '<span class="pocp_toggle_title"><i class="icon-plus"></i>PS_GameLog</span>';
+									echo '<div class="pocp_panel">';
+
+									echo '</div>';
+								echo '</li>';
+								echo '<li>';
+									echo '<span class="pocp_toggle_title"><i class="icon-plus"></i>PS_UserData</span>';
+									echo '<div class="pocp_panel">';
+
+									echo '</div>';
+								echo '</li>';
+							echo '</ul>';
+						echo '</div>';
+					echo '</li>';
+				echo '</ul>';
+			echo '</div>';
+		echo '</div>';
+	echo '</div>';
+?>

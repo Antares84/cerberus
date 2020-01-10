@@ -1,0 +1,24 @@
+USE [PS_GameData]
+GO
+
+/****** Object:  Table [dbo].[MarketCharConcern]    Script Date: 8/14/2014 11:00:45 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[MarketCharConcern](
+	[RowID] [int] IDENTITY(1,1) NOT NULL,
+	[CharID] [int] NOT NULL,
+	[MarketID] [int] NOT NULL,
+ CONSTRAINT [PK_MarketCharConcern] PRIMARY KEY CLUSTERED 
+(
+	[CharID] ASC,
+	[MarketID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+

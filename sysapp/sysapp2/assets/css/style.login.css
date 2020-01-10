@@ -1,0 +1,119 @@
+﻿/*-----------------------
+  Universal Fonts Layout
+-----------------------*/
+@font-face {
+	font-family: 'Tillana';
+	src: url('../fonts/Tillana/Tillana-Regular.eot');
+	src: url('../fonts/Tillana/Tillana-Regular.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Tillana/Tillana-Regular.ttf') format('truetype'),
+		url('../fonts/Tillana/Tillana-Regular.svg#Tillana-Regular.svg') format('svg');
+}
+
+* {
+	margin:0;
+	padding:0;
+}
+
+body {
+	background: #000;}
+#wrapper {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	width: 98%;
+	height: 96%;
+	border: 1px solid blue;
+	border-radius: 15px;
+	background: url('../images/login_bg.png') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+	
+/* Login Box */
+#login-box {
+	position: absolute;
+	top: 72%;
+	left: 45%;
+	padding: 10px;
+}
+
+#login-box img {
+	border:none;
+}
+
+#login-box h2 {
+	text-align: center;
+	color: #ebebeb;
+	font-family: 'Tillana', cursive;
+	font-size: 32px;
+	font-weight: bold;
+	padding-top: -5px;
+}
+
+#login-box-field {
+	position: relative;
+	width: 100%;
+}
+
+.form-login  {
+	width: 94%;
+	margin: 1%;
+	padding: 10px 4px 6px 3px;
+	border: 1px solid #0d2c52;
+	background-color:#9B0000;
+	font-size: 16px;
+	color: #ebebeb;
+}
+
+/* Form Design */
+form.form-main { 
+	margin: 1%;
+}
+
+input[type="text"], input[type="password"] {
+	padding-top: 5px;
+	text-decoration: none;
+	font-family: 'Tillana', cursive;
+	font-size: 14px;
+	font-weight: bold;
+	color: silver;
+	text-align: center;
+	/*background: transparent linear-gradient(red, black, red) repeat scroll 0% 0%;*/
+	background: -webkit-linear-gradient(rgba(255,0,0,0.5), rgba(0,0,0,0.5), rgba(255,0,0,0.5)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(255,0,0,0.5), rgba(0,0,0,0.5), rgba(255,0,0,0.5)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(255,0,0,0.5), rgba(0,0,0,0.5), rgba(255,0,0,0.5)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(255,0,0,0.5), rgba(0,0,0,0.5), rgba(255,0,0,0.5)); /* Standard syntax (must be last) */
+	border: 1px solid blue;
+	border-radius: 10px;
+}
+
+input[type="submit"] {
+	height: 30px;
+	padding: 0 5px;
+	color: silver;
+	background: transparent linear-gradient(red, black, red) repeat scroll 0% 0%;
+	border: 1px solid blue;
+	border-radius: 10px;
+}
+
+input[type="submit"]:hover {
+	background: transparent linear-gradient(lime, black, lime) repeat scroll 0% 0%;}
+
+.submit_return_home {
+	font-family: 'Tillana', cursive;
+	font-size: 16px;
+	float: left;
+	margin-left:5%;
+	cursor: url('img/cursor/red.cur'), default;
+	margin-top: -2px;
+}
+
+.submit_login {
+	font-family: 'Tillana', cursive;
+	font-size: 16px;
+	float: right;
+	margin-right: 5%;
+	cursor: url('img/cursor/red.cur'), default;
+}
